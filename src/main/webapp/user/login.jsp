@@ -17,7 +17,7 @@
 <div class="main">
     <input type="checkbox" id="chk" aria-hidden="true">
     <div class="signup">
-        <form>
+        <form method="post" action="loginUsers">
             <label for="chk" aria-hidden="true">Sign up</label>
             <input type="text" name="name" placeholder="Name" required="">
             <input type="number" name="phone" placeholder="Phone" required="">
@@ -28,7 +28,7 @@
     </div>
 
     <div class="login">
-        <form>
+        <form method="post" action="loginUsers">
             <label for="chk" aria-hidden="true">Login</label>
             <input type="text" name="user" placeholder="Username" required="">
             <input type="password" name="pass" placeholder="Password" required="">

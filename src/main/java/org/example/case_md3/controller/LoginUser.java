@@ -64,13 +64,13 @@ public class LoginUser extends HttpServlet {
                 }
             }
             if (check) {
-                resp.sendRedirect("/loginUsers");
-
-            } else {
                 resp.sendRedirect("/homeUser");
-
+            } else {
+                resp.sendRedirect("/loginUsers");
             }
         } else {
+            String name = req.getParameter("name");
+            String phone = req.getParameter("phone");
             String username = req.getParameter("username");
             String password = req.getParameter("password");
             userService.add(new User(username, password));
