@@ -73,7 +73,7 @@ public class LoginUser extends HttpServlet {
             String phone = req.getParameter("phone");
             String username = req.getParameter("username");
             String password = req.getParameter("password");
-            userService.add(new User(username, password));
+            userService.add(new User(name,phone,username, password));
             resp.sendRedirect("/loginUsers");
         }
     }
