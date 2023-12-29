@@ -10,7 +10,7 @@
 <html>
 <head>
     <title>Slide Navbar</title>
-    <link rel="stylesheet" type="text/css" href="css/login.css">
+    <link rel="stylesheet" type="text/css" href="cssLogin/login.css">
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
