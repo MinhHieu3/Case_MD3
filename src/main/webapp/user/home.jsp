@@ -5,6 +5,7 @@
   Time: 10:36 PM
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -57,7 +58,7 @@
                     </select>
                 </div>
                 <div class="right-phone-box">
-                    <p>Call US :- <a href="#"> +11 900 800 100</a></p>
+                    <p>Hotline :  <a href="#"> 900 800 100</a></p>
                 </div>
                 <div class="our-link">
                     <ul>
@@ -130,7 +131,7 @@
                     <li class="nav-item active"><a class="nav-link" href="index.html">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
                     <li class="dropdown">
-                        <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">SHOP</a>
+                        <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown"></a>
                         <ul class="dropdown-menu">
                             <li><a href="shop.html">Sidebar Shop</a></li>
                             <li><a href="shop-detail.html">Shop Detail</a></li>
@@ -319,54 +320,7 @@
                 </div>
             </div>
         </div>
-
-        <div class="row special-list">
-            <div class="col-lg-3 col-md-6 special-grid best-seller">
-                <div class="products-single fix">
-                    <div class="box-img-hover">
-                        <div class="type-lb">
-                            <p class="sale">Sale</p>
-                        </div>
-                        <img src="images/img-pro-01.jpg" class="img-fluid" alt="Image">
-                        <div class="mask-icon">
-                            <ul>
-                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                            </ul>
-                            <a class="cart" href="#">Add to Cart</a>
-                        </div>
-                    </div>
-                    <div class="why-text">
-                        <h4>Lorem ipsum dolor sit amet</h4>
-                        <h5> $7.79</h5>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6 special-grid top-featured">
-                <div class="products-single fix">
-                    <div class="box-img-hover">
-                        <div class="type-lb">
-                            <p class="new">New</p>
-                        </div>
-                        <img src="images/img-pro-02.jpg" class="img-fluid" alt="Image">
-                        <div class="mask-icon">
-                            <ul>
-                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                            </ul>
-                            <a class="cart" href="#">Add to Cart</a>
-                        </div>
-                    </div>
-                    <div class="why-text">
-                        <h4>Lorem ipsum dolor sit amet</h4>
-                        <h5> $9.79</h5>
-                    </div>
-                </div>
-            </div>
-
+        <c:forEach items='${danhSach}' var="product">
             <div class="col-lg-3 col-md-6 special-grid top-featured">
                 <div class="products-single fix">
                     <div class="box-img-hover">
@@ -384,34 +338,14 @@
                         </div>
                     </div>
                     <div class="why-text">
-                        <h4>Lorem ipsum dolor sit amet</h4>
-                        <h5> $10.79</h5>
+                        <h3>Tên sản Phẩm : ${product.name}</h3>
+                        <h4>${product.type.describe}</h4>
+                        <h3>Số Lượng : ${product.quantity}</h3>
+                        <h5> $${product.price}</h5>
                     </div>
                 </div>
             </div>
-
-            <div class="col-lg-3 col-md-6 special-grid best-seller">
-                <div class="products-single fix">
-                    <div class="box-img-hover">
-                        <div class="type-lb">
-                            <p class="sale">Sale</p>
-                        </div>
-                        <img src="images/img-pro-04.jpg" class="img-fluid" alt="Image">
-                        <div class="mask-icon">
-                            <ul>
-                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                            </ul>
-                            <a class="cart" href="#">Add to Cart</a>
-                        </div>
-                    </div>
-                    <div class="why-text">
-                        <h4>Lorem ipsum dolor sit amet</h4>
-                        <h5> $15.79</h5>
-                    </div>
-                </div>
-            </div>
+            </c:forEach>
         </div>
     </div>
 </div>
@@ -687,6 +621,9 @@
 <script src="js/form-validator.min.js"></script>
 <script src="js/contact-form-script.js"></script>
 <script src="js/custom.js"></script>
+
+
+
 </body>
 
 </html>
