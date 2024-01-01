@@ -17,6 +17,7 @@ import java.util.List;
 @WebServlet(name = "homeUser", value = "/homeUser")
 public class HomeUser extends HttpServlet {
     ProductServiceImpl productService=new ProductServiceImpl();
+    UserServiceImpl userService=new UserServiceImpl();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");

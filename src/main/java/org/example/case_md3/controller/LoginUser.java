@@ -1,6 +1,8 @@
 package org.example.case_md3.controller;
 
+import org.example.case_md3.model.Product;
 import org.example.case_md3.model.User;
+import org.example.case_md3.service.ProductServiceImpl;
 import org.example.case_md3.service.UserServiceImpl;
 
 import javax.servlet.RequestDispatcher;
@@ -11,12 +13,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.List;
 
 @WebServlet(name = "loginUser", value = "/loginUsers")
 public class LoginUser extends HttpServlet {
 
     UserServiceImpl userService=new UserServiceImpl();
+    ProductServiceImpl productService=new ProductServiceImpl();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -52,7 +56,7 @@ public class LoginUser extends HttpServlet {
         }
     }
 
-    private void CheckLogin(HttpServletRequest req, HttpServletResponse resp) throws IOException, SQLException {
+    private void CheckLogin(HttpServletRequest req, HttpServletResponse resp) throws IOException, SQLException, ServletException {
         String user = req.getParameter("user");
         String pass = req.getParameter("pass");
         if (user != null && pass != null) {
@@ -61,11 +65,16 @@ public class LoginUser extends HttpServlet {
             for (int i = 0; i < list.size(); i++) {
                 if (list.get(i).getUsername().equals(user) && list.get(i).getPassword().equals(pass)) {
                     check = true;
+                    String name=list.get(i).getName();
+                    RequestDispatcher requestDispatcher = req.getRequestDispatcher("user/home.jsp");
+                    List<Product> products = productService.findAll();
+                    req.setAttribute("danhSach", products);
+                    req.setAttribute("user", name);
+                    requestDispatcher.forward(req, resp);
+                    break;
                 }
             }
-            if (check) {
-                resp.sendRedirect("/homeUser");
-            } else {
+            if (!check) {
                 resp.sendRedirect("/loginUsers");
             }
         } else {
