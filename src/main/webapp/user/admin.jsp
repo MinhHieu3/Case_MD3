@@ -22,7 +22,7 @@
 
 </head>
 <body>
-accccc
+<a href="/admins?action=create">add</a>
 <table border="1">
     <thead>
     <tr>
@@ -37,12 +37,18 @@ accccc
     <tbody>
 <c:forEach items="${danhSach}" var="pr">
     <tr>
-        <th>${danhSach.id}</th>
-        <th>${danhSach.name}</th>
-        <th>${danhSach.quantity}</th>
-        <th>${danhSach.price}</th>
-        <th>${danhSach.Type}</th>
-        <th>${danhSach.status}</th>
+        <th>${pr.id}</th>
+        <th>${pr.name}</th>
+        <th>${pr.quantity}</th>
+        <th>${pr.price}</th>
+        <th>${pr.type.id}</th>
+        <th>${pr.status}</th>
+        <th>
+            <button>EDIT</button>
+        </th>
+        <th>
+            <button>DELETE</button>
+        </th>
     </tr>
 </c:forEach>
     </tbody>

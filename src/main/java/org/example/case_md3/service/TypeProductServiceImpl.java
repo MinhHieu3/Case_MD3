@@ -53,19 +53,20 @@ public class TypeProductServiceImpl implements GeneralService<TypeProduct>{
 
     @Override
     public TypeProduct findById(int id) {
-        TypeProduct typeProducts=new TypeProduct();
+        TypeProduct typeProducts = new TypeProduct();
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("select * from type where id=? ")) {
             preparedStatement.setInt(1,id);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                int ids =rs.getInt("id");
-                String names=rs.getString("name");
-                String producer=rs.getString("producer");
+                int ids = rs.getInt("id");
+                String names = rs.getString("name");
+                String producer = rs.getString("producer");
                 String describe = rs.getString("describe");
-                typeProducts=new TypeProduct(ids, names,producer,describe);
+                typeProducts = new TypeProduct(ids, names,producer,describe);
             }
         } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
         return typeProducts;
     }
@@ -80,16 +81,16 @@ public class TypeProductServiceImpl implements GeneralService<TypeProduct>{
         return false;
     }
     public TypeProduct findByName(String name) {
-        TypeProduct typeProducts=new TypeProduct();
+        TypeProduct typeProducts = new TypeProduct();
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("select * from product where name like ? ")) {
             preparedStatement.setString(1,name);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                String names=rs.getString("name");
-                String producer=rs.getString("producer");
+                String names = rs.getString("name");
+                String producer = rs.getString("producer");
                 String describe = rs.getString("describe");
-                typeProducts=new TypeProduct( names,producer,describe);
+                typeProducts = new TypeProduct( names,producer,describe);
             }
         } catch (SQLException e) {
         }
