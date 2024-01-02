@@ -2,9 +2,8 @@ package org.example.case_md3.service;
 
 import org.example.case_md3.model.Product;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductServiceImpl implements GeneralService<Product>{
@@ -20,7 +19,23 @@ public class ProductServiceImpl implements GeneralService<Product>{
     }
     @Override
     public List<Product> findAll() {
-        return null;
+        List<Product> products = new ArrayList<>();
+        Connection connection = getConnection();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("select * from product");
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()){
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                int quantity = rs.getInt("quantity");
+                double price = rs.getDouble("price");
+                int type =
+
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return products;
     }
 
     @Override
