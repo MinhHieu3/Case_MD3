@@ -44,18 +44,20 @@ public class HomeUser extends HttpServlet {
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("user/listBuy.jsp");
             int id = Integer.parseInt(req.getParameter("id"));
             List<Product> productList = productService.findAll();
-            boolean check = false;
             for (int i = 0; i < productList.size(); i++) {
-                for (int j = 0; j < buyList.size(); j++) {
-                    if (productList.get(i).getId() == id) {
-                        if (buyList.get(j).getId() != productList.get(i).getId()) {
-                        buyList.add(productList.get(i));
-                        req.setAttribute("buyList", buyList);
+                if (productList.get(i).getId() == id) {
+                    boolean check =false;
+                    for (int j = 0; j < buyList.size(); j++) {
+                        if (buyList.get(j).getId() == productList.get(i).getId()) {
+                           check=true;
                             break;
                         }
                     }
+                    if(!check){
+                        buyList.add(productList.get(i));
+                    }
                 }
-
+                req.setAttribute("buyList", buyList);
             }
             requestDispatcher.forward(req, resp);
         }
@@ -63,22 +65,22 @@ public class HomeUser extends HttpServlet {
     }
 
 
-private void showList(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    RequestDispatcher requestDispatcher = req.getRequestDispatcher("user/home.jsp");
-    List<Product> products = productService.findAll();
-    req.setAttribute("danhSach", products);
-    requestDispatcher.forward(req, resp);
-}
-
-@Override
-protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    String action = req.getParameter("action");
-    if (action == null) {
-        action = "";
+    private void showList(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("user/home.jsp");
+        List<Product> products = productService.findAll();
+        req.setAttribute("danhSach", products);
+        requestDispatcher.forward(req, resp);
     }
-    switch (action) {
 
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String action = req.getParameter("action");
+        if (action == null) {
+            action = "";
+        }
+        switch (action) {
+
+        }
     }
-}
 
 }
