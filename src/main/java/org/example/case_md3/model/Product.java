@@ -5,13 +5,13 @@ public class Product {
     private String name;
     private int quantity;
     private double price;
-    private String type;
+    private TypeProduct type;
     private String status;
 
     public Product() {
     }
 
-    public Product(int id, String name, int quantity, double price, String type, String status) {
+    public Product(int id, String name, int quantity, double price, TypeProduct type, String status) {
         this.id = id;
         this.name = name;
         this.quantity = quantity;
@@ -52,11 +52,11 @@ public class Product {
         this.price = price;
     }
 
-    public String getType() {
+    public TypeProduct getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(TypeProduct type) {
         this.type = type;
     }
 

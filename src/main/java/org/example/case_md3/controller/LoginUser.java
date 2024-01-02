@@ -1,6 +1,7 @@
 package org.example.case_md3.controller;
 
 import org.example.case_md3.model.User;
+import org.example.case_md3.service.TypeProductServiceImpl;
 import org.example.case_md3.service.UserServiceImpl;
 
 import javax.servlet.RequestDispatcher;
@@ -15,8 +16,8 @@ import java.util.List;
 
 @WebServlet(name = "loginUser", value = "/loginUsers")
 public class LoginUser extends HttpServlet {
-
-    UserServiceImpl userService=new UserServiceImpl();
+    TypeProductServiceImpl typeServiceImpll = new TypeProductServiceImpl();
+    UserServiceImpl userService = new UserServiceImpl();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
