@@ -1,13 +1,14 @@
 package org.example.case_md3.service;
 
-import org.example.case_md3.model.OrderDetails;
+import org.example.case_md3.model.*;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrderDetailServiceImpl implements GeneralService<OrderDetails>{
+    OrderService orderService=new OrderService();
+    ProductServiceImpl productService=new ProductServiceImpl();
     protected Connection getConnection() {
         Connection connection = null;
         try {
@@ -20,17 +21,60 @@ public class OrderDetailServiceImpl implements GeneralService<OrderDetails>{
     }
     @Override
     public List<OrderDetails> findAll() {
-        return null;
+        List<OrderDetails> orderDetails = new ArrayList<>();
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("select * from orderdetail")) {
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int idOrder =rs.getInt("idOrder");
+                int idProduct =rs.getInt("idProduct");
+                int quantity= rs.getInt("quantity");
+                double price=rs.getDouble("price");
+                Order order=orderService.findById(idOrder);
+                Product product=productService.findById(idProduct);
+                orderDetails.add(new OrderDetails(order, product,quantity,price));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return orderDetails;
+
     }
 
     @Override
     public void add(OrderDetails orderDetails) throws SQLException {
-
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("insert into orderdetail (idOrder,idProduct,quantity,price) values (?,?,?,?)")) {
+            preparedStatement.setInt(1, orderDetails.getIdOrder().getId());
+            preparedStatement.setInt(2, orderDetails.getIdProduct().getId());
+            preparedStatement.setInt(3, orderDetails.getQuantity());
+            preparedStatement.setDouble(4, orderDetails.getPrice());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
     }
 
     @Override
     public OrderDetails findById(int id) {
-        return null;
+        OrderDetails orderDetails=new OrderDetails();
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("select * from orderdetail where id=? ")) {
+            preparedStatement.setInt(1,id);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int idOrder =rs.getInt("idOrder");
+                int idProduct =rs.getInt("idProduct");
+                int quantity= rs.getInt("quantity");
+                double price=rs.getDouble("price");
+                Order order=orderService.findById(idOrder);
+                Product product=productService.findById(idProduct);
+                orderDetails=new OrderDetails(order, product,quantity,price);
+            }
+        } catch (SQLException e) {
+        }
+        return orderDetails;
+
     }
 
     @Override

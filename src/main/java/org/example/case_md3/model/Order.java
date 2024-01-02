@@ -6,12 +6,12 @@ public class Order {
     private int id;
     private User idUser;
     private double total;
-    private LocalDateTime time;
+    private String time;
 
     public Order() {
     }
 
-    public Order(int id, User idUser, double total, LocalDateTime time) {
+    public Order(int id, User idUser, double total, String time) {
         this.id = id;
         this.idUser = idUser;
         this.total = total;
@@ -42,11 +42,11 @@ public class Order {
         this.total = total;
     }
 
-    public LocalDateTime getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(LocalDateTime time) {
+    public void setTime(String time) {
         this.time = time;
     }
 }
