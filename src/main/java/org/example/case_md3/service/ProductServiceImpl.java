@@ -1,12 +1,15 @@
 package org.example.case_md3.service;
 
 import org.example.case_md3.model.Product;
+import org.example.case_md3.model.TypeProduct;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProductServiceImpl implements GeneralService<Product>{
+
+
     protected Connection getConnection() {
         Connection connection = null;
         try {
@@ -29,7 +32,8 @@ public class ProductServiceImpl implements GeneralService<Product>{
                 String name = rs.getString("name");
                 int quantity = rs.getInt("quantity");
                 double price = rs.getDouble("price");
-                int type =
+                int idType = rs.getInt("idType");
+                TypeProduct typeProduct =
 
             }
         } catch (SQLException e) {
