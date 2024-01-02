@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class UserServiceImpl implements GeneralService<User> {
+    public static String name =null;
     protected Connection getConnection() {
         Connection connection = null;
         try {

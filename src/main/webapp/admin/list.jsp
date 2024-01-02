@@ -12,15 +12,6 @@
     <title>Title</title>
 </head>
 <body>
-<c:forEach items='${danhSach}' var="product">
-    <tr>
-        <td>${product.id}</td>
-        <td>${product.name}</td>
-        <td>${product.quantity}</td>
-        <td>${product.price}</td>
-        <td>${product.type.name}</td>
-        <td>${product.status}</td>
-    </tr>
-</c:forEach>
+<h1>TEssssst</h1>
 </body>
 </html>

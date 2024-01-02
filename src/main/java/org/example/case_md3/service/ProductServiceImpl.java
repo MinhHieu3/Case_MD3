@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductServiceImpl implements GeneralService<Product>{
+
     TypeProductServiceImpl typeProductService=new TypeProductServiceImpl();
     protected Connection getConnection() {
         Connection connection = null;

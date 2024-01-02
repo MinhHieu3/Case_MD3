@@ -19,8 +19,8 @@ import java.util.List;
 @WebServlet(name = "loginUser", value = "/loginUsers")
 public class LoginUser extends HttpServlet {
 
-    UserServiceImpl userService=new UserServiceImpl();
-    ProductServiceImpl productService=new ProductServiceImpl();
+    UserServiceImpl userService = new UserServiceImpl();
+    ProductServiceImpl productService = new ProductServiceImpl();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -65,11 +65,12 @@ public class LoginUser extends HttpServlet {
             for (int i = 0; i < list.size(); i++) {
                 if (list.get(i).getUsername().equals(user) && list.get(i).getPassword().equals(pass)) {
                     check = true;
-                    String name=list.get(i).getName();
+                    String name = list.get(i).getName();
                     RequestDispatcher requestDispatcher = req.getRequestDispatcher("user/home.jsp");
                     List<Product> products = productService.findAll();
                     req.setAttribute("danhSach", products);
                     req.setAttribute("user", name);
+                    UserServiceImpl.name = name;
                     requestDispatcher.forward(req, resp);
                     break;
                 }
@@ -82,7 +83,7 @@ public class LoginUser extends HttpServlet {
             String phone = req.getParameter("phone");
             String username = req.getParameter("username");
             String password = req.getParameter("password");
-            userService.add(new User(name,phone,username, password));
+            userService.add(new User(name, phone, username, password));
             resp.sendRedirect("/loginUsers");
         }
     }

@@ -56,7 +56,7 @@
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <div class="login-box">
-                    <c:forEach items='${user}' var="users" >
+                    <c:forEach items='${user}' var="users">
                         <h2 style="color: white ;font-size: 16px">${users}</h2>
                     </c:forEach>
                 </div>
@@ -260,30 +260,33 @@
                 </div>
             </div>
         </div>
-        <c:forEach items='${danhSach}' var="product">
-            <div class="col-lg-3 col-md-6 special-grid top-featured">
-                <div class="products-single fix">
-                    <div class="box-img-hover">
-                        <div class="type-lb">
-                            <p class="sale">Sale</p>
+        <div class="row">
+
+            <c:forEach items='${danhSach}' var="product">
+                <div class="col-3 special-grid top-featured">
+                    <div class="products-single fix">
+                        <div class="box-img-hover">
+                            <div class="type-lb">
+                                <p class="sale">Sale</p>
+                            </div>
+                            <img src="images/img-pro-03.jpg" class="img-fluid" alt="Image">
+                            <div class="mask-icon">
+                                <a class="cart" href="/homeUser?action=buy&login&id=${product.id}">Mua</a>
+                            </div>
                         </div>
-                        <img src="images/img-pro-03.jpg" class="img-fluid" alt="Image">
-                        <div class="mask-icon">
-                            <a class="cart" href="/loginUsers?id=${product.id}">Mua</a>
+                        <div class="why-text">
+                            <h3>Tên sản Phẩm : ${product.name}</h3>
+                            <h4>${product.type.describe}</h4>
+                            <h3>Số Lượng : ${product.quantity}</h3>
+                            <h5> $${product.price}</h5>
                         </div>
-                    </div>
-                    <div class="why-text">
-                        <h3>Tên sản Phẩm : ${product.name}</h3>
-                        <h4>${product.type.describe}</h4>
-                        <h3>Số Lượng : ${product.quantity}</h3>
-                        <h5> $${product.price}</h5>
                     </div>
                 </div>
-            </div>
-        </c:forEach>
+            </c:forEach>
+        </div>
     </div>
 </div>
-</div>
+
 <!-- Start Categories  -->
 <div class="categories-shop">
     <div class="container">
