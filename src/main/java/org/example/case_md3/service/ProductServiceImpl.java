@@ -7,9 +7,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductServiceImpl implements GeneralService<Product>{
+public class ProductServiceImpl implements GeneralService<Product> {
 
-    TypeProductServiceImpl typeProductService=new TypeProductServiceImpl();
+    TypeProductServiceImpl typeProductService = new TypeProductServiceImpl();
+
     protected Connection getConnection() {
         Connection connection = null;
         try {
@@ -20,6 +21,7 @@ public class ProductServiceImpl implements GeneralService<Product>{
         }
         return connection;
     }
+
     @Override
     public List<Product> findAll() {
         List<Product> products = new ArrayList<>();
@@ -27,14 +29,14 @@ public class ProductServiceImpl implements GeneralService<Product>{
              PreparedStatement preparedStatement = connection.prepareStatement("select * from product")) {
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                int id =rs.getInt("id");
-                String name=rs.getString("name");
-                int quantity =rs.getInt("quantity");
-                double price=rs.getDouble("price");
-                int type= rs.getInt("idType");
-                TypeProduct typeProduct=typeProductService.findById(type);
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                int quantity = rs.getInt("quantity");
+                double price = rs.getDouble("price");
+                int type = rs.getInt("idType");
+                TypeProduct typeProduct = typeProductService.findById(type);
                 String status = rs.getString("status");
-                products.add(new Product(id, name,quantity,price,typeProduct,status));
+                products.add(new Product(id, name, quantity, price, typeProduct, status));
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -46,7 +48,7 @@ public class ProductServiceImpl implements GeneralService<Product>{
     @Override
     public void add(Product product) throws SQLException {
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("insert into product (name,quantity,price,,idType,status) values (?,?,?,?,?)")) {
+             PreparedStatement preparedStatement = connection.prepareStatement("insert into product (name,quantity,price,idType,status) values (?,?,?,?,?)")) {
             preparedStatement.setString(1, product.getName());
             preparedStatement.setInt(2, product.getQuantity());
             preparedStatement.setDouble(3, product.getPrice());
@@ -60,20 +62,20 @@ public class ProductServiceImpl implements GeneralService<Product>{
 
     @Override
     public Product findById(int id) {
-        Product product=new Product();
+        Product product = new Product();
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("select * from type where id=? ")) {
-            preparedStatement.setInt(1,id);
+            preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                int ids =rs.getInt("id");
-                String name=rs.getString("name");
-                int quantity =rs.getInt("quantity");
-                double price=rs.getDouble("price");
-                int type= rs.getInt("idType");
-                TypeProduct typeProduct=typeProductService.findById(type);
+                int ids = rs.getInt("id");
+                String name = rs.getString("name");
+                int quantity = rs.getInt("quantity");
+                double price = rs.getDouble("price");
+                int type = rs.getInt("idType");
+                TypeProduct typeProduct = typeProductService.findById(type);
                 String status = rs.getString("status");
-                product=(new Product(ids, name,quantity,price,typeProduct,status));
+                product = (new Product(ids, name, quantity, price, typeProduct, status));
             }
         } catch (SQLException e) {
         }
@@ -82,11 +84,27 @@ public class ProductServiceImpl implements GeneralService<Product>{
 
     @Override
     public boolean update(Product product) throws SQLException {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("update product set name=?,price=?,quantity=?,idType=?,status=? where id =?");) {
+            preparedStatement.setString(1, product.getName());
+            preparedStatement.setDouble(2, product.getPrice());
+            preparedStatement.setInt(3, product.getQuantity());
+            preparedStatement.setInt(4, product.getType().getId());
+            preparedStatement.setString(5, product.getStatus());
+            preparedStatement.setInt(6, product.getId());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
         return false;
     }
 
     @Override
     public boolean delete(int id) throws SQLException {
+        Connection connection = getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement("delete from product where id=?");
+        preparedStatement.setInt(1, id);
+        preparedStatement.executeUpdate();
         return false;
     }
 }

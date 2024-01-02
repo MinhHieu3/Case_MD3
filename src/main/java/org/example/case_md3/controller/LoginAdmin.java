@@ -25,6 +25,7 @@ public class LoginAdmin extends HttpServlet {
             action = "";
         }
         switch (action) {
+
             case "":
                 showCheckAdmin(req, resp);
                 break;

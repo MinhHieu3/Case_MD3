@@ -20,6 +20,14 @@ public class Product {
         this.status = status;
     }
 
+    public Product(String name, int quantity, double price, TypeProduct type, String status) {
+        this.name = name;
+        this.quantity = quantity;
+        this.price = price;
+        this.type = type;
+        this.status = status;
+    }
+
     public int getId() {
         return id;
     }
