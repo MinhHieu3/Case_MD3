@@ -1,6 +1,8 @@
 package org.example.case_md3.service;
 
 import org.example.case_md3.model.Admin;
+import org.example.case_md3.model.Order;
+import org.example.case_md3.model.User;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -41,6 +43,7 @@ public class AdminServiceImpl implements GeneralService<Admin>{
     @Override
     public void add(Admin admin) throws SQLException {
 
+
     }
 
     @Override
@@ -58,4 +61,5 @@ public class AdminServiceImpl implements GeneralService<Admin>{
     public boolean delete(int id) throws SQLException {
         return false;
     }
+
 }

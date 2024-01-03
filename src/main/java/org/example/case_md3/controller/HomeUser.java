@@ -85,7 +85,6 @@ public class HomeUser extends HttpServlet {
         int idOrder = orderList.get(orderList.size() - 1).getId();
         Order order = orderService.findById(idOrder);
         List<Product> products = productService.findAll();
-
         for (int i = 0; i < buyList.size(); i++) {
             orderDetailService.add(new OrderDetails(order, buyList.get(i)));
             for (int j = 0; j < products.size(); j++) {
@@ -96,10 +95,6 @@ public class HomeUser extends HttpServlet {
                 }
             }
         }
-
-        int quantity = 0;
-
-
         buyList = new ArrayList<>();
         count = 0;
         resp.sendRedirect("/homeUser");

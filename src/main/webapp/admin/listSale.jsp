@@ -18,7 +18,6 @@
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 </head>
 <body id="page-top">
-
 <div id="wrapper">
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
         <a class="sidebar-brand d-flex align-items-center justify-content-center"
@@ -57,7 +56,7 @@
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Custom Utilities:</h6>
                     <a class="collapse-item" href="/homeAdmin?action=showBill">Danh Sách Hóa Đơn </a>
-                    <a class="collapse-item" href="/homeAdmin?action=showSale">Doanh Thu</a>
+                    <a class="collapse-item" href="">Doanh Thu</a>
 
                 </div>
             </div>
@@ -125,23 +124,11 @@
                         <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <tr>
-                                    <th>NAME</th>
-                                    <th>PRICE</th>
-                                    <th>QUANTITY</th>
-                                    <th>TYPE</th>
-                                    <th>STATUS</th>
-                                    <th></th>
-                                    <th></th>
+                                    <th>Doanh So</th>
                                 </tr>
-                                <c:forEach items='${menuNav}' var="product">
+                                    <c:forEach items='${sale}' var="sale">
                                     <tr>
-                                        <td>${product.name}</td>
-                                        <td>${product.price}</td>
-                                        <td>${product.quantity}</td>
-                                        <td>${product.type.name}</td>
-                                        <td>${product.status}</td>
-                                        <td><a href="/product?action=update&id=${product.id}">sửa</a></td>
-                                        <td><a href="/product?action=delete&id=${product.id}">xóa</a></td>
+                                        <td>${sale.total}</td>
                                     </tr>
                                 </c:forEach>
                             </table>
@@ -183,3 +170,4 @@
 </body>
 
 </html>
+

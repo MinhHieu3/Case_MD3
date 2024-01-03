@@ -18,8 +18,6 @@ import java.util.List;
 @WebServlet(name = "loginAdmin", value = "/loginAdmin")
 
 public class LoginAdmin extends HttpServlet {
-    OrderDetailServiceImpl orderDetailService = new OrderDetailServiceImpl();
-    OrderService orderService = new OrderService();
     AdminServiceImpl adminService = new AdminServiceImpl();
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
