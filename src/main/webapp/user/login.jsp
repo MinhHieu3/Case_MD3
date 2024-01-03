@@ -13,12 +13,13 @@
     <link rel="stylesheet" type="text/css" href="cssLogin/login.css">
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
 </head>
-<body>
+<body style="background:url('https://cdn.24h.com.vn/upload/3-2018/images/2018-08-11/Da-dep-dang-xinh-voi-sua-chua-uong-hoa-qua-tu-tay-pha-che-2-1533977400-740-width650height433.jpg') ;
+!important ;">
 <div class="main">
     <input type="checkbox" id="chk" aria-hidden="true">
     <div class="signup">
         <form method="post" action="loginUsers">
-            <label for="chk" aria-hidden="true">Sign up</label>
+            <label for="chk" aria-hidden="true" style="color: #573b8a ">Sign up</label>
             <input type="text" name="name" placeholder="Name" required="">
             <input type="number" name="phone" placeholder="Phone" required="">
             <input type="text" name="username" placeholder="Username" required="">
@@ -36,15 +37,5 @@
         </form>
     </div>
 </div>
-
-<div class="login">
-    <form method="post" action="loginAdmin">
-        <label for="chk" aria-hidden="true">Login Acount Admin</label>
-        <input type="text" name="userAdmin" placeholder="userAdmin" required="">
-        <input type="password" name="passAdmin" placeholder="passAdmin" required="">
-        <button>Login Admin</button>
-    </form>
-</div>
-
 </body>
 </html>

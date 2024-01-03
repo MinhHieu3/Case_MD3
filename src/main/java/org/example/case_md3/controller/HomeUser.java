@@ -1,13 +1,7 @@
 package org.example.case_md3.controller;
 
-import org.example.case_md3.model.Order;
-import org.example.case_md3.model.OrderDetails;
-import org.example.case_md3.model.Product;
-import org.example.case_md3.model.User;
-import org.example.case_md3.service.OrderDetailServiceImpl;
-import org.example.case_md3.service.OrderService;
-import org.example.case_md3.service.ProductServiceImpl;
-import org.example.case_md3.service.UserServiceImpl;
+import org.example.case_md3.model.*;
+import org.example.case_md3.service.*;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -26,7 +20,9 @@ public class HomeUser extends HttpServlet {
     ProductServiceImpl productService = new ProductServiceImpl();
     UserServiceImpl userService = new UserServiceImpl();
     OrderDetailServiceImpl orderDetailService = new OrderDetailServiceImpl();
+    TypeProductServiceImpl typeProductService = new TypeProductServiceImpl();
     OrderService orderService = new OrderService();
+    public static Integer count = 0;
 
     public static List<Product> buyList = new ArrayList<>();
 
@@ -36,7 +32,6 @@ public class HomeUser extends HttpServlet {
         if (action == null) {
             action = "";
         }
-
         switch (action) {
             case "buy":
                 buy(req, resp);
@@ -48,8 +43,36 @@ public class HomeUser extends HttpServlet {
                     throw new RuntimeException(e);
                 }
                 break;
+            case "cart":
+                cart(req, resp);
+                break;
             default:
-                showList(req, resp);
+                searchProduct(req, resp);
+                break;
+        }
+    }
+
+    private void searchProduct(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String search = req.getParameter("search");
+        List<Product> products;
+        if (search != null) {
+            products = productService.findByName(search);
+        } else {
+            products = productService.findAll();
+        }
+        List<TypeProduct> typeProducts = typeProductService.findAll();
+        req.setAttribute("tpr", typeProducts);
+        req.setAttribute("danhSach", products);
+        req.getRequestDispatcher("user/home.jsp").forward(req, resp);
+    }
+
+    private void cart(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        if (UserServiceImpl.name == null) {
+            resp.sendRedirect("/loginUsers");
+        } else {
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("user/listBuy.jsp");
+            req.setAttribute("buyList", buyList);
+            requestDispatcher.forward(req, resp);
         }
     }
 
@@ -73,9 +96,9 @@ public class HomeUser extends HttpServlet {
         for (int i = 0; i < buyList.size(); i++) {
             orderDetailService.add(new OrderDetails(order, buyList.get(i)));
         }
-
+        buyList = new ArrayList<>();
+        count=0;
         resp.sendRedirect("/homeUser");
-
     }
 
     private void buy(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
@@ -111,7 +134,9 @@ public class HomeUser extends HttpServlet {
                     }
                 }
                 req.setAttribute("buyList", buyList);
+
             }
+
             requestDispatcher.forward(req, resp);
         }
 
@@ -120,11 +145,14 @@ public class HomeUser extends HttpServlet {
 
     private void showList(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("user/home.jsp");
+        for (int i = 0; i < buyList.size(); i++) {
+            count++;
+        }
+        req.setAttribute("buy", count);
         List<Product> products = productService.findAll();
         req.setAttribute("danhSach", products);
         requestDispatcher.forward(req, resp);
     }
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");

@@ -49,16 +49,9 @@
 <div class="main-top">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                <div class="right-phone-box">
-                    <p>Call US :- <a href="#"> +11 900 800 100</a></p>
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="col-11">
                 <div class="login-box">
-                    <c:forEach items='${user}' var="users">
-                        <h2 style="color: white ;font-size: 16px">${users}</h2>
-                    </c:forEach>
+                        <h2 style="color: white ;font-size: 16px">${user}</h2>
                 </div>
                 <div class="text-slid-box">
                     <div id="offer-box" class="carouselTicker">
@@ -133,24 +126,55 @@
             <!-- Start Atribute Navigation -->
             <div class="attr-nav">
                 <ul>
-                    <form method="get"
-                          class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                   aria-label="Search" aria-describedby="basic-addon2" name="search">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
+                    <li class="search">
+                        <form method="get"
+                              class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                            <div class="input-group">
+                                <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                                       aria-label="Search" aria-describedby="basic-addon2" name="search">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="button">
+                                        <i class="fas fa-search fa-sm"></i>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
+                        </form>
 
-                        <a href="#">
+
+
+                    <li class="nav-item dropdown no-arrow d-sm-none">
+                        <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <!-- Dropdown - Messages -->
+                        <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                             aria-labelledby="searchDropdown">
+                            <form class="form-inline mr-auto w-100 navbar-search">
+                                <div class="input-group">
+                                    <input type="text" class="form-control bg-light border-0 small"
+                                           placeholder="Search for..." aria-label="Search"
+                                           aria-describedby="basic-addon2" name="search">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="button">
+                                            <i class="fas fa-search fa-sm"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+
+
+
+                    </li>
+
+                    <li class="side-menu">
+                        <a href="/homeUser?action=cart">
                             <i class="fa fa-shopping-bag"></i>
-                            <span class="badge">3</span>
+                            <span class="badge">${buy}</span>
                             <p>My Cart</p>
                         </a>
-                    </form>
                     </li>
                 </ul>
             </div>
@@ -194,7 +218,7 @@
     <div class="container">
         <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-search"></i></span>
-            <input type="text" class="form-control" placeholder="Search">
+            <input type="text" class="form-control" placeholder="Search" name="search">
             <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
         </div>
     </div>
@@ -287,11 +311,16 @@
                         </div>
                         <div class="why-text">
                             <h3>Tên sản Phẩm : ${product.name}</h3>
-                            <h4>${product.type.describe}</h4>
+                            <h4>${product.type.name}</h4>
                             <h3>Số Lượng : ${product.quantity}</h3>
-                            <h5> $${product.price}</h5>
+                            <h5> $${product.price} | ${product.status}</h5>
                         </div>
                     </div>
+
+
+
+
+
                 </div>
             </c:forEach>
         </div>
