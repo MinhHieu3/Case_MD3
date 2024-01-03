@@ -4,6 +4,7 @@ import org.example.case_md3.model.Order;
 import org.example.case_md3.model.OrderDetails;
 import org.example.case_md3.model.Product;
 import org.example.case_md3.model.User;
+import org.example.case_md3.service.OrderDetailServiceImpl;
 import org.example.case_md3.service.OrderService;
 import org.example.case_md3.service.ProductServiceImpl;
 import org.example.case_md3.service.UserServiceImpl;
@@ -24,7 +25,7 @@ import java.util.List;
 public class HomeUser extends HttpServlet {
     ProductServiceImpl productService = new ProductServiceImpl();
     UserServiceImpl userService = new UserServiceImpl();
-    OrderDetails orderDetails = new OrderDetails();
+    OrderDetailServiceImpl orderDetailService = new OrderDetailServiceImpl();
     OrderService orderService = new OrderService();
 
     public static List<Product> buyList = new ArrayList<>();
@@ -53,7 +54,6 @@ public class HomeUser extends HttpServlet {
     }
 
     private void order(HttpServletRequest req, HttpServletResponse resp) throws SQLException, IOException {
-        List<Order> orders = orderService.findAll();
         double total = 0;
         for (int i = 0; i < buyList.size(); i++) {
             total += buyList.get(i).getPrice();
@@ -67,6 +67,13 @@ public class HomeUser extends HttpServlet {
         }
         User user1 = userService.findById(idUser);
         orderService.add(new Order(user1, total, time));
+        List<Order> orderList = orderService.findAll();
+        int idOrder = orderList.get(orderList.size() - 1).getId();
+        Order order = orderService.findById(idOrder);
+        for (int i = 0; i < buyList.size(); i++) {
+            orderDetailService.add(new OrderDetails(order, buyList.get(i)));
+        }
+
         resp.sendRedirect("/homeUser");
 
     }
@@ -92,8 +99,8 @@ public class HomeUser extends HttpServlet {
                         product.setQuantity(1);
                         buyList.add(product);
 
+
                     } else {
-//                        int quantity = Integer.parseInt(req.getParameter("quantity"));
                         for (int j = 0; j < buyList.size(); j++) {
                             if (buyList.get(j).getQuantity() != 0 && buyList.get(j).getId() == id) {
                                 buyList.get(i).setQuantity(buyList.get(j).getQuantity() + 1);

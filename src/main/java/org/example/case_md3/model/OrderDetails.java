@@ -9,6 +9,16 @@ public class OrderDetails {
     public OrderDetails() {
     }
 
+    public OrderDetails(Order idOrder, Product idProduct) {
+        this.idOrder = idOrder;
+        this.idProduct = idProduct;
+    }
+
+    public OrderDetails(int quantity, double price) {
+        this.quantity = quantity;
+        this.price = price;
+    }
+
     public OrderDetails(Order idOrder, Product idProduct, int quantity, double price) {
         this.idOrder = idOrder;
         this.idProduct = idProduct;
@@ -33,7 +43,7 @@ public class OrderDetails {
     }
 
     public int getQuantity() {
-        return quantity;
+        return this.quantity;
     }
 
     public void setQuantity(int quantity) {
@@ -41,7 +51,7 @@ public class OrderDetails {
     }
 
     public double getPrice() {
-        return price;
+        return this.price;
     }
 
     public void setPrice(double price) {

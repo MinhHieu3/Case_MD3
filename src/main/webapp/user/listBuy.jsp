@@ -31,7 +31,6 @@
         <td>${products.id}</td>
         <td>${products.name}</td>
         <td>${products.quantity}</td>
-<%--        <td><input type="text" name="quantity"></td>--%>
         <td>${products.price}</td>
     </tr>
     </c:forEach>
