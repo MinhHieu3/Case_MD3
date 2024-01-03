@@ -107,4 +107,26 @@ public class ProductServiceImpl implements GeneralService<Product> {
         preparedStatement.executeUpdate();
         return false;
     }
+    public ArrayList<Product> findByName(String name) {
+        ArrayList<Product> products = new ArrayList<>();
+        Connection connection = getConnection();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("select * from product where name like ?;");
+            preparedStatement.setString(1, "%" + name + "%");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int idN = resultSet.getInt("id");
+                String nameN = resultSet.getString("name");
+                int quantityN = resultSet.getInt("quantity");
+                double priceN = resultSet.getDouble("price");
+                int idTypeN = resultSet.getInt("idType");
+                String statusN = resultSet.getString("status");
+                TypeProduct typeProduct = typeProductService.findById(idTypeN);
+                products.add(new Product(idN, nameN, quantityN, priceN, typeProduct ,statusN));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return products;
+    }
 }
