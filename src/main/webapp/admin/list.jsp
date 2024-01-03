@@ -85,8 +85,8 @@
                  data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Custom Utilities:</h6>
-                    <a class="collapse-item" href="/loginAdmin?action=showBill">chỗ này để xem doanh thu</a>
-                    <a class="collapse-item" href="utilities-border.html">chỗ này để xem show bill </a>
+                    <a class="collapse-item" href="/loginAdmin?action=showBill">List Bill</a>
+                    <a class="collapse-item" href="utilities-border.html">chỗ này để xem doanh thu </a>
 
                 </div>
             </div>

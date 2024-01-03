@@ -1,7 +1,9 @@
 package org.example.case_md3.controller;
 import org.example.case_md3.model.Admin;
 import org.example.case_md3.model.Order;
+import org.example.case_md3.model.OrderDetails;
 import org.example.case_md3.service.AdminServiceImpl;
+import org.example.case_md3.service.OrderDetailServiceImpl;
 import org.example.case_md3.service.OrderService;
 
 import javax.servlet.RequestDispatcher;
@@ -16,6 +18,7 @@ import java.util.List;
 @WebServlet(name = "loginAdmin", value = "/loginAdmin")
 
 public class LoginAdmin extends HttpServlet {
+    OrderDetailServiceImpl orderDetailService = new OrderDetailServiceImpl();
     OrderService orderService = new OrderService();
     AdminServiceImpl adminService = new AdminServiceImpl();
 
@@ -34,17 +37,24 @@ public class LoginAdmin extends HttpServlet {
         }
     }
 
+    private void showBill(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("admin/listBill.jsp");
+        List<OrderDetails> orderDetails = orderDetailService.findAll();
+        req.setAttribute("listOrderDetail",orderDetails);
+        requestDispatcher.forward(req,resp);
+    }
+
     private void showLoginAdmin(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("admin/login.jsp");
         requestDispatcher.forward(req,resp);
     }
-
-    private void showBill(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("admin/listBill.jsp");
-        List<Order> orderList = orderService.findAll();
-        req.setAttribute("listOrder",orderList);
-        requestDispatcher.forward(req,resp);
-    }
+// của order
+//    private void showBill(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        RequestDispatcher requestDispatcher = req.getRequestDispatcher("admin/listBill.jsp");
+//        List<Order> orderList = orderService.findAll();
+//        req.setAttribute("listOrder",orderList);
+//        requestDispatcher.forward(req,resp);
+//    }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String action = req.getParameter("action");

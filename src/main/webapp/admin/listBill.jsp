@@ -91,8 +91,8 @@
                  data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Custom Utilities:</h6>
-                    <a class="collapse-item" href="utilities-color.html">chỗ này để xem doanh thu</a>
-                    <a class="collapse-item" href="utilities-border.html">chỗ này để xem show bill </a>
+                    <a class="collapse-item" href="">List Bill</a>
+                    <a class="collapse-item" href="utilities-border.html">chỗ này để xem doanh thu </a>
 
                 </div>
             </div>
@@ -242,7 +242,7 @@
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">List Bill</h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -250,16 +250,20 @@
                                 <tr>
                                     <th>ID Hóa Đơn</th>
                                     <th>Tên Người Mua</th>
+                                    <th>Tên Sản Phẩm</th>
+                                    <th>Số Lượng Mua</th>
                                     <th>Tổng Tiền</th>
                                     <th>Thời Gian Mua</th>
 
                                 </tr>
-                                <c:forEach items='${listOrder}' var="order">
+                                <c:forEach items='${listOrderDetail}' var="orderdetail">
                                     <tr>
-                                        <td>${order.id}</td>
-                                        <td>${order.idUser.name}</td>
-                                        <td>${order.total}</td>
-                                        <td>${order.time}</td>
+                                        <td>${orderdetail.idOrder.id}</td>
+                                        <td>${orderdetail.idOrder.idUser.name}</td>
+                                        <td>${orderdetail.idProduct.product.name}</td>
+                                        <td>${orderdetail.quantity}</td>
+                                        <td>${orderdetail.idOrder.total}</td>
+                                        <td>${orderdetail.idOrder.time}</td>
 
                                     </tr>
                                 </c:forEach>
