@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -21,6 +22,7 @@ public class LoginUser extends HttpServlet {
 
     UserServiceImpl userService = new UserServiceImpl();
     ProductServiceImpl productService = new ProductServiceImpl();
+    public static List<User>userList=new ArrayList<>();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -70,6 +72,9 @@ public class LoginUser extends HttpServlet {
                     List<Product> products = productService.findAll();
                     req.setAttribute("danhSach", products);
                     req.setAttribute("user", name);
+                    User user1=list.get(i);
+                    userList.add(user1);
+                    req.setAttribute("id", userList);
                     UserServiceImpl.name = name;
                     requestDispatcher.forward(req, resp);
                     break;

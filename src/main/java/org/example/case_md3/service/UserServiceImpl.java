@@ -61,7 +61,7 @@ public class UserServiceImpl implements GeneralService<User> {
     public User findById(int id) {
         User user=new User();
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("select * from type where id=? ")) {
+             PreparedStatement preparedStatement = connection.prepareStatement("select * from user where id=? ")) {
             preparedStatement.setInt(1,id);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {

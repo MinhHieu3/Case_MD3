@@ -47,8 +47,8 @@ public class OrderDetailServiceImpl implements GeneralService<OrderDetails>{
              PreparedStatement preparedStatement = connection.prepareStatement("insert into orderdetail (idOrder,idProduct,quantity,price) values (?,?,?,?)")) {
             preparedStatement.setInt(1, orderDetails.getIdOrder().getId());
             preparedStatement.setInt(2, orderDetails.getIdProduct().getId());
-            preparedStatement.setInt(3, orderDetails.getQuantity());
-            preparedStatement.setDouble(4, orderDetails.getPrice());
+            preparedStatement.setInt(3, orderDetails.getIdProduct().getQuantity());
+            preparedStatement.setDouble(4, orderDetails.getIdProduct().getPrice());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);

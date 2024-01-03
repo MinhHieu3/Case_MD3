@@ -1,6 +1,11 @@
 package org.example.case_md3.controller;
 
+import org.example.case_md3.model.Order;
+import org.example.case_md3.model.OrderDetails;
 import org.example.case_md3.model.Product;
+import org.example.case_md3.model.User;
+import org.example.case_md3.service.OrderDetailServiceImpl;
+import org.example.case_md3.service.OrderService;
 import org.example.case_md3.service.ProductServiceImpl;
 import org.example.case_md3.service.UserServiceImpl;
 
@@ -11,6 +16,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +25,8 @@ import java.util.List;
 public class HomeUser extends HttpServlet {
     ProductServiceImpl productService = new ProductServiceImpl();
     UserServiceImpl userService = new UserServiceImpl();
+    OrderDetailServiceImpl orderDetailService = new OrderDetailServiceImpl();
+    OrderService orderService = new OrderService();
 
     public static List<Product> buyList = new ArrayList<>();
 
@@ -32,9 +41,41 @@ public class HomeUser extends HttpServlet {
             case "buy":
                 buy(req, resp);
                 break;
+            case "order":
+                try {
+                    order(req, resp);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                break;
             default:
                 showList(req, resp);
         }
+    }
+
+    private void order(HttpServletRequest req, HttpServletResponse resp) throws SQLException, IOException {
+        double total = 0;
+        for (int i = 0; i < buyList.size(); i++) {
+            total += buyList.get(i).getPrice();
+        }
+        String time = String.valueOf(LocalDateTime.now());
+        List<User> user = LoginUser.userList;
+        int idUser = 0;
+        for (int j = 0; j < user.size(); j++) {
+            idUser = user.get(j).getId();
+            break;
+        }
+        User user1 = userService.findById(idUser);
+        orderService.add(new Order(user1, total, time));
+        List<Order> orderList = orderService.findAll();
+        int idOrder = orderList.get(orderList.size() - 1).getId();
+        Order order = orderService.findById(idOrder);
+        for (int i = 0; i < buyList.size(); i++) {
+            orderDetailService.add(new OrderDetails(order, buyList.get(i)));
+        }
+
+        resp.sendRedirect("/homeUser");
+
     }
 
     private void buy(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
@@ -46,15 +87,27 @@ public class HomeUser extends HttpServlet {
             List<Product> productList = productService.findAll();
             for (int i = 0; i < productList.size(); i++) {
                 if (productList.get(i).getId() == id) {
-                    boolean check =false;
+                    boolean check = false;
                     for (int j = 0; j < buyList.size(); j++) {
                         if (buyList.get(j).getId() == productList.get(i).getId()) {
-                           check=true;
+                            check = true;
                             break;
                         }
                     }
-                    if(!check){
-                        buyList.add(productList.get(i));
+                    if (!check) {
+                        Product product = productList.get(i);
+                        product.setQuantity(1);
+                        buyList.add(product);
+
+
+                    } else {
+                        for (int j = 0; j < buyList.size(); j++) {
+                            if (buyList.get(j).getQuantity() != 0 && buyList.get(j).getId() == id) {
+                                buyList.get(i).setQuantity(buyList.get(j).getQuantity() + 1);
+                                break;
+                            }
+                        }
+
                     }
                 }
                 req.setAttribute("buyList", buyList);

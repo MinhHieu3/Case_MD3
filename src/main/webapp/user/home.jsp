@@ -271,7 +271,7 @@
                             </div>
                             <img src="images/img-pro-03.jpg" class="img-fluid" alt="Image">
                             <div class="mask-icon">
-                                <a class="cart" href="/homeUser?action=buy&login&id=${product.id}">Mua</a>
+                                <a class="cart" href="/homeUser?action=buy&id=${product.id}">Mua</a>
                             </div>
                         </div>
                         <div class="why-text">

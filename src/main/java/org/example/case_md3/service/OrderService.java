@@ -25,7 +25,7 @@ public class OrderService implements GeneralService<Order>{
     public List<Order> findAll() {
         List<Order> orders = new ArrayList<>();
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("select * from order")) {
+             PreparedStatement preparedStatement = connection.prepareStatement("select * from `order`")) {
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 int id =rs.getInt("id");
@@ -45,7 +45,7 @@ public class OrderService implements GeneralService<Order>{
     @Override
     public void add(Order order) throws SQLException {
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("insert into order (idUser,total,time) values (?,?,?)")) {
+             PreparedStatement preparedStatement = connection.prepareStatement("insert into `order` (idUser,total,time) values (?,?,?)")) {
             preparedStatement.setInt(1, order.getIdUser().getId());
             preparedStatement.setDouble(2, order.getTotal());
             preparedStatement.setString(3, order.getTime());
@@ -59,7 +59,7 @@ public class OrderService implements GeneralService<Order>{
     public Order findById(int id) {
         Order order=new Order();
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("select * from order where id=? ")) {
+             PreparedStatement preparedStatement = connection.prepareStatement("select * from `order` where id=? ")) {
             preparedStatement.setInt(1,id);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
