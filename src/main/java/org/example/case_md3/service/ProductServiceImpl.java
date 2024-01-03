@@ -129,4 +129,25 @@ public class ProductServiceImpl implements GeneralService<Product> {
         }
         return products;
     }
+
+    public List<Product> SortPrice() {
+        List<Product> products = new ArrayList<>();
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("select * from product order by price asc ")) {
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                int quantity = rs.getInt("quantity");
+                double price = rs.getDouble("price");
+                int type = rs.getInt("idType");
+                TypeProduct typeProduct = typeProductService.findById(type);
+                String status = rs.getString("status");
+                products.add(new Product(id, name, quantity, price, typeProduct, status));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return products;
+    }
 }

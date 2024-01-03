@@ -25,6 +25,9 @@ public class HomeAdmin extends HttpServlet {
             action = "";
         }
         switch (action) {
+            case "sortPrice":
+                sortPrice(request, response);
+                break;
             default:
                 showListProduct(request, response);
                 break;
@@ -32,8 +35,17 @@ public class HomeAdmin extends HttpServlet {
 
     }
 
+    private void sortPrice(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        List<Product> products;
+        products = productService.SortPrice();
+        List<TypeProduct> typeProducts = typeProductService.findAll();
+        request.setAttribute("tpr", typeProducts);
+        request.setAttribute("menuNav", products);
+        request.getRequestDispatcher("admin/list.jsp").forward(request, response);
+    }
+
     private void showListProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String search =request.getParameter("search");
+        String search = request.getParameter("search");
         List<Product> products;
         if (search != null) {
             products = productService.findByName(search);

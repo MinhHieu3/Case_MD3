@@ -866,6 +866,7 @@
                                  <th>PRICE</th>
                                  <th>TYPE</th>
                                  <th>STATUS</th>
+                                 <button><a href="/homeAdmin?action=sortPrice">Sắp xếp theo giá tiền tăng dần</a></button>
                              </tr>
 
                              <c:forEach items="${menuNav}" var="pr">
