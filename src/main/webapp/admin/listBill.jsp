@@ -260,7 +260,7 @@
                                     <tr>
                                         <td>${orderdetail.idOrder.id}</td>
                                         <td>${orderdetail.idOrder.idUser.name}</td>
-                                        <td>${orderdetail.idProduct.product.name}</td>
+                                        <td>${orderdetail.idProduct.name}</td>
                                         <td>${orderdetail.quantity}</td>
                                         <td>${orderdetail.idOrder.total}</td>
                                         <td>${orderdetail.idOrder.time}</td>

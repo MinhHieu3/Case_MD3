@@ -64,7 +64,7 @@ public class ProductServiceImpl implements GeneralService<Product> {
     public Product findById(int id) {
         Product product = new Product();
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("select * from type where id=? ")) {
+             PreparedStatement preparedStatement = connection.prepareStatement("select * from product where id=? ")) {
             preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {

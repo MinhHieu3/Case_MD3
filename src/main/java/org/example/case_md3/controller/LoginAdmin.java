@@ -28,33 +28,16 @@ public class LoginAdmin extends HttpServlet {
             action = "";
         }
         switch (action) {
-            case "showBill":
-                showBill(req,resp);
-                break;
+
             case "showLoginAdmin":
                 showLoginAdmin(req,resp);
                 break;
         }
     }
-
-    private void showBill(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("admin/listBill.jsp");
-        List<OrderDetails> orderDetails = orderDetailService.findAll();
-        req.setAttribute("listOrderDetail",orderDetails);
-        requestDispatcher.forward(req,resp);
-    }
-
     private void showLoginAdmin(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("admin/login.jsp");
         requestDispatcher.forward(req,resp);
     }
-// của order
-//    private void showBill(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        RequestDispatcher requestDispatcher = req.getRequestDispatcher("admin/listBill.jsp");
-//        List<Order> orderList = orderService.findAll();
-//        req.setAttribute("listOrder",orderList);
-//        requestDispatcher.forward(req,resp);
-//    }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String action = req.getParameter("action");

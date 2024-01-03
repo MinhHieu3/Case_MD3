@@ -1,6 +1,5 @@
 package org.example.case_md3.controller;
 
-import org.example.case_md3.model.Order;
 import org.example.case_md3.model.Product;
 import org.example.case_md3.model.TypeProduct;
 import org.example.case_md3.service.OrderService;
@@ -18,7 +17,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 @WebServlet(name = "product", value = "/product")
-public class HomeProduct extends HttpServlet {
+public class ProductServlet extends HttpServlet {
     OrderService orderService = new OrderService();
     ProductServiceImpl productService = new ProductServiceImpl();
     TypeProductServiceImpl typeProductService = new TypeProductServiceImpl();

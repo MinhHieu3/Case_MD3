@@ -45,20 +45,8 @@ public class AdminServiceImpl implements GeneralService<Admin>{
 
     @Override
     public Admin findById(int id) {
-        Admin admin = new Admin();
-//        try (Connection connection = getConnection();
-//             PreparedStatement preparedStatement = connection.prepareStatement("select * from admin where id = ?");) {
-//            preparedStatement.setInt(1,id);
-//            //   System.out.println(preparedStatement); //in ra câu truy vấn.
-//            ResultSet rs = preparedStatement.executeQuery();
-//            while (rs.next()) {
-//                String name = rs.getString("userAdmin");
-//                String pass = rs.getString("passAdmin");
-//                admin=new Admin(name,pass);
-//            }
-//        } catch (SQLException e) {
-//        }
-        return admin ;
+
+        return null ;
     }
 
     @Override
