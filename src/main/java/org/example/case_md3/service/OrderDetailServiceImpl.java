@@ -77,6 +77,17 @@ public class OrderDetailServiceImpl implements GeneralService<OrderDetails>{
 
     }
 
+    public double sum() throws SQLException {
+        double totalPrice = 0;
+        Connection connection = getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement("select sum(price) as total_Price from orderdetail ");
+        ResultSet rs = preparedStatement.executeQuery();
+        if (rs.next()){
+            totalPrice = rs.getDouble("totalPrice");
+        }
+        return totalPrice;
+    }
+
     @Override
     public boolean update(OrderDetails orderDetails) throws SQLException {
         return false;

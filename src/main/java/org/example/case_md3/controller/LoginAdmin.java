@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 @WebServlet(name = "loginAdmin", value = "/loginAdmin")
@@ -29,7 +30,11 @@ public class LoginAdmin extends HttpServlet {
         }
         switch (action) {
             case "showBill":
-                showBill(req,resp);
+                try {
+                    showBill(req,resp);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
                 break;
             case "showLoginAdmin":
                 showLoginAdmin(req,resp);
@@ -37,10 +42,12 @@ public class LoginAdmin extends HttpServlet {
         }
     }
 
-    private void showBill(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    private void showBill(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, SQLException {
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("admin/listBill.jsp");
         List<OrderDetails> orderDetails = orderDetailService.findAll();
         req.setAttribute("listOrderDetail",orderDetails);
+        double totalPrice = orderDetailService.sum();
+        req.setAttribute("totalPrice",totalPrice);
         requestDispatcher.forward(req,resp);
     }
 
