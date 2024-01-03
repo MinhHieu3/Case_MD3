@@ -49,16 +49,9 @@
 <div class="main-top">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                <div class="right-phone-box">
-                    <p>Call US :- <a href="#"> +11 900 800 100</a></p>
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="col-11">
                 <div class="login-box">
-                    <c:forEach items='${user}' var="users">
-                        <h2 style="color: white ;font-size: 16px">${users}</h2>
-                    </c:forEach>
+                        <h2 style="color: white ;font-size: 16px">${user}</h2>
                 </div>
                 <div class="text-slid-box">
                     <div id="offer-box" class="carouselTicker">
@@ -135,9 +128,9 @@
                 <ul>
                     <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
                     <li class="side-menu">
-                        <a href="#">
+                        <a href="/homeUser?action=cart">
                             <i class="fa fa-shopping-bag"></i>
-                            <span class="badge">3</span>
+                            <span class="badge">${buy}</span>
                             <p>My Cart</p>
                         </a>
                     </li>

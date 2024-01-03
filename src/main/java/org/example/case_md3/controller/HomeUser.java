@@ -27,6 +27,7 @@ public class HomeUser extends HttpServlet {
     UserServiceImpl userService = new UserServiceImpl();
     OrderDetailServiceImpl orderDetailService = new OrderDetailServiceImpl();
     OrderService orderService = new OrderService();
+    public static Integer count =0;
 
     public static List<Product> buyList = new ArrayList<>();
 
@@ -48,8 +49,21 @@ public class HomeUser extends HttpServlet {
                     throw new RuntimeException(e);
                 }
                 break;
+            case "cart":
+                cart(req, resp);
+                break;
             default:
                 showList(req, resp);
+        }
+    }
+
+    private void cart(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        if (UserServiceImpl.name == null) {
+            resp.sendRedirect("/loginUsers");
+        } else {
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("user/listBuy.jsp");
+            req.setAttribute("buyList", buyList);
+            requestDispatcher.forward(req, resp);
         }
     }
 
@@ -73,9 +87,9 @@ public class HomeUser extends HttpServlet {
         for (int i = 0; i < buyList.size(); i++) {
             orderDetailService.add(new OrderDetails(order, buyList.get(i)));
         }
-
+        buyList = new ArrayList<>();
+        count=0;
         resp.sendRedirect("/homeUser");
-
     }
 
     private void buy(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
@@ -111,7 +125,9 @@ public class HomeUser extends HttpServlet {
                     }
                 }
                 req.setAttribute("buyList", buyList);
+
             }
+
             requestDispatcher.forward(req, resp);
         }
 
@@ -120,11 +136,14 @@ public class HomeUser extends HttpServlet {
 
     private void showList(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("user/home.jsp");
+        for (int i = 0; i < buyList.size(); i++) {
+            count++;
+        }
+        req.setAttribute("buy", count);
         List<Product> products = productService.findAll();
         req.setAttribute("danhSach", products);
         requestDispatcher.forward(req, resp);
     }
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
