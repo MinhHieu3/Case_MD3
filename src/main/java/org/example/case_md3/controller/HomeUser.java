@@ -8,6 +8,7 @@ import org.example.case_md3.service.OrderDetailServiceImpl;
 import org.example.case_md3.service.OrderService;
 import org.example.case_md3.service.ProductServiceImpl;
 import org.example.case_md3.service.UserServiceImpl;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,7 +27,7 @@ public class HomeUser extends HttpServlet {
     UserServiceImpl userService = new UserServiceImpl();
     OrderDetailServiceImpl orderDetailService = new OrderDetailServiceImpl();
     OrderService orderService = new OrderService();
-    public static Integer count =0;
+    public static Integer count = 0;
 
     public static List<Product> buyList = new ArrayList<>();
 
@@ -83,12 +84,24 @@ public class HomeUser extends HttpServlet {
         List<Order> orderList = orderService.findAll();
         int idOrder = orderList.get(orderList.size() - 1).getId();
         Order order = orderService.findById(idOrder);
+        List<Product> products = productService.findAll();
+
         for (int i = 0; i < buyList.size(); i++) {
             orderDetailService.add(new OrderDetails(order, buyList.get(i)));
+            for (int j = 0; j < products.size(); j++) {
+                if (buyList.get(i).getId() == products.get(i).getId()) {
+                    int quantity = products.get(i).getQuantity() - buyList.get(i).getQuantity();
+                    Product product = new Product(buyList.get(i).getId(), quantity);
+                    productService.updateProduct(product);
+                }
+            }
         }
 
+        int quantity = 0;
+
+
         buyList = new ArrayList<>();
-        count=0;
+        count = 0;
         resp.sendRedirect("/homeUser");
     }
 
@@ -112,8 +125,6 @@ public class HomeUser extends HttpServlet {
                         Product product = productList.get(i);
                         product.setQuantity(1);
                         buyList.add(product);
-
-
                     } else {
                         for (int j = 0; j < buyList.size(); j++) {
                             if (buyList.get(j).getQuantity() != 0 && buyList.get(j).getId() == id) {
@@ -125,13 +136,11 @@ public class HomeUser extends HttpServlet {
                     }
                 }
                 req.setAttribute("buyList", buyList);
-
             }
-
             requestDispatcher.forward(req, resp);
         }
-
     }
+
     private void showList(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("user/home.jsp");
         for (int i = 0; i < buyList.size(); i++) {
@@ -142,6 +151,7 @@ public class HomeUser extends HttpServlet {
         req.setAttribute("danhSach", products);
         requestDispatcher.forward(req, resp);
     }
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
