@@ -46,8 +46,8 @@ public class LoginAdmin extends HttpServlet {
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("admin/listBill.jsp");
         List<OrderDetails> orderDetails = orderDetailService.findAll();
         req.setAttribute("listOrderDetail",orderDetails);
-        double totalPrice = orderDetailService.sum();
-        req.setAttribute("totalPrice",totalPrice);
+//        double totalPrice = orderDetailService.sum();
+//        req.setAttribute("totalPrice",totalPrice);
         requestDispatcher.forward(req,resp);
     }
 
