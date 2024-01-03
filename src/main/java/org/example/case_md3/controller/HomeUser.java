@@ -8,7 +8,6 @@ import org.example.case_md3.service.OrderDetailServiceImpl;
 import org.example.case_md3.service.OrderService;
 import org.example.case_md3.service.ProductServiceImpl;
 import org.example.case_md3.service.UserServiceImpl;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -87,6 +86,7 @@ public class HomeUser extends HttpServlet {
         for (int i = 0; i < buyList.size(); i++) {
             orderDetailService.add(new OrderDetails(order, buyList.get(i)));
         }
+
         buyList = new ArrayList<>();
         count=0;
         resp.sendRedirect("/homeUser");
@@ -132,8 +132,6 @@ public class HomeUser extends HttpServlet {
         }
 
     }
-
-
     private void showList(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("user/home.jsp");
         for (int i = 0; i < buyList.size(); i++) {
@@ -154,5 +152,4 @@ public class HomeUser extends HttpServlet {
 
         }
     }
-
 }
