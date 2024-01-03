@@ -47,7 +47,7 @@ public class HomeUser extends HttpServlet {
                 cart(req, resp);
                 break;
             default:
-                searchProduct(req, resp);
+                showList(req, resp);
                 break;
         }
     }

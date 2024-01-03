@@ -1,8 +1,10 @@
 package org.example.case_md3.controller;
 
 import org.example.case_md3.model.Product;
+import org.example.case_md3.model.TypeProduct;
 import org.example.case_md3.model.User;
 import org.example.case_md3.service.ProductServiceImpl;
+import org.example.case_md3.service.TypeProductServiceImpl;
 import org.example.case_md3.service.UserServiceImpl;
 
 import javax.servlet.RequestDispatcher;
@@ -22,6 +24,7 @@ public class LoginUser extends HttpServlet {
 
     UserServiceImpl userService = new UserServiceImpl();
     ProductServiceImpl productService = new ProductServiceImpl();
+    TypeProductServiceImpl typeProductService = new TypeProductServiceImpl();
     public static List<User>userList=new ArrayList<>();
 
     @Override
@@ -31,10 +34,28 @@ public class LoginUser extends HttpServlet {
             action = "";
         }
         switch (action) {
-            default:
+            case "login" :
                 showList(req, resp);
+                break;
+            default:
+                searchProduct(req, resp);
         }
     }
+    private void searchProduct(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String search = req.getParameter("search");
+        List<Product> products;
+        if (search != null) {
+            products = productService.findByName(search);
+        } else {
+            products = productService.findAll();
+        }
+        List<TypeProduct> typeProducts = typeProductService.findAll();
+        req.setAttribute("tpr", typeProducts);
+        req.setAttribute("danhSach", products);
+        req.getRequestDispatcher("user/home.jsp").forward(req, resp);
+    }
+
+
 
     private void showList(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("user/login.jsp");
@@ -72,7 +93,7 @@ public class LoginUser extends HttpServlet {
                     List<Product> products = productService.findAll();
                     req.setAttribute("danhSach", products);
                     req.setAttribute("user", name);
-                    User user1=list.get(i);
+                    User user1 = list.get(i);
                     userList.add(user1);
                     req.setAttribute("id", userList);
                     UserServiceImpl.name = name;
