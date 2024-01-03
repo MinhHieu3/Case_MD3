@@ -125,7 +125,7 @@
                         </c:forEach>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
-                    <li class="nav-item"><a class="nav-link" href="contact-us.html">Contact Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/loginAdmin?action=showLoginAdmin"> Login as admin</a></li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

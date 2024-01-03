@@ -1,7 +1,9 @@
 package org.example.case_md3.controller;
 
+import org.example.case_md3.model.Order;
 import org.example.case_md3.model.Product;
 import org.example.case_md3.model.TypeProduct;
+import org.example.case_md3.service.OrderService;
 import org.example.case_md3.service.ProductServiceImpl;
 import org.example.case_md3.service.TypeProductServiceImpl;
 
@@ -17,6 +19,7 @@ import java.util.List;
 
 @WebServlet(name = "product", value = "/product")
 public class HomeProduct extends HttpServlet {
+    OrderService orderService = new OrderService();
     ProductServiceImpl productService = new ProductServiceImpl();
     TypeProductServiceImpl typeProductService = new TypeProductServiceImpl();
 
@@ -39,8 +42,11 @@ public class HomeProduct extends HttpServlet {
                     throw new RuntimeException(e);
                 }
                 break;
+
         }
     }
+
+
 
     private void showDelete(HttpServletRequest req, HttpServletResponse resp) throws IOException, SQLException {
         int id = Integer.parseInt(req.getParameter("id"));

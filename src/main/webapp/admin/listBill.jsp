@@ -1,3 +1,10 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: admin
+  Date: 1/3/2024
+  Time: 11:11 AM
+  To change this template use File | Settings | File Templates.
+--%>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -25,7 +32,6 @@
 </head>
 
 <body id="page-top">
-
 <!-- Page Wrapper -->
 <div id="wrapper">
 
@@ -43,12 +49,12 @@
         <!-- Divider -->
         <hr class="sidebar-divider my-0">
 
-<%--        <!-- Nav Item - Dashboard -->--%>
-<%--        <li class="nav-item">--%>
-<%--            <a class="nav-link" href="index.html">--%>
-<%--                <i class="fas fa-fw fa-tachometer-alt"></i>--%>
-<%--                <span>Dashboard</span></a>--%>
-<%--        </li>--%>
+        <%--        <!-- Nav Item - Dashboard -->--%>
+        <%--        <li class="nav-item">--%>
+        <%--            <a class="nav-link" href="index.html">--%>
+        <%--                <i class="fas fa-fw fa-tachometer-alt"></i>--%>
+        <%--                <span>Dashboard</span></a>--%>
+        <%--        </li>--%>
 
         <!-- Divider -->
         <hr class="sidebar-divider">
@@ -85,7 +91,7 @@
                  data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Custom Utilities:</h6>
-                    <a class="collapse-item" href="/loginAdmin?action=showBill">chỗ này để xem doanh thu</a>
+                    <a class="collapse-item" href="utilities-color.html">chỗ này để xem doanh thu</a>
                     <a class="collapse-item" href="utilities-border.html">chỗ này để xem show bill </a>
 
                 </div>
@@ -241,26 +247,22 @@
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <tr>
+                                    <th>ID Hóa Đơn</th>
+                                    <th>Tên Người Mua</th>
+                                    <th>Tổng Tiền</th>
+                                    <th>Thời Gian Mua</th>
+
+                                </tr>
+                                <c:forEach items='${listOrder}' var="order">
                                     <tr>
-                                        <th>NAME</th>
-                                        <th>PRICE</th>
-                                        <th>QUANTITY</th>
-                                        <th>TYPE</th>
-                                        <th>STATUS</th>
-                                        <th></th>
-                                        <th></th>
+                                        <td>${order.id}</td>
+                                        <td>${order.idUser.name}</td>
+                                        <td>${order.total}</td>
+                                        <td>${order.time}</td>
+
                                     </tr>
-                                    <c:forEach items='${menuNav}' var="product">
-                                        <tr>
-                                            <td>${product.name}</td>
-                                            <td>${product.price}</td>
-                                            <td>${product.quantity}</td>
-                                            <td>${product.type.name}</td>
-                                            <td>${product.status}</td>
-                                            <td><a href="/product?action=update&id=${product.id}">sửa</a></td>
-                                            <td><a href="/product?action=delete&id=${product.id}">xóa</a></td>
-                                        </tr>
-                                    </c:forEach>
+                                </c:forEach>
                             </table>
                         </div>
                     </div>

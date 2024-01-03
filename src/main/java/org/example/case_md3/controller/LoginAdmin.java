@@ -1,8 +1,11 @@
 package org.example.case_md3.controller;
-
 import org.example.case_md3.model.Admin;
+import org.example.case_md3.model.Order;
 import org.example.case_md3.service.AdminServiceImpl;
+import org.example.case_md3.service.OrderService;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -13,10 +16,34 @@ import java.util.List;
 @WebServlet(name = "loginAdmin", value = "/loginAdmin")
 
 public class LoginAdmin extends HttpServlet {
+    OrderService orderService = new OrderService();
     AdminServiceImpl adminService = new AdminServiceImpl();
 
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String action = req.getParameter("action");
+        if (action == null) {
+            action = "";
+        }
+        switch (action) {
+            case "showBill":
+                showBill(req,resp);
+                break;
+            case "showLoginAdmin":
+                showLoginAdmin(req,resp);
+                break;
+        }
+    }
 
+    private void showLoginAdmin(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("admin/login.jsp");
+        requestDispatcher.forward(req,resp);
+    }
+
+    private void showBill(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("admin/listBill.jsp");
+        List<Order> orderList = orderService.findAll();
+        req.setAttribute("listOrder",orderList);
+        requestDispatcher.forward(req,resp);
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -25,7 +52,6 @@ public class LoginAdmin extends HttpServlet {
             action = "";
         }
         switch (action) {
-
             case "":
                 showCheckAdmin(req, resp);
                 break;

@@ -37,14 +37,5 @@
     </div>
 </div>
 
-<div class="login">
-    <form method="post" action="loginAdmin">
-        <label for="chk" aria-hidden="true">Login Acount Admin</label>
-        <input type="text" name="userAdmin" placeholder="userAdmin" required="">
-        <input type="password" name="passAdmin" placeholder="passAdmin" required="">
-        <button>Login Admin</button>
-    </form>
-</div>
-
 </body>
 </html>

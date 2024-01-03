@@ -33,7 +33,6 @@ public class OrderService implements GeneralService<Order>{
                 double total= rs.getDouble("total");
                 String time = rs.getString("time");
                 User user=userService.findById(idUser);
-
                 orders.add(new Order(id, user,total,time));
             }
         } catch (SQLException e) {
