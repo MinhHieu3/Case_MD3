@@ -45,6 +45,9 @@ public class Home extends HttpServlet {
                     throw new RuntimeException(e);
                 }
                 break;
+            case "":
+                searchProduct(req,resp);
+                break;
             case "cart":
                 cart(req, resp);
                 break;
@@ -52,7 +55,7 @@ public class Home extends HttpServlet {
                 delete(req,resp);
                 break;
             default:
-                searchProduct(req, resp);
+                showList(req, resp);
                 break;
         }
     }

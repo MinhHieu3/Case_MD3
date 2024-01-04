@@ -90,14 +90,12 @@
             <div class="collapse navbar-collapse" id="navbar-menu">
                 <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
                     <li class="nav-item active"><a class="nav-link" href="http://localhost:8080/home#">Trang Chủ</a></li>
-                    <li class="nav-item"><a class="nav-link" href="about.html">Thông tin </a></li>
                     <li class="dropdown">
                         <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Thể Loại</a>
                         <ul class="dropdown-menu">
                             <li></li>
                         </ul>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
                     <li class="nav-item"><a class="nav-link" href="/loginAdmin?action=showLoginAdmin">Sản Phẩm Đã Mua</a></li>
                 </ul>
             </div>
@@ -215,7 +213,6 @@
                     </div>
                     <hr> </div>
             </div>
-<%--            <div class="col-12 d-flex shopping-box"><a href="/home?action=order" class="ml-auto btn hvr-hover">Thanh toán</a> </div>--%>
             <div class="col-12 d-flex shopping-box"><a onclick="confirmAction()" class="ml-auto btn hvr-hover">Thanh toán</a> </div>
         </div>
 
