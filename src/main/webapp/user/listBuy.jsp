@@ -155,9 +155,10 @@
                         <tr>
                             <th>ID Hóa Đơn</th>
                             <th></th>
-                            <th>Tổng</th>
+                            <th>Tổng Tiền</th>
                             <th></th>
-                            <th>Thời Gian</th>
+                            <th>Thời Gian Mua</th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -174,7 +175,7 @@
                                 <td class=total-pr">
                                     <p>${order.time}</p>
                                 </td>
-                                <td><a href="/home?action=invoice&idOder=${order.id}"><< chi tiết >></a></td>
+                                <td><a href="/home?action=invoice&idOrder=${order.id}"><< chi tiết >></a></td>
                             </tr>
                         </c:forEach>
                         </tbody>
