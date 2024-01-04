@@ -34,8 +34,8 @@ public class ProductServiceImpl implements GeneralService<Product> {
                 int quantity = rs.getInt("quantity");
                 double price = rs.getDouble("price");
                 int type = rs.getInt("idType");
-                TypeProduct typeProduct = typeProductService.findById(type);
                 String status = rs.getString("status");
+                TypeProduct typeProduct = typeProductService.findById(type);
                 products.add(new Product(id, name, quantity, price, typeProduct, status));
             }
         } catch (SQLException e) {

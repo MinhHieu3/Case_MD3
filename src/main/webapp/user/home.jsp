@@ -51,7 +51,7 @@
         <div class="row">
             <div class="col-11">
                 <div class="login-box">
-                        <h2 style="color: white ;font-size: 16px">${user}</h2>
+                    <h2 style="color: white ;font-size: 16px">${user}</h2>
                 </div>
                 <div class="text-slid-box">
                     <div id="offer-box" class="carouselTicker">
@@ -111,19 +111,15 @@
                     <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
                     <li class="dropdown">
                         <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Thể Loại</a>
-                        <c:forEach items='${danhSach}' var="product">
-                            <ul class="dropdown-menu">
-                                <li><a href="shop.html">${product.type.name}</a></li>
-                            </ul>
-                        </c:forEach>
+                        <ul class="dropdown-menu">
+                            <li></li>
+                        </ul>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/loginAdmin?action=showLoginAdmin"> Login as admin</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/loginAdmin?action=showLoginAdmin"> Login as
+                        admin</a></li>
                 </ul>
             </div>
-            <!-- /.navbar-collapse -->
-
-            <!-- Start Atribute Navigation -->
             <div class="attr-nav">
                 <ul>
                     <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
@@ -268,9 +264,9 @@
                             </div>
                         </div>
                         <div class="why-text">
-                            <h3>Tên sản Phẩm : ${product.name}</h3>
-                            <h4>${product.type.describe}</h4>
-                            <h3>Số Lượng : ${product.quantity}</h3>
+                            <h4>Tên Sản Phẩm : ${product.name}</h4>
+                            <h4>Mô Tả : ${product.type.describe}</h4>
+                            <h4>Số Lượng : ${product.quantity}</h4>
                             <h5> $${product.price}</h5>
                         </div>
                     </div>
