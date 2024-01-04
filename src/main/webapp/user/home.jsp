@@ -128,7 +128,7 @@
                 <ul>
                     <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
                     <li class="side-menu">
-                        <a href="/homeUser?action=cart">
+                        <a href="/home?action=cart">
                             <i class="fa fa-shopping-bag"></i>
                             <span class="badge">${buy}</span>
                             <p>My Cart</p>
@@ -264,7 +264,7 @@
                             </div>
                             <img src="images/img-pro-03.jpg" class="img-fluid" alt="Image">
                             <div class="mask-icon">
-                                <a class="cart" href="/homeUser?action=buy&id=${product.id}">Mua</a>
+                                <a class="cart" href="/home?action=buy&id=${product.id}">Mua</a>
                             </div>
                         </div>
                         <div class="why-text">

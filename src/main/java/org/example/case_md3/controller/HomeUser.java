@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(name = "homeUser", value = "/homeUser")
+@WebServlet(name = "homeUser", value = "/home")
 public class HomeUser extends HttpServlet {
     ProductServiceImpl productService = new ProductServiceImpl();
     UserServiceImpl userService = new UserServiceImpl();
@@ -89,15 +89,15 @@ public class HomeUser extends HttpServlet {
             orderDetailService.add(new OrderDetails(order, buyList.get(i)));
             for (int j = 0; j < products.size(); j++) {
                 if (buyList.get(i).getId() == products.get(i).getId()) {
-                    int quantity = products.get(i).getQuantity() - buyList.get(i).getQuantity();
-                    Product product = new Product(buyList.get(i).getId(), quantity);
-                    productService.updateProduct(product);
+                        int quantity = products.get(i).getQuantity() - buyList.get(i).getQuantity();
+                        Product product = new Product(buyList.get(i).getId(), quantity);
+                        productService.updateProduct(product);
                 }
             }
         }
         buyList = new ArrayList<>();
         count = 0;
-        resp.sendRedirect("/homeUser");
+        resp.sendRedirect("/home");
     }
 
     private void buy(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {

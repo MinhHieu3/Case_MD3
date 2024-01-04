@@ -70,13 +70,11 @@ public class OrderService implements GeneralService<Order>{
         }
         return order;
     }
-    public List<Order> findByTime(String time ) {
+    public List<Order> findByTime() {
         List<Order> orders = new ArrayList<>();
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("select sum(`order`.total) as 'total'\n" +
-                     "from `order`\n" +
-                     "where time like ? ")) {
-            preparedStatement.setString(1, time +"%");
+                     "from `order`\n" )) {
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 double total = rs.getDouble("total");

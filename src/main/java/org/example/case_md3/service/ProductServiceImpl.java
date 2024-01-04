@@ -109,6 +109,17 @@ public class ProductServiceImpl implements GeneralService<Product> {
         }
         return false;
     }
+    public boolean updateStatus(Product product) throws SQLException {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("update product set status=? where id =?");) {
+            preparedStatement.setString(1, product.getStatus());
+            preparedStatement.setInt(2, product.getId());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return false;
+    }
 
 
     @Override

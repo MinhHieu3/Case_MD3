@@ -46,7 +46,7 @@ public class ProductServlet extends HttpServlet {
     private void showDelete(HttpServletRequest req, HttpServletResponse resp) throws IOException, SQLException {
         int id = Integer.parseInt(req.getParameter("id"));
         productService.delete(id);
-        resp.sendRedirect("/homeAdmin");
+        resp.sendRedirect("/home");
     }
 
     private void showUpdate(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

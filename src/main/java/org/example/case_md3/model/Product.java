@@ -14,7 +14,11 @@ public class Product {
     public Product(int id, int quantity) {
         this.id = id;
         this.quantity = quantity;
+    } public Product(int id,String status){
+        this.id = id;
+          this.status = status;
     }
+
 
     public Product(int id, String name, int quantity, double price, TypeProduct type, String status) {
         this.id = id;
@@ -22,7 +26,7 @@ public class Product {
         this.quantity = quantity;
         this.price = price;
         this.type = type;
-        this.status = status;
+
     }
 
     public Product(String name, int quantity, double price, TypeProduct type, String status) {

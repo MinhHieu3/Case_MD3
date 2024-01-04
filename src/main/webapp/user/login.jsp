@@ -37,9 +37,5 @@
         </form>
     </div>
 </div>
-<<<<<<< HEAD
-
-=======
->>>>>>> ece102ac044995d951cf902faaed7b14e149c967
 </body>
 </html>

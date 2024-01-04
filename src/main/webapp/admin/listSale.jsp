@@ -124,10 +124,14 @@
                         <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <tr>
-                                    <th>Doanh So</th>
+                                    <th>Số Đơn Hàng</th>
+                                    <th>Số Lượng Sản Phẩm Đã Bán Được </th>
+                                    <th>Doanh Số</th>
                                 </tr>
                                     <c:forEach items='${sale}' var="sale">
                                     <tr>
+                                        <td>${orderBuy}</td>
+                                        <td>${quantityBuy} / ${quantity}</td>
                                         <td>${sale.total}</td>
                                     </tr>
                                 </c:forEach>
