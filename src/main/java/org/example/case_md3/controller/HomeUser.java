@@ -61,7 +61,7 @@ public class HomeUser extends HttpServlet {
         if (UserServiceImpl.name == null) {
             resp.sendRedirect("/loginUsers");
         } else {
-            RequestDispatcher requestDispatcher = req.getRequestDispatcher("user/listBuy.jsp");
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("user/cart.jsp");
             req.setAttribute("buyList", buyList);
             requestDispatcher.forward(req, resp);
         }
@@ -106,15 +106,17 @@ public class HomeUser extends HttpServlet {
         if (UserServiceImpl.name == null) {
             resp.sendRedirect("/loginUsers");
         } else {
-            RequestDispatcher requestDispatcher = req.getRequestDispatcher("user/listBuy.jsp");
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("user/cart.jsp");
             int id = Integer.parseInt(req.getParameter("id"));
             List<Product> productList = productService.findAll();
+
             for (int i = 0; i < productList.size(); i++) {
                 if (productList.get(i).getId() == id) {
                     boolean check = false;
                     for (int j = 0; j < buyList.size(); j++) {
                         if (buyList.get(j).getId() == productList.get(i).getId()) {
                             check = true;
+
                             break;
                         }
                     }
@@ -122,6 +124,7 @@ public class HomeUser extends HttpServlet {
                         Product product = productList.get(i);
                         product.setQuantity(1);
                         buyList.add(product);
+
                     } else {
                         for (int j = 0; j < buyList.size(); j++) {
                             if (buyList.get(j).getQuantity() != 0 && buyList.get(j).getId() == id) {
@@ -134,6 +137,11 @@ public class HomeUser extends HttpServlet {
                 }
                 req.setAttribute("buyList", buyList);
             }
+            double total=0;
+            for (int j = 0; j < buyList.size(); j++) {
+                total+=(buyList.get(j).getQuantity()*buyList.get(j).getPrice());
+            }
+            req.setAttribute("total", total);
             requestDispatcher.forward(req, resp);
         }
     }
