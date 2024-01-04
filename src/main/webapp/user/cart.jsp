@@ -33,6 +33,7 @@
     <link rel="stylesheet" href="css/custom.css">
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="jsCart/confim.js"></script>
 </head>
 <body>
 <div class="main-top">
@@ -97,7 +98,7 @@
                         </ul>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/loginAdmin?action=showLoginAdmin">Đăng Nhâp Admin</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/loginAdmin?action=showLoginAdmin">Sản Phẩm Đã Mua</a></li>
                 </ul>
             </div>
             <div class="attr-nav">
@@ -214,7 +215,8 @@
                     </div>
                     <hr> </div>
             </div>
-            <div class="col-12 d-flex shopping-box"><a href="/home?action=order" class="ml-auto btn hvr-hover">Thanh toán</a> </div>
+<%--            <div class="col-12 d-flex shopping-box"><a href="/home?action=order" class="ml-auto btn hvr-hover">Thanh toán</a> </div>--%>
+            <div class="col-12 d-flex shopping-box"><a onclick="confirmAction()" class="ml-auto btn hvr-hover">Thanh toán</a> </div>
         </div>
 
     </div>
