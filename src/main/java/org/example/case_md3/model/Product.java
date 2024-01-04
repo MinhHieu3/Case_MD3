@@ -14,9 +14,11 @@ public class Product {
     public Product(int id, int quantity) {
         this.id = id;
         this.quantity = quantity;
-    } public Product(int id,String status){
+    }
+
+    public Product(int id, String status) {
         this.id = id;
-          this.status = status;
+        this.status = status;
     }
 
 
@@ -26,6 +28,7 @@ public class Product {
         this.quantity = quantity;
         this.price = price;
         this.type = type;
+        this.status = status;
 
     }
 
