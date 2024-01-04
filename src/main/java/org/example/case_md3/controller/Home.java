@@ -54,10 +54,34 @@ public class Home extends HttpServlet {
             case "delete":
                 delete(req,resp);
                 break;
+            case "listBuy":
+                    listBuy(req,resp);
+                break;
             default:
                 showList(req, resp);
                 break;
         }
+    }
+
+    private void listBuy(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("user/listBuy.jsp");
+        List<Order> orderList = orderService.findAll();
+        List<Order>orders=new ArrayList<>();
+        int id=UserServiceImpl.id;
+        for (int i = 0; i < orderList.size(); i++) {
+            if (orderList.get(i).getIdUser().getId() == id) {
+                orders.add(orderList.get(i));
+
+            }
+
+        }
+        req.setAttribute("listOrder", orders);
+        for (int i = 0; i < orders.size(); i++) {
+
+        }
+
+
+        requestDispatcher.forward(req, resp);
     }
 
     private void searchProduct(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -123,6 +147,7 @@ public class Home extends HttpServlet {
                 }
                 req.setAttribute("user", name);
             }
+
             requestDispatcher.forward(req, resp);
         }
     }
