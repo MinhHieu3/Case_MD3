@@ -45,6 +45,8 @@
 </head>
 
 <body>
+<a href="account/login">Login</a>
+<a href="account/signup">Sign up</a>
 <!-- Start Main Top -->
 <div class="main-top">
     <div class="container-fluid">
@@ -133,7 +135,7 @@
                                 <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
                                        aria-label="Search" aria-describedby="basic-addon2" name="search">
                                 <div class="input-group-append">
-                                    <button class="btn btn-primary" type="button">
+                                    <button class="btn btn-primary" type="submit">
                                         <i class="fas fa-search fa-sm"></i>
                                     </button>
                                 </div>
@@ -289,7 +291,7 @@
                 <div class="special-menu text-center">
                     <div class="button-group filter-button-group">
                         <button class="active" data-filter="*">All</button>
-                        <button data-filter=".top-featured">Top featured</button>
+                        <button data-filter=".top-featured"><a href="/loginUsers?action=sortPrice">Lowest price</a></button>
                         <button data-filter=".best-seller">Best seller</button>
                     </div>
                 </div>
@@ -642,6 +644,7 @@
 <!-- End copyright  -->
 
 <a href="#" id="back-to-top" title="Back to top" style="display: none;">&uarr;</a>
+
 
 <!-- ALL JS FILES -->
 <script src="js/jquery-3.2.1.min.js"></script>

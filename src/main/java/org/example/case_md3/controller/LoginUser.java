@@ -34,13 +34,27 @@ public class LoginUser extends HttpServlet {
             action = "";
         }
         switch (action) {
-            case "login" :
-                showList(req, resp);
+//            case "login" :
+//                showFormLogin(req, resp);
+//                break;
+            case "sortPrice" :
+                sortMoney(req, resp);
                 break;
             default:
-                searchProduct(req, resp);
+                showFormLogin(req, resp);
+                break;
         }
     }
+
+    private void sortMoney(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        List<Product> products;
+        products = productService.SortPrice();
+        List<TypeProduct> typeProducts = typeProductService.findAll();
+        req.setAttribute("tpr", typeProducts);
+        req.setAttribute("danhSach", products);
+        req.getRequestDispatcher("user/home.jsp").forward(req, resp);
+    }
+
     private void searchProduct(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String search = req.getParameter("search");
         List<Product> products;
@@ -57,7 +71,7 @@ public class LoginUser extends HttpServlet {
 
 
 
-    private void showList(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    private void showFormLogin(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("user/login.jsp");
         requestDispatcher.forward(req, resp);
     }
@@ -110,7 +124,7 @@ public class LoginUser extends HttpServlet {
             String username = req.getParameter("username");
             String password = req.getParameter("password");
             userService.add(new User(name, phone, username, password));
-            resp.sendRedirect("/loginUsers");
+            resp.sendRedirect("/homeUsers");
         }
     }
 }
