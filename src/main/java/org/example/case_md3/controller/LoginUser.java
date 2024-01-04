@@ -118,11 +118,12 @@ public class LoginUser extends HttpServlet {
                     RequestDispatcher requestDispatcher = req.getRequestDispatcher("user/home.jsp");
                     List<Product> products = productService.findAll();
                     req.setAttribute("danhSach", products);
-                    req.setAttribute("user", name);
-                    User user1 = list.get(i);
+                    User user1=list.get(i);
                     userList.add(user1);
                     req.setAttribute("id", userList);
                     UserServiceImpl.name = name;
+                    req.setAttribute("buy", Home.count=0);
+                    req.setAttribute("user", name);
                     requestDispatcher.forward(req, resp);
                     break;
                 }

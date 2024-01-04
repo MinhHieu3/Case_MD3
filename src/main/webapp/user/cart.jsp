@@ -1,6 +1,14 @@
 <%--
   Created by IntelliJ IDEA.
   User: Dell
+  Date: 1/4/2024
+  Time: 2:17 PM
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%--
+  Created by IntelliJ IDEA.
+  User: Dell
   Date: 12/29/2023
   Time: 10:36 PM
   To change this template use File | Settings | File Templates.
@@ -25,10 +33,9 @@
     <link rel="stylesheet" href="css/custom.css">
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="jsCart/confim.js"></script>
 </head>
 <body>
-
-<!-- Start Main Top -->
 <div class="main-top">
     <div class="container-fluid">
         <div class="row">
@@ -83,7 +90,7 @@
             <div class="collapse navbar-collapse" id="navbar-menu">
                 <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
                     <li class="nav-item active"><a class="nav-link" href="http://localhost:8080/home#">Trang Chủ</a></li>
-                    <li class="nav-item"><a class="nav-link" href="about.html">Thông Tin </a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">Thông tin </a></li>
                     <li class="dropdown">
                         <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Thể Loại</a>
                         <ul class="dropdown-menu">
@@ -91,30 +98,12 @@
                         </ul>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/loginAdmin?action=showLoginAdmin">Đăng Nhập Admin</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/loginAdmin?action=showLoginAdmin"> Login as
-                        admin</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/loginAdmin?action=showLoginAdmin">Sản Phẩm Đã Mua</a></li>
                 </ul>
             </div>
             <div class="attr-nav">
                 <ul>
-                    <li class="search">
-                        <form action="/home"
-                              class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                            <div class="input-group">
-                                <input type="text" class="form-control bg-light border-0 small"
-                                       placeholder="Search for..."
-                                       aria-label="Search" aria-describedby="basic-addon2" name="search">
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary" type="submit">
-                                                                                Search
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-
-
-
+                    <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
                     <li class="side-menu">
                         <a href="/home?action=cart">
                             <i class="fa fa-shopping-bag"></i>
@@ -130,17 +119,17 @@
             <li class="cart-box">
                 <ul class="cart-list">
                     <li>
-                        <a href="#" class="photo"><img src="images/img-pro-01.jpg" class="cart-thumb" alt=""/></a>
+                        <a href="#" class="photo"><img src="images/img-pro-01.jpg" class="cart-thumb" alt="" /></a>
                         <h6><a href="#">Delica omtantur </a></h6>
                         <p>1x - <span class="price">$80.00</span></p>
                     </li>
                     <li>
-                        <a href="#" class="photo"><img src="images/img-pro-02.jpg" class="cart-thumb" alt=""/></a>
+                        <a href="#" class="photo"><img src="images/img-pro-02.jpg" class="cart-thumb" alt="" /></a>
                         <h6><a href="#">Omnes ocurreret</a></h6>
                         <p>1x - <span class="price">$60.00</span></p>
                     </li>
                     <li>
-                        <a href="#" class="photo"><img src="images/img-pro-03.jpg" class="cart-thumb" alt=""/></a>
+                        <a href="#" class="photo"><img src="images/img-pro-03.jpg" class="cart-thumb" alt="" /></a>
                         <h6><a href="#">Agam facilisis</a></h6>
                         <p>1x - <span class="price">$40.00</span></p>
                     </li>
@@ -153,7 +142,6 @@
         </div>
     </nav>
 </header>
-
 <div class="top-search">
     <div class="container">
         <div class="input-group">
@@ -163,117 +151,83 @@
         </div>
     </div>
 </div>
-<div id="slides-shop" class="cover-slides">
-    <ul class="slides-container">
-        <li class="text-center">
-            <img src="images/banner-01.jpg" alt="">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h1 class="m-b-20"><strong>Welcome To <br> Freshshop</strong></h1>
-                        <p class="m-b-40">See how your users experience your website in realtime or view <br> trends to
-                            see any changes in performance over time.</p>
-                        <p><a class="btn hvr-hover" href="#">Shop New</a></p>
-                    </div>
-                </div>
-            </div>
-        </li>
-        <li class="text-center">
-            <img src="images/banner-02.jpg" alt="">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h1 class="m-b-20"><strong>Welcome To <br> Freshshop</strong></h1>
-                        <p class="m-b-40">See how your users experience your website in realtime or view <br> trends to
-                            see any changes in performance over time.</p>
-                        <p><a class="btn hvr-hover" href="#">Shop New</a></p>
-                    </div>
-                </div>
-            </div>
-        </li>
-        <li class="text-center">
-            <img src="images/banner-03.jpg" alt="">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h1 class="m-b-20"><strong>Welcome To <br> Freshshop</strong></h1>
-                        <p class="m-b-40">See how your users experience your website in realtime or view <br> trends to
-                            see any changes in performance over time.</p>
-                        <p><a class="btn hvr-hover" href="#">Shop New</a></p>
-                    </div>
-                </div>
-            </div>
-        </li>
-    </ul>
-    <div class="slides-navigation">
-        <a href="#" class="next"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
-        <a href="#" class="prev"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
-    </div>
-</div>
-<!-- End Slider -->
-<div class="products-box">
+<div class="cart-box-main">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <div class="title-all text-center">
-                    <h1>Fruits & Vegetables</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet lacus enim.</p>
+                <div class="table-main table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Tên Sản Phẩm </th>
+                            <th>Giá</th>
+                            <th>Số Lượng</th>
+                            <th>Thành Tiền</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach items='${buyList}' var="product">
+                        <tr>
+                            <td class="name-pr">
+                                <a href="#">
+                                        ${product.name}
+                                </a>
+                            </td>
+                            <td class="price-pr">
+                                <p>$ ${product.price}</p>
+                            </td>
+                            <td class="price-pr">
+                                <p>${product.quantity}</p>
+                            </td>
+                            <td class="total-pr">
+                                <p>$ ${product.price * product.quantity}</p>
+                            </td>
+                            <td class="remove-pr">
+                                <a href="/home?action=delete&id=${product.id}">
+                                    <i class="fas fa-times"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="special-menu text-center">
-                    <div class="button-group filter-button-group">
-                        <button class="active" data-filter="*"><a href="/loginUsers" style="color: #a9b6d0">All</a>
-                        </button>
-                        <button data-filter=".top-featured"><a href="/loginUsers?action=sortPricem">Lowest price</a>
-                        </button>
-                        <button data-filter=".best-seller"><a href="/loginUsers?action=sortPriceM">Highest price</a>
-                        </button>
+        <div class="col-12 d-flex shopping-box"><a href="http://localhost:8080/home" class="ml-auto btn hvr-hover">Chọn Sản Phẩm Khác</a> </div>
+        <div class="row my-5">
+            <div class="col-lg-8 col-sm-12"></div>
+            <div class="col-lg-4 col-sm-12">
+                <div class="order-box">
+                    <h3>Hóa Đơn </h3>
+                    <div class="d-flex">
+                        <h4>Thành Tiền</h4>
+                        <div class="ml-auto font-weight-bold">$ ${total}  </div>
                     </div>
-                </div>
+                    <div class="d-flex">
+                        <h4>Discount</h4>
+                        <div class="ml-auto font-weight-bold"> $ 0 </div>
+                    </div>
+                    <div class="d-flex gr-total">
+                        <h5>Tổng</h5>
+                        <div class="ml-auto h5"> $ ${total} </div>
+                    </div>
+                    <hr> </div>
             </div>
+<%--            <div class="col-12 d-flex shopping-box"><a href="/home?action=order" class="ml-auto btn hvr-hover">Thanh toán</a> </div>--%>
+            <div class="col-12 d-flex shopping-box"><a onclick="confirmAction()" class="ml-auto btn hvr-hover">Thanh toán</a> </div>
         </div>
-        <div class="row">
 
-            <c:forEach items='${danhSach}' var="product">
-                <div class="col-3 special-grid top-featured">
-                    <div class="products-single fix">
-                        <div class="box-img-hover">
-                            <div class="type-lb">
-                                <p class="sale">Sale</p>
-                            </div>
-                            <img src="images/img-pro-03.jpg" class="img-fluid" alt="Image">
-                            <div class="mask-icon">
-                                <a class="cart" href="/home?action=buy&id=${product.id}">Mua</a>
-                            </div>
-                        </div>
-                        <div class="why-text">
-                            <h4>Tên Sản Phẩm : ${product.name}</h4>
-                            <h4>Mô Tả : ${product.type.describe}</h4>
-                            <h4>Số Lượng : ${product.quantity}</h4>
-                            <h5> $${product.price}</h5>
-                        </div>
-                    </div>
-                </div>
-            </c:forEach>
-        </div>
     </div>
 </div>
 
 <div class="footer-copyright" style="background-color: snow">
     <p class="footer-company" style="color: black">Hội Người Đẹp Trai C09. &copy; 2024</p>
 </div>
-<!-- End copyright  -->
-
-<a href="#" id="back-to-top" title="Back to top" style="display: none;">&uarr;</a>
-
-<!-- ALL JS FILES -->
 <script src="js/jquery-3.2.1.min.js"></script>
 <script src="js/popper.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<!-- ALL PLUGINS -->
 <script src="js/jquery.superslides.min.js"></script>
 <script src="js/bootstrap-select.js"></script>
 <script src="js/inewsticker.js"></script>
