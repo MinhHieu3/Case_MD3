@@ -88,10 +88,12 @@ public class HomeUser extends HttpServlet {
         for (int i = 0; i < buyList.size(); i++) {
             orderDetailService.add(new OrderDetails(order, buyList.get(i)));
             for (int j = 0; j < products.size(); j++) {
-                if (buyList.get(i).getId() == products.get(i).getId()) {
-                        int quantity = products.get(i).getQuantity() - buyList.get(i).getQuantity();
+                if (buyList.get(i).getId() == products.get(j).getId()) {
+                    if (products.get(j).getId()>=1) {
+                        int quantity = products.get(j).getQuantity() - buyList.get(i).getQuantity();
                         Product product = new Product(buyList.get(i).getId(), quantity);
                         productService.updateProduct(product);
+                    }
                 }
             }
         }
