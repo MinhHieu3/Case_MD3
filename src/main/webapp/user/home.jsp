@@ -120,7 +120,7 @@
                         </c:forEach>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
-                    <li class="nav-item"><a class="nav-link" href="contact-us.html">Contact Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/loginAdmin?action=showLoginAdmin"> Login as admin</a></li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -290,9 +290,9 @@
             <div class="col-lg-12">
                 <div class="special-menu text-center">
                     <div class="button-group filter-button-group">
-                        <button class="active" data-filter="*">All</button>
-                        <button data-filter=".top-featured"><a href="/loginUsers?action=sortPrice">Lowest price</a></button>
-                        <button data-filter=".best-seller">Best seller</button>
+                        <button class="active" data-filter="*"><a href="/loginUsers" style="color: #a9b6d0">All</a></button>
+                        <button data-filter=".top-featured"><a href="/loginUsers?action=sortPricem">Lowest price</a></button>
+                        <button data-filter=".best-seller"><a href="/loginUsers?action=sortPriceM">Highest price</a></button>
                     </div>
                 </div>
             </div>
@@ -308,7 +308,7 @@
                             </div>
                             <img src="images/img-pro-03.jpg" class="img-fluid" alt="Image">
                             <div class="mask-icon">
-                                <a class="cart" href="/homeUser?action=buy&id=${product.id}">Mua</a>
+                                <a class="cart" href="/home?action=buy&id=${product.id}">Mua</a>
                             </div>
                         </div>
                         <div class="why-text">

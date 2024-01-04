@@ -16,7 +16,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 @WebServlet(name = "product", value = "/product")
-public class HomeProduct extends HttpServlet {
+public class ProductServlet extends HttpServlet {
     ProductServiceImpl productService = new ProductServiceImpl();
     TypeProductServiceImpl typeProductService = new TypeProductServiceImpl();
 
@@ -45,7 +45,7 @@ public class HomeProduct extends HttpServlet {
     private void showDelete(HttpServletRequest req, HttpServletResponse resp) throws IOException, SQLException {
         int id = Integer.parseInt(req.getParameter("id"));
         productService.delete(id);
-        resp.sendRedirect("/homeAdmin");
+        resp.sendRedirect("/home");
     }
 
     private void showUpdate(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

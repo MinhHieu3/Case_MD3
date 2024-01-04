@@ -34,11 +34,14 @@ public class LoginUser extends HttpServlet {
             action = "";
         }
         switch (action) {
-//            case "login" :
-//                showFormLogin(req, resp);
-//                break;
-            case "sortPrice" :
-                sortMoney(req, resp);
+            case "search" :
+                searchProduct(req, resp);
+                break;
+            case "sortPriceM" :
+                sortMoneyMax(req, resp);
+                break;
+            case "sortPricem" :
+                sortMoneyMin(req, resp);
                 break;
             default:
                 showFormLogin(req, resp);
@@ -46,9 +49,18 @@ public class LoginUser extends HttpServlet {
         }
     }
 
-    private void sortMoney(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    private void sortMoneyMax(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Product> products;
-        products = productService.SortPrice();
+        products = productService.SortPriceMax();
+        List<TypeProduct> typeProducts = typeProductService.findAll();
+        req.setAttribute("tpr", typeProducts);
+        req.setAttribute("danhSach", products);
+        req.getRequestDispatcher("user/home.jsp").forward(req, resp);
+    }
+
+    private void sortMoneyMin(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        List<Product> products;
+        products = productService.SortPriceMin();
         List<TypeProduct> typeProducts = typeProductService.findAll();
         req.setAttribute("tpr", typeProducts);
         req.setAttribute("danhSach", products);

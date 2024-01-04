@@ -1,7 +1,11 @@
 package org.example.case_md3.controller;
 
+import org.example.case_md3.model.Order;
+import org.example.case_md3.model.OrderDetails;
 import org.example.case_md3.model.Product;
 import org.example.case_md3.model.TypeProduct;
+import org.example.case_md3.service.OrderDetailServiceImpl;
+import org.example.case_md3.service.OrderService;
 import org.example.case_md3.service.ProductServiceImpl;
 import org.example.case_md3.service.TypeProductServiceImpl;
 
@@ -18,52 +22,59 @@ import java.util.List;
 @WebServlet(name = "homeAdmin", value = "/homeAdmin")
 public class HomeAdmin extends HttpServlet {
     ProductServiceImpl productService = new ProductServiceImpl();
-    TypeProductServiceImpl typeProductService = new TypeProductServiceImpl();
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String action = request.getParameter("action");
+    OrderDetailServiceImpl orderDetailService = new OrderDetailServiceImpl();
+    OrderService orderService=new OrderService();
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String action = req.getParameter("action");
         if (action == null) {
             action = "";
         }
         switch (action) {
-            case "sortPrice":
-                sortPrice(request, response);
+            case "showBill":
+                showBill(req,resp);
+                break;
+            case "showSale":
+                showSale(req,resp);
                 break;
             default:
-                showListProduct(request, response);
-                break;
+                showList(req, resp);
         }
 
     }
 
-    private void sortPrice(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        List<Product> products;
-        products = productService.SortPrice();
-        List<TypeProduct> typeProducts = typeProductService.findAll();
-        request.setAttribute("tpr", typeProducts);
-        request.setAttribute("menuNav", products);
-        request.getRequestDispatcher("admin/list.jsp").forward(request, response);
-    }
-
-    private void showListProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String search = request.getParameter("search");
-        List<Product> products;
-        if (search != null) {
-            products = productService.findByName(search);
-        } else {
-            products = productService.findAll();
+    private void showSale(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("admin/listSale.jsp");
+        List<Order> order= orderService.findByTime();
+        List<Order>orderList=orderService.findAll();
+        List<Product>products=productService.findAll();
+        int count=orderList.size();
+        List<OrderDetails>orderDetails=orderDetailService.findAll();
+        int quantity=0;
+        for (int i = 0; i < orderDetails.size(); i++) {
+            quantity+=orderDetails.get(i).getQuantity();
         }
-        List<TypeProduct> typeProducts = typeProductService.findAll();
-        request.setAttribute("tpr", typeProducts);
-        request.setAttribute("menuNav", products);
-        request.getRequestDispatcher("admin/list.jsp").forward(request, response);
+        int quantityProduct=0;
+        for (int i = 0; i < products.size(); i++) {
+            quantityProduct+=products.get(i).getQuantity();
+        }
+        req.setAttribute("sale",order);
+        req.setAttribute("orderBuy",count);
+        req.setAttribute("quantityBuy",quantity);
+        req.setAttribute("quantity",quantityProduct);
+        requestDispatcher.forward(req,resp);
     }
-//    RequestDispatcher requestDispatcher = request.getRequestDispatcher("admin/list.jsp");
-//        List<Product> products = productService.findAll();
-//        request.setAttribute("menuNav",products);
-//        requestDispatcher.forward(request,response);
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    private void showBill(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("admin/listBill.jsp");
+        List<OrderDetails> orderDetails = orderDetailService.findAll();
+        req.setAttribute("listOrderDetail",orderDetails);
+        requestDispatcher.forward(req,resp);
+    }
 
+    private void showList(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("admin/list.jsp");
+        List<Product> products = productService.findAll();
+        req.setAttribute("menuNav",products);
+        requestDispatcher.forward(req,resp);
     }
 }

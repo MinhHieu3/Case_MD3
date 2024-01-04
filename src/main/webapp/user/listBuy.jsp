@@ -15,7 +15,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
 </head>
 <body>
-<form action="/homeUser">
+<form action="/home">
 <table class="table table-striped">
     <thead>
     <tr>
@@ -39,7 +39,7 @@
     <button>Mua Thêm</button>
 </form>
 
-    <button><a href="/homeUser?action=order">Thanh Toán</a></button>
+    <button><a href="/home?action=order">Thanh Toán</a></button>
 
 
 </body>

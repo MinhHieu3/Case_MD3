@@ -57,7 +57,7 @@
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Custom Utilities:</h6>
                     <a class="collapse-item" href="/homeAdmin?action=showBill">Danh Sách Hóa Đơn </a>
-                    <a class="collapse-item" href="/homeAdmin?action=showSale">Doanh Thu</a>
+                    <a class="collapse-item" href="">Doanh Thu</a>
 
                 </div>
             </div>
@@ -71,13 +71,11 @@
                         <i class="fa fa-bars"></i>
                     </button>
                 </form>
-
-                <!-- Topbar Search -->
-                <form method="get"
+                <form
                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                     <div class="input-group">
                         <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                               aria-label="Search" aria-describedby="basic-addon2" name="search">
+                               aria-label="Search" aria-describedby="basic-addon2">
                         <div class="input-group-append">
                             <button class="btn btn-primary" type="button">
                                 <i class="fas fa-search fa-sm"></i>
@@ -97,7 +95,7 @@
                                 <div class="input-group">
                                     <input type="text" class="form-control bg-light border-0 small"
                                            placeholder="Search for..." aria-label="Search"
-                                           aria-describedby="basic-addon2" name="search">
+                                           aria-describedby="basic-addon2">
                                     <div class="input-group-append">
                                         <button class="btn btn-primary" type="button">
                                             <i class="fas fa-search fa-sm"></i>
@@ -127,23 +125,22 @@
                         <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <tr>
-                                    <th>NAME</th>
-                                    <th>PRICE</th>
-                                    <th>QUANTITY</th>
-                                    <th>TYPE</th>
-                                    <th>STATUS</th>
-                                    <th></th>
-                                    <th></th>
+                                    <th>ID Hóa Đơn</th>
+                                    <th>Tên Người Mua</th>
+                                    <th>Tên Sản Phẩm</th>
+                                    <th>Số Lượng Mua</th>
+                                    <th>Tổng Tiền</th>
+                                    <th>Thời Gian Mua</th>
                                 </tr>
-                                <c:forEach items='${menuNav}' var="product">
+                                <c:forEach items='${listOrderDetail}' var="orderdetail">
                                     <tr>
-                                        <td>${product.name}</td>
-                                        <td>${product.price}</td>
-                                        <td>${product.quantity}</td>
-                                        <td>${product.type.name}</td>
-                                        <td>${product.status}</td>
-                                        <td><a href="/product?action=update&id=${product.id}">sửa</a></td>
-                                        <td><a href="/product?action=delete&id=${product.id}">xóa</a></td>
+                                        <td>${orderdetail.idOrder.id}</td>
+                                        <td>${orderdetail.idOrder.idUser.name}</td>
+                                        <td>${orderdetail.idProduct.name}</td>
+                                        <td>${orderdetail.quantity}</td>
+                                        <td>${orderdetail.idOrder.total}</td>
+                                        <td>${orderdetail.idOrder.time}</td>
+
                                     </tr>
                                 </c:forEach>
                             </table>
@@ -185,3 +182,4 @@
 </body>
 
 </html>
+

@@ -64,7 +64,7 @@ public class ProductServiceImpl implements GeneralService<Product> {
     public Product findById(int id) {
         Product product = new Product();
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("select * from type where id=? ")) {
+             PreparedStatement preparedStatement = connection.prepareStatement("select * from product where id=? ")) {
             preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
@@ -98,6 +98,29 @@ public class ProductServiceImpl implements GeneralService<Product> {
         }
         return false;
     }
+    public boolean updateProduct(Product product) throws SQLException {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("update product set quantity=? where id =?");) {
+            preparedStatement.setInt(1, product.getQuantity());
+            preparedStatement.setInt(2, product.getId());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return false;
+    }
+    public boolean updateStatus(Product product) throws SQLException {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("update product set status=? where id =?");) {
+            preparedStatement.setString(1, product.getStatus());
+            preparedStatement.setInt(2, product.getId());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return false;
+    }
+
 
     @Override
     public boolean delete(int id) throws SQLException {
@@ -130,10 +153,31 @@ public class ProductServiceImpl implements GeneralService<Product> {
         return products;
     }
 
-    public List<Product> SortPrice() {
+    public List<Product> SortPriceMin() {
         List<Product> products = new ArrayList<>();
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("select * from product order by price asc ")) {
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                int quantity = rs.getInt("quantity");
+                double price = rs.getDouble("price");
+                int type = rs.getInt("idType");
+                TypeProduct typeProduct = typeProductService.findById(type);
+                String status = rs.getString("status");
+                products.add(new Product(id, name, quantity, price, typeProduct, status));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return products;
+    }
+
+    public List<Product> SortPriceMax() {
+        List<Product> products = new ArrayList<>();
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("select * from product order by price desc")) {
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("id");

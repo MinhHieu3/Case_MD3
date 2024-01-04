@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(name = "homeUser", value = "/homeUser")
+@WebServlet(name = "homeUser", value = "/home")
 public class HomeUser extends HttpServlet {
     ProductServiceImpl productService = new ProductServiceImpl();
     UserServiceImpl userService = new UserServiceImpl();
@@ -93,12 +93,22 @@ public class HomeUser extends HttpServlet {
         List<Order> orderList = orderService.findAll();
         int idOrder = orderList.get(orderList.size() - 1).getId();
         Order order = orderService.findById(idOrder);
+        List<Product> products = productService.findAll();
         for (int i = 0; i < buyList.size(); i++) {
             orderDetailService.add(new OrderDetails(order, buyList.get(i)));
+            for (int j = 0; j < products.size(); j++) {
+                if (buyList.get(i).getId() == products.get(j).getId()) {
+                    if (products.get(j).getId()>=1) {
+                        int quantity = products.get(j).getQuantity() - buyList.get(i).getQuantity();
+                        Product product = new Product(buyList.get(i).getId(), quantity);
+                        productService.updateProduct(product);
+                    }
+                }
+            }
         }
         buyList = new ArrayList<>();
-        count=0;
-        resp.sendRedirect("/homeUser");
+        count = 0;
+        resp.sendRedirect("/home");
     }
 
     private void buy(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
@@ -121,8 +131,6 @@ public class HomeUser extends HttpServlet {
                         Product product = productList.get(i);
                         product.setQuantity(1);
                         buyList.add(product);
-
-
                     } else {
                         for (int j = 0; j < buyList.size(); j++) {
                             if (buyList.get(j).getQuantity() != 0 && buyList.get(j).getId() == id) {
@@ -134,14 +142,10 @@ public class HomeUser extends HttpServlet {
                     }
                 }
                 req.setAttribute("buyList", buyList);
-
             }
-
             requestDispatcher.forward(req, resp);
         }
-
     }
-
 
     private void showList(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("user/home.jsp");
@@ -153,6 +157,7 @@ public class HomeUser extends HttpServlet {
         req.setAttribute("danhSach", products);
         requestDispatcher.forward(req, resp);
     }
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
@@ -163,5 +168,4 @@ public class HomeUser extends HttpServlet {
 
         }
     }
-
 }

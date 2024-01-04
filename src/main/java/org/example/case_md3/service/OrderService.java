@@ -3,10 +3,7 @@ package org.example.case_md3.service;
 import org.example.case_md3.model.*;
 
 import java.sql.*;
-import java.time.DateTimeException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class OrderService implements GeneralService<Order>{
@@ -33,7 +30,6 @@ public class OrderService implements GeneralService<Order>{
                 double total= rs.getDouble("total");
                 String time = rs.getString("time");
                 User user=userService.findById(idUser);
-
                 orders.add(new Order(id, user,total,time));
             }
         } catch (SQLException e) {
@@ -74,8 +70,23 @@ public class OrderService implements GeneralService<Order>{
         }
         return order;
     }
+    public List<Order> findByTime() {
+        List<Order> orders = new ArrayList<>();
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("select sum(`order`.total) as 'total'\n" +
+                     "from `order`\n" )) {
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                double total = rs.getDouble("total");
+                orders.add(new Order( total));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return orders;
+    }
 
-    @Override
+        @Override
     public boolean update(Order order) throws SQLException {
         return false;
     }
