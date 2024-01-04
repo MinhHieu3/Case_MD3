@@ -45,15 +45,14 @@
 </head>
 
 <body>
-<a href="account/login">Login</a>
-<a href="account/signup">Sign up</a>
+
 <!-- Start Main Top -->
 <div class="main-top">
     <div class="container-fluid">
         <div class="row">
             <div class="col-11">
                 <div class="login-box">
-                        <h2 style="color: white ;font-size: 16px">${user}</h2>
+                    <h2 style="color: white ;font-size: 16px">${user}</h2>
                 </div>
                 <div class="text-slid-box">
                     <div id="offer-box" class="carouselTicker">
@@ -120,7 +119,8 @@
                         </c:forEach>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/loginAdmin?action=showLoginAdmin"> Login as admin</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/loginAdmin?action=showLoginAdmin"> Login as
+                        admin</a></li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -129,47 +129,21 @@
             <div class="attr-nav">
                 <ul>
                     <li class="search">
-                        <form method="get"
+                        <form action="/home"
                               class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                             <div class="input-group">
-                                <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                                <input type="text" class="form-control bg-light border-0 small"
+                                       placeholder="Search for..."
                                        aria-label="Search" aria-describedby="basic-addon2" name="search">
                                 <div class="input-group-append">
                                     <button class="btn btn-primary" type="submit">
-                                        <i class="fas fa-search fa-sm"></i>
+                                                                                Search
                                     </button>
                                 </div>
                             </div>
                         </form>
 
 
-
-                    <li class="nav-item dropdown no-arrow d-sm-none">
-                        <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-search fa-fw"></i>
-                        </a>
-                        <!-- Dropdown - Messages -->
-                        <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                             aria-labelledby="searchDropdown">
-                            <form class="form-inline mr-auto w-100 navbar-search">
-                                <div class="input-group">
-                                    <input type="text" class="form-control bg-light border-0 small"
-                                           placeholder="Search for..." aria-label="Search"
-                                           aria-describedby="basic-addon2" name="search">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-primary" type="button">
-                                            <i class="fas fa-search fa-sm"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </li>
-
-
-
-                    </li>
 
                     <li class="side-menu">
                         <a href="/homeUser?action=cart">
@@ -216,15 +190,15 @@
 <!-- End Main Top -->
 
 <!-- Start Top Search -->
-<div class="top-search">
-    <div class="container">
-        <div class="input-group">
-            <span class="input-group-addon"><i class="fa fa-search"></i></span>
-            <input type="text" class="form-control" placeholder="Search" name="search">
-            <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
-        </div>
-    </div>
-</div>
+<%--<div class="top-search">--%>
+<%--    <div class="container">--%>
+<%--        <div class="input-group">--%>
+<%--            <span class="input-group-addon"><i class="fa fa-search"></i></span>--%>
+<%--            <input type="text" class="form-control" placeholder="Search" name="search">--%>
+<%--            <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>--%>
+<%--        </div>--%>
+<%--    </div>--%>
+<%--</div>--%>
 <!-- End Top Search -->
 
 <!-- Start Slider -->
@@ -290,9 +264,12 @@
             <div class="col-lg-12">
                 <div class="special-menu text-center">
                     <div class="button-group filter-button-group">
-                        <button class="active" data-filter="*"><a href="/loginUsers" style="color: #a9b6d0">All</a></button>
-                        <button data-filter=".top-featured"><a href="/loginUsers?action=sortPricem">Lowest price</a></button>
-                        <button data-filter=".best-seller"><a href="/loginUsers?action=sortPriceM">Highest price</a></button>
+                        <button class="active" data-filter="*"><a href="/loginUsers" style="color: #a9b6d0">All</a>
+                        </button>
+                        <button data-filter=".top-featured"><a href="/loginUsers?action=sortPricem">Lowest price</a>
+                        </button>
+                        <button data-filter=".best-seller"><a href="/loginUsers?action=sortPriceM">Highest price</a>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -318,9 +295,6 @@
                             <h5> $${product.price} | ${product.status}</h5>
                         </div>
                     </div>
-
-
-
 
 
                 </div>
