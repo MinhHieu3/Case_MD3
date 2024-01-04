@@ -143,6 +143,16 @@ public class HomeUser extends HttpServlet {
         for (int i = 0; i < buyList.size(); i++) {
             count++;
         }
+        List<User>userList=userService.findAll();
+        if (UserServiceImpl.name!=null) {
+            String name = "";
+            for (int i = 0; i < userList.size(); i++) {
+                if (userList.get(i).getName().equals(UserServiceImpl.name)) {
+                    name = userList.get(i).getName();
+                }
+            }
+            req.setAttribute("user", name);
+        }
         req.setAttribute("buy", count);
         List<Product> products = productService.findAll();
         req.setAttribute("danhSach", products);
