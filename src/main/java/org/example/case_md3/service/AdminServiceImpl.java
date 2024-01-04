@@ -1,6 +1,8 @@
 package org.example.case_md3.service;
 
 import org.example.case_md3.model.Admin;
+import org.example.case_md3.model.Order;
+import org.example.case_md3.model.User;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -41,24 +43,13 @@ public class AdminServiceImpl implements GeneralService<Admin>{
     @Override
     public void add(Admin admin) throws SQLException {
 
+
     }
 
     @Override
     public Admin findById(int id) {
-        Admin admin = new Admin();
-//        try (Connection connection = getConnection();
-//             PreparedStatement preparedStatement = connection.prepareStatement("select * from admin where id = ?");) {
-//            preparedStatement.setInt(1,id);
-//            //   System.out.println(preparedStatement); //in ra câu truy vấn.
-//            ResultSet rs = preparedStatement.executeQuery();
-//            while (rs.next()) {
-//                String name = rs.getString("userAdmin");
-//                String pass = rs.getString("passAdmin");
-//                admin=new Admin(name,pass);
-//            }
-//        } catch (SQLException e) {
-//        }
-        return admin ;
+
+        return null ;
     }
 
     @Override
@@ -70,4 +61,5 @@ public class AdminServiceImpl implements GeneralService<Admin>{
     public boolean delete(int id) throws SQLException {
         return false;
     }
+
 }

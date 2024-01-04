@@ -11,7 +11,13 @@ public class Order {
     public Order() {
     }
 
-    public Order( User idUser, double total, String time) {
+    public Order(double total) {
+        this.total = total;
+    }
+
+
+
+    public Order(User idUser, double total, String time) {
         this.idUser = idUser;
         this.total = total;
         this.time = time;

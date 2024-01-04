@@ -3,14 +3,12 @@ package org.example.case_md3.service;
 import org.example.case_md3.model.*;
 
 import java.sql.*;
-import java.time.DateTimeException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-public class OrderService implements GeneralService<Order>{
-    UserServiceImpl userService=new UserServiceImpl();
+public class OrderService implements GeneralService<Order> {
+    UserServiceImpl userService = new UserServiceImpl();
+
     protected Connection getConnection() {
         Connection connection = null;
         try {
@@ -21,6 +19,7 @@ public class OrderService implements GeneralService<Order>{
         }
         return connection;
     }
+
     @Override
     public List<Order> findAll() {
         List<Order> orders = new ArrayList<>();
@@ -28,12 +27,12 @@ public class OrderService implements GeneralService<Order>{
              PreparedStatement preparedStatement = connection.prepareStatement("select * from `order`")) {
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                int id =rs.getInt("id");
-                int idUser =rs.getInt("idUser");
-                double total= rs.getDouble("total");
+                int id = rs.getInt("id");
+                int idUser = rs.getInt("idUser");
+                double total = rs.getDouble("total");
                 String time = rs.getString("time");
-                User user=userService.findById(idUser);
-                orders.add(new Order(id, user,total,time));
+                User user = userService.findById(idUser);
+                orders.add(new Order(id, user, total, time));
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -56,23 +55,42 @@ public class OrderService implements GeneralService<Order>{
 
     @Override
     public Order findById(int id) {
-        Order order=new Order();
+        Order order = new Order();
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("select * from `order` where id=? ")) {
-            preparedStatement.setInt(1,id);
+            preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                int ids =rs.getInt("id");
-                int idUser =rs.getInt("idUser");
-                double total= rs.getDouble("total");
+                int ids = rs.getInt("id");
+                int idUser = rs.getInt("idUser");
+                double total = rs.getDouble("total");
                 String time = rs.getString("time");
-                User idFind=userService.findById(idUser);
-                order=new Order(ids, idFind,total,time);
+                User idFind = userService.findById(idUser);
+                order = new Order(ids, idFind, total, time);
             }
         } catch (SQLException e) {
         }
         return order;
     }
+
+    public List<Order> findByTime(String time) {
+        List<Order> orders = new ArrayList<>();
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("select sum(`order`.total) as 'total'\n" +
+                     "from `order`\n" +
+                     "where time like ? ")) {
+            preparedStatement.setString(1, time + "%");
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                double total = rs.getDouble("total");
+                orders.add(new Order(total));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return orders;
+    }
+
 
     @Override
     public boolean update(Order order) throws SQLException {

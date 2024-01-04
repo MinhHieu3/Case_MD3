@@ -92,7 +92,7 @@
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Custom Utilities:</h6>
                     <a class="collapse-item" href="">List Bill</a>
-                    <a class="collapse-item" href="utilities-border.html">chỗ này để xem doanh thu </a>
+                    <a class="collapse-item" href="/homeAdmin?action=showSale">chỗ này để xem doanh thu </a>
 
                 </div>
             </div>

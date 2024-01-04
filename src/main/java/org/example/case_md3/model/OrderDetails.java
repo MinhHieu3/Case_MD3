@@ -26,6 +26,10 @@ public class OrderDetails {
         this.price = price;
     }
 
+    public OrderDetails(double price) {
+        this.price = price;
+    }
+
     public Order getIdOrder() {
         return idOrder;
     }

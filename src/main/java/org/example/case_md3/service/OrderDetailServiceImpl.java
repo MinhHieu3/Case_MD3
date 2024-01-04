@@ -6,9 +6,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderDetailServiceImpl implements GeneralService<OrderDetails>{
-    OrderService orderService=new OrderService();
-    ProductServiceImpl productService=new ProductServiceImpl();
+public class OrderDetailServiceImpl implements GeneralService<OrderDetails> {
+    OrderService orderService = new OrderService();
+    ProductServiceImpl productService = new ProductServiceImpl();
+
     protected Connection getConnection() {
         Connection connection = null;
         try {
@@ -19,6 +20,7 @@ public class OrderDetailServiceImpl implements GeneralService<OrderDetails>{
         }
         return connection;
     }
+
     @Override
     public List<OrderDetails> findAll() {
         List<OrderDetails> orderDetails = new ArrayList<>();
@@ -26,13 +28,13 @@ public class OrderDetailServiceImpl implements GeneralService<OrderDetails>{
              PreparedStatement preparedStatement = connection.prepareStatement("select * from orderdetail")) {
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                int idOrder =rs.getInt("idOrder");
-                int idProduct =rs.getInt("idProduct");
-                int quantity= rs.getInt("quantity");
-                double price=rs.getDouble("price");
-                Order order=orderService.findById(idOrder);
-                Product product=productService.findById(idProduct);
-                orderDetails.add(new OrderDetails(order, product,quantity,price));
+                int idOrder = rs.getInt("idOrder");
+                int idProduct = rs.getInt("idProduct");
+                int quantity = rs.getInt("quantity");
+                double price = rs.getDouble("price");
+                Order order = orderService.findById(idOrder);
+                Product product = productService.findById(idProduct);
+                orderDetails.add(new OrderDetails(order, product, quantity, price));
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -57,19 +59,19 @@ public class OrderDetailServiceImpl implements GeneralService<OrderDetails>{
 
     @Override
     public OrderDetails findById(int id) {
-        OrderDetails orderDetails=new OrderDetails();
+        OrderDetails orderDetails = new OrderDetails();
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("select * from orderdetail where id=? ")) {
-            preparedStatement.setInt(1,id);
+            preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                int idOrder =rs.getInt("idOrder");
-                int idProduct =rs.getInt("idProduct");
-                int quantity= rs.getInt("quantity");
-                double price=rs.getDouble("price");
-                Order order=orderService.findById(idOrder);
-                Product product=productService.findById(idProduct);
-                orderDetails=new OrderDetails(order, product,quantity,price);
+                int idOrder = rs.getInt("idOrder");
+                int idProduct = rs.getInt("idProduct");
+                int quantity = rs.getInt("quantity");
+                double price = rs.getDouble("price");
+                Order order = orderService.findById(idOrder);
+                Product product = productService.findById(idProduct);
+                orderDetails = new OrderDetails(order, product, quantity, price);
             }
         } catch (SQLException e) {
         }
@@ -77,16 +79,24 @@ public class OrderDetailServiceImpl implements GeneralService<OrderDetails>{
 
     }
 
-//    public double sum() throws SQLException {
-//        double totalPrice = 0;
+//    public List<OrderDetails> findByIdOrder(double price) {
+//        List<OrderDetails> orderDetails = new ArrayList<>();
 //        Connection connection = getConnection();
-//        PreparedStatement preparedStatement = connection.prepareStatement("select sum(price) as total_Price from orderdetail ");
-//        ResultSet rs = preparedStatement.executeQuery();
-//        if (rs.next()){
-//            totalPrice = rs.getDouble("totalPrice");
+//        try {
+//            PreparedStatement preparedStatement = connection.prepareStatement("select sum(orderdetail.price) as 'price' from orderdetail where price =?");
+//            preparedStatement.setDouble(1, price);
+//            ResultSet rs = preparedStatement.executeQuery();
+//            while (rs.next()) {
+//                double prices = rs.getDouble("price");
+//                orderDetails.add(new OrderDetails(prices));
+//            }
+//
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
 //        }
-//        return totalPrice;
+//        return orderDetails;
 //    }
+
 
     @Override
     public boolean update(OrderDetails orderDetails) throws SQLException {
