@@ -69,8 +69,19 @@ public class Home extends HttpServlet {
             products = productService.findAll();
         }
         List<TypeProduct> typeProducts = typeProductService.findAll();
+        List<User>userList=userService.findAll();
+        if (UserServiceImpl.name!=null) {
+            String name = "";
+            for (int i = 0; i < userList.size(); i++) {
+                if (userList.get(i).getName().equals(UserServiceImpl.name)) {
+                    name = userList.get(i).getName();
+                }
+            }
+            req.setAttribute("user", name);
+        }
         req.setAttribute("tpr", typeProducts);
         req.setAttribute("danhSach", products);
+        req.setAttribute("buy", buyList.size());
         req.getRequestDispatcher("user/home.jsp").forward(req, resp);
     }
 
@@ -102,6 +113,16 @@ public class Home extends HttpServlet {
         } else {
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("user/cart.jsp");
             req.setAttribute("buyList", buyList);
+            List<User>userList=userService.findAll();
+            if (UserServiceImpl.name!=null) {
+                String name = "";
+                for (int i = 0; i < userList.size(); i++) {
+                    if (userList.get(i).getName().equals(UserServiceImpl.name)) {
+                        name = userList.get(i).getName();
+                    }
+                }
+                req.setAttribute("user", name);
+            }
             requestDispatcher.forward(req, resp);
         }
     }
