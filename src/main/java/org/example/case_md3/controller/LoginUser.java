@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @WebServlet(name = "loginUser", value = "/loginUsers")
@@ -75,7 +74,7 @@ public class LoginUser extends HttpServlet {
                     userList.add(user1);
                     req.setAttribute("id", userList);
                     UserServiceImpl.name = name;
-                    req.setAttribute("buy", HomeUser.count=0);
+                    req.setAttribute("buy", Home.count=0);
                     req.setAttribute("user", name);
                     requestDispatcher.forward(req, resp);
                     break;

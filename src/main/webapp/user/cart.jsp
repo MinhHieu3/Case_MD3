@@ -88,8 +88,8 @@
             </div>
             <div class="collapse navbar-collapse" id="navbar-menu">
                 <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
-                    <li class="nav-item active"><a class="nav-link" href="http://localhost:8080/home#">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                    <li class="nav-item active"><a class="nav-link" href="http://localhost:8080/home#">Trang Chủ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">Thông tin </a></li>
                     <li class="dropdown">
                         <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Thể Loại</a>
                         <ul class="dropdown-menu">
@@ -97,8 +97,7 @@
                         </ul>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/loginAdmin?action=showLoginAdmin"> Login as
-                        admin</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/loginAdmin?action=showLoginAdmin">Đăng Nhâp Admin</a></li>
                 </ul>
             </div>
             <div class="attr-nav">
@@ -108,7 +107,7 @@
                         <a href="/home?action=cart">
                             <i class="fa fa-shopping-bag"></i>
                             <span class="badge">${buy}</span>
-                            <p>My Cart</p>
+                            <p>Giỏ Hàng</p>
                         </a>
                     </li>
                 </ul>
@@ -140,32 +139,14 @@
                 </ul>
             </li>
         </div>
-        <!-- End Side Menu -->
     </nav>
-    <!-- End Navigation -->
 </header>
-<!-- End Main Top -->
-
-<!-- Start Top Search -->
 <div class="top-search">
     <div class="container">
         <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-search"></i></span>
             <input type="text" class="form-control" placeholder="Search">
             <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
-        </div>
-    </div>
-</div>
-<div class="all-title-box">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <h2>Cart</h2>
-                <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Shop</a></li>
-                    <li class="breadcrumb-item active">Cart</li>
-                </ul>
-            </div>
         </div>
     </div>
 </div>
@@ -202,7 +183,7 @@
                                 <p>$ ${product.price * product.quantity}</p>
                             </td>
                             <td class="remove-pr">
-                                <a href="#">
+                                <a href="/home?action=delete&id=${product.id}">
                                     <i class="fas fa-times"></i>
                                 </a>
                             </td>

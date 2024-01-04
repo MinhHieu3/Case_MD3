@@ -21,8 +21,10 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.nio.file.Files.delete;
+
 @WebServlet(name = "homeUser", value = "/home")
-public class HomeUser extends HttpServlet {
+public class Home extends HttpServlet {
     ProductServiceImpl productService = new ProductServiceImpl();
     UserServiceImpl userService = new UserServiceImpl();
     OrderDetailServiceImpl orderDetailService = new OrderDetailServiceImpl();
@@ -52,9 +54,34 @@ public class HomeUser extends HttpServlet {
             case "cart":
                 cart(req, resp);
                 break;
+            case "delete":
+                delete(req,resp);
+                break;
             default:
                 showList(req, resp);
         }
+    }
+
+    private void delete(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("user/cart.jsp");
+        int id= Integer.parseInt(req.getParameter("id"));
+        double total = 0;
+        boolean check=false;
+        for (int i = 0; i < buyList.size(); i++) {
+            if (buyList.get(i).getId()==id){
+                buyList.remove(buyList.get(i));
+                req.setAttribute("buyList", buyList);
+                check=true;
+                break;
+            }
+        }
+        if (check){
+            for (int i = 0; i < buyList.size(); i++) {
+                total+=(buyList.get(i).getQuantity()*buyList.get(i).getPrice());
+            }
+        }
+        req.setAttribute("total", total);
+        requestDispatcher.forward(req, resp);
     }
 
     private void cart(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {

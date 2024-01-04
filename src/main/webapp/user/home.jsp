@@ -80,8 +80,8 @@
             </div>
             <div class="collapse navbar-collapse" id="navbar-menu">
                 <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
-                    <li class="nav-item active"><a class="nav-link" href="http://localhost:8080/home#">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                    <li class="nav-item active"><a class="nav-link" href="http://localhost:8080/home#">Trang Chủ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">Thông Tin </a></li>
                     <li class="dropdown">
                         <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Thể Loại</a>
                         <ul class="dropdown-menu">
@@ -89,8 +89,7 @@
                         </ul>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/loginAdmin?action=showLoginAdmin"> Login as
-                        admin</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/loginAdmin?action=showLoginAdmin">Đăng Nhập Admin</a></li>
                 </ul>
             </div>
             <div class="attr-nav">
@@ -100,7 +99,7 @@
                         <a href="/home?action=cart">
                             <i class="fa fa-shopping-bag"></i>
                             <span class="badge">${buy}</span>
-                            <p>My Cart</p>
+                            <p>Giỏ Hàng</p>
                         </a>
                     </li>
                 </ul>
