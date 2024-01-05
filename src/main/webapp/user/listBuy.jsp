@@ -91,7 +91,7 @@
                             <li></li>
                         </ul>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="/loginAdmin?action=showLoginAdmin">Sản Phẩm Đã
+                    <li class="nav-item"><a class="nav-link" href="/loginAdmin?action">Sản Phẩm Đã
                         Mua</a></li>
                 </ul>
             </div>
