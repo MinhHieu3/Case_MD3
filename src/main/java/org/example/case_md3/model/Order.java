@@ -16,7 +16,6 @@ public class Order {
     }
 
 
-
     public Order(User idUser, double total, String time) {
         this.idUser = idUser;
         this.total = total;

@@ -30,11 +30,11 @@ public class ProductServlet extends HttpServlet {
                 showCreate(req, resp);
                 break;
             case "update":
-                showUpdate(req,resp);
+                showUpdate(req, resp);
                 break;
             case "delete":
                 try {
-                    showDelete(req,resp);
+                    showDelete(req, resp);
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
@@ -77,7 +77,7 @@ public class ProductServlet extends HttpServlet {
                 break;
             case "update":
                 try {
-                    updateProduct(req,resp);
+                    updateProduct(req, resp);
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
@@ -94,7 +94,7 @@ public class ProductServlet extends HttpServlet {
         int idType = Integer.parseInt(req.getParameter("idType"));
         TypeProduct typeProduct = typeProductService.findById(idType);
         String status = req.getParameter("status");
-        Product product = new Product(id,name,quantity,price,typeProduct,status);
+        Product product = new Product(id, name, quantity, price, typeProduct, status);
         productService.update(product);
         resp.sendRedirect("/homeAdmin");
     }

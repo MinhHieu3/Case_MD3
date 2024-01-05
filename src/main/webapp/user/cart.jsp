@@ -78,11 +78,13 @@
                         aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="http://localhost:8080/home#"><img src="images/logo.png" class="logo" alt=""></a>
+                <a class="navbar-brand" href="http://localhost:8080/home#"><img src="images/logo.png" class="logo"
+                                                                                alt=""></a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-menu">
                 <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
-                    <li class="nav-item active"><a class="nav-link" href="http://localhost:8080/home#">Trang Chủ</a></li>
+                    <li class="nav-item active"><a class="nav-link" href="http://localhost:8080/home#">Trang Chủ</a>
+                    </li>
                     <li class="dropdown">
                         <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Thể Loại</a>
                         <ul class="dropdown-menu">
@@ -110,17 +112,17 @@
             <li class="cart-box">
                 <ul class="cart-list">
                     <li>
-                        <a href="#" class="photo"><img src="images/img-pro-01.jpg" class="cart-thumb" alt="" /></a>
+                        <a href="#" class="photo"><img src="images/img-pro-01.jpg" class="cart-thumb" alt=""/></a>
                         <h6><a href="#">Delica omtantur </a></h6>
                         <p>1x - <span class="price">$80.00</span></p>
                     </li>
                     <li>
-                        <a href="#" class="photo"><img src="images/img-pro-02.jpg" class="cart-thumb" alt="" /></a>
+                        <a href="#" class="photo"><img src="images/img-pro-02.jpg" class="cart-thumb" alt=""/></a>
                         <h6><a href="#">Omnes ocurreret</a></h6>
                         <p>1x - <span class="price">$60.00</span></p>
                     </li>
                     <li>
-                        <a href="#" class="photo"><img src="images/img-pro-03.jpg" class="cart-thumb" alt="" /></a>
+                        <a href="#" class="photo"><img src="images/img-pro-03.jpg" class="cart-thumb" alt=""/></a>
                         <h6><a href="#">Agam facilisis</a></h6>
                         <p>1x - <span class="price">$40.00</span></p>
                     </li>
@@ -150,7 +152,7 @@
                     <table class="table">
                         <thead>
                         <tr>
-                            <th>Tên Sản Phẩm </th>
+                            <th>Tên Sản Phẩm</th>
                             <th>Giá</th>
                             <th>Số Lượng</th>
                             <th>Thành Tiền</th>
@@ -159,34 +161,35 @@
                         </thead>
                         <tbody>
                         <c:forEach items='${buyList}' var="product">
-                        <tr>
-                            <td class="name-pr">
-                                <a href="#">
-                                        ${product.name}
-                                </a>
-                            </td>
-                            <td class="price-pr">
-                                <p>$ ${product.price}</p>
-                            </td>
-                            <td class="price-pr">
-                                <p>${product.quantity}</p>
-                            </td>
-                            <td class="total-pr">
-                                <p>$ ${product.price * product.quantity}</p>
-                            </td>
-                            <td class="remove-pr">
-                                <a href="/home?action=delete&id=${product.id}">
-                                    <i class="fas fa-times"></i>
-                                </a>
-                            </td>
-                        </tr>
+                            <tr>
+                                <td class="name-pr">
+                                    <a href="#">
+                                            ${product.name}
+                                    </a>
+                                </td>
+                                <td class="price-pr">
+                                    <p>$ ${product.price}</p>
+                                </td>
+                                <td class="price-pr">
+                                    <p>${product.quantity}</p>
+                                </td>
+                                <td class="total-pr">
+                                    <p>$ ${product.price * product.quantity}</p>
+                                </td>
+                                <td class="remove-pr">
+                                    <a href="/home?action=delete&id=${product.id}">
+                                        <i class="fas fa-times"></i>
+                                    </a>
+                                </td>
+                            </tr>
                         </c:forEach>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
-        <div class="col-12 d-flex shopping-box"><a href="http://localhost:8080/home" class="ml-auto btn hvr-hover">Chọn Sản Phẩm Khác</a> </div>
+        <div class="col-12 d-flex shopping-box"><a href="http://localhost:8080/home" class="ml-auto btn hvr-hover">Chọn
+            Sản Phẩm Khác</a></div>
         <div class="row my-5">
             <div class="col-lg-8 col-sm-12"></div>
             <div class="col-lg-4 col-sm-12">
@@ -198,15 +201,17 @@
                     </div>
                     <div class="d-flex">
                         <h4>Discount</h4>
-                        <div class="ml-auto font-weight-bold"> $ 0 </div>
+                        <div class="ml-auto font-weight-bold"> $ 0</div>
                     </div>
                     <div class="d-flex gr-total">
                         <h5>Tổng</h5>
                         <div class="ml-auto h5"> $ ${total} </div>
                     </div>
-                    <hr> </div>
+                    <hr>
+                </div>
             </div>
-            <div class="col-12 d-flex shopping-box"><a onclick="confirmAction()" class="ml-auto btn hvr-hover">Thanh toán</a> </div>
+            <div class="col-12 d-flex shopping-box"><a onclick="confirmAction()" class="ml-auto btn hvr-hover">Thanh
+                toán</a></div>
         </div>
 
     </div>

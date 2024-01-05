@@ -25,7 +25,7 @@ public class LoginUser extends HttpServlet {
     UserServiceImpl userService = new UserServiceImpl();
     ProductServiceImpl productService = new ProductServiceImpl();
     TypeProductServiceImpl typeProductService = new TypeProductServiceImpl();
-    public static List<User>userList=new ArrayList<>();
+    public static List<User> userList = new ArrayList<>();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -34,13 +34,13 @@ public class LoginUser extends HttpServlet {
             action = "";
         }
         switch (action) {
-            case "search" :
+            case "search":
                 searchProduct(req, resp);
                 break;
-            case "sortPriceM" :
+            case "sortPriceM":
                 sortMoneyMax(req, resp);
                 break;
-            case "sortPricem" :
+            case "sortPricem":
                 sortMoneyMin(req, resp);
                 break;
             default:
@@ -82,7 +82,6 @@ public class LoginUser extends HttpServlet {
     }
 
 
-
     private void showFormLogin(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("user/login.jsp");
         requestDispatcher.forward(req, resp);
@@ -115,16 +114,16 @@ public class LoginUser extends HttpServlet {
                 if (list.get(i).getUsername().equals(user) && list.get(i).getPassword().equals(pass)) {
                     check = true;
                     String name = list.get(i).getName();
-                    int id=list.get(i).getId();
+                    int id = list.get(i).getId();
                     RequestDispatcher requestDispatcher = req.getRequestDispatcher("user/home.jsp");
                     List<Product> products = productService.findAll();
                     req.setAttribute("danhSach", products);
-                    User user1=list.get(i);
+                    User user1 = list.get(i);
                     userList.add(user1);
                     req.setAttribute("id", userList);
                     UserServiceImpl.name = name;
-                    UserServiceImpl.id=id;
-                    req.setAttribute("buy", Home.count=0);
+                    UserServiceImpl.id = id;
+                    req.setAttribute("buy", Home.count = 0);
                     req.setAttribute("user", name);
                     requestDispatcher.forward(req, resp);
                     break;

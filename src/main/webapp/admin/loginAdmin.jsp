@@ -52,7 +52,7 @@
                                                 Me</label>
                                         </div>
                                     </div>
-                                   <button class="btn btn-outline-primary">Login Admin</button>
+                                    <button class="btn btn-outline-primary">Login Admin</button>
                                 </form>
                                 <hr>
                                 <div class="text-center">

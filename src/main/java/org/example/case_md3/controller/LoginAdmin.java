@@ -1,4 +1,5 @@
 package org.example.case_md3.controller;
+
 import org.example.case_md3.model.Admin;
 import org.example.case_md3.model.Order;
 import org.example.case_md3.model.OrderDetails;
@@ -28,13 +29,14 @@ public class LoginAdmin extends HttpServlet {
         switch (action) {
 
             case "showLoginAdmin":
-                showLoginAdmin(req,resp);
+                showLoginAdmin(req, resp);
                 break;
         }
     }
+
     private void showLoginAdmin(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("admin/loginAdmin.jsp");
-        requestDispatcher.forward(req,resp);
+        requestDispatcher.forward(req, resp);
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {

@@ -98,6 +98,7 @@ public class ProductServiceImpl implements GeneralService<Product> {
         }
         return false;
     }
+
     public boolean updateProduct(Product product) throws SQLException {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("update product set quantity=? where id =?");) {
@@ -109,6 +110,7 @@ public class ProductServiceImpl implements GeneralService<Product> {
         }
         return false;
     }
+
     public boolean updateStatus(Product product) throws SQLException {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("update product set status=? where id =?");) {
@@ -130,6 +132,7 @@ public class ProductServiceImpl implements GeneralService<Product> {
         preparedStatement.executeUpdate();
         return false;
     }
+
     public ArrayList<Product> findByName(String name) {
         ArrayList<Product> products = new ArrayList<>();
         Connection connection = getConnection();
@@ -145,7 +148,7 @@ public class ProductServiceImpl implements GeneralService<Product> {
                 int idTypeN = resultSet.getInt("idType");
                 String statusN = resultSet.getString("status");
                 TypeProduct typeProduct = typeProductService.findById(idTypeN);
-                products.add(new Product(idN, nameN, quantityN, priceN, typeProduct ,statusN));
+                products.add(new Product(idN, nameN, quantityN, priceN, typeProduct, statusN));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
