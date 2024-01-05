@@ -115,6 +115,7 @@ public class LoginUser extends HttpServlet {
                 if (list.get(i).getUsername().equals(user) && list.get(i).getPassword().equals(pass)) {
                     check = true;
                     String name = list.get(i).getName();
+                    int id=list.get(i).getId();
                     RequestDispatcher requestDispatcher = req.getRequestDispatcher("user/home.jsp");
                     List<Product> products = productService.findAll();
                     req.setAttribute("danhSach", products);
@@ -122,6 +123,7 @@ public class LoginUser extends HttpServlet {
                     userList.add(user1);
                     req.setAttribute("id", userList);
                     UserServiceImpl.name = name;
+                    UserServiceImpl.id=id;
                     req.setAttribute("buy", Home.count=0);
                     req.setAttribute("user", name);
                     requestDispatcher.forward(req, resp);

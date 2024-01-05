@@ -45,16 +45,43 @@ public class Home extends HttpServlet {
                     throw new RuntimeException(e);
                 }
                 break;
+            case "":
+                searchProduct(req,resp);
+                break;
             case "cart":
                 cart(req, resp);
                 break;
             case "delete":
                 delete(req,resp);
                 break;
+            case "listBuy":
+                    listBuy(req,resp);
+                break;
             default:
-                searchProduct(req, resp);
+                showList(req, resp);
                 break;
         }
+    }
+
+    private void listBuy(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("user/listBuy.jsp");
+        List<Order> orderList = orderService.findAll();
+        List<Order>orders=new ArrayList<>();
+        int id=UserServiceImpl.id;
+        for (int i = 0; i < orderList.size(); i++) {
+            if (orderList.get(i).getIdUser().getId() == id) {
+                orders.add(orderList.get(i));
+
+            }
+
+        }
+        req.setAttribute("listOrder", orders);
+        for (int i = 0; i < orders.size(); i++) {
+
+        }
+
+
+        requestDispatcher.forward(req, resp);
     }
 
     private void searchProduct(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -66,8 +93,19 @@ public class Home extends HttpServlet {
             products = productService.findAll();
         }
         List<TypeProduct> typeProducts = typeProductService.findAll();
+        List<User>userList=userService.findAll();
+        if (UserServiceImpl.name!=null) {
+            String name = "";
+            for (int i = 0; i < userList.size(); i++) {
+                if (userList.get(i).getName().equals(UserServiceImpl.name)) {
+                    name = userList.get(i).getName();
+                }
+            }
+            req.setAttribute("user", name);
+        }
         req.setAttribute("tpr", typeProducts);
         req.setAttribute("danhSach", products);
+        req.setAttribute("buy", buyList.size());
         req.getRequestDispatcher("user/home.jsp").forward(req, resp);
     }
 
@@ -99,6 +137,17 @@ public class Home extends HttpServlet {
         } else {
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("user/cart.jsp");
             req.setAttribute("buyList", buyList);
+            List<User>userList=userService.findAll();
+            if (UserServiceImpl.name!=null) {
+                String name = "";
+                for (int i = 0; i < userList.size(); i++) {
+                    if (userList.get(i).getName().equals(UserServiceImpl.name)) {
+                        name = userList.get(i).getName();
+                    }
+                }
+                req.setAttribute("user", name);
+            }
+
             requestDispatcher.forward(req, resp);
         }
     }

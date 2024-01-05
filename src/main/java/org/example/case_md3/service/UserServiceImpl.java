@@ -11,6 +11,7 @@ import java.util.List;
 
 public class UserServiceImpl implements GeneralService<User> {
     public static String name =null;
+    public static int id=0;
     protected Connection getConnection() {
         Connection connection = null;
         try {
