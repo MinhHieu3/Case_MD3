@@ -63,13 +63,14 @@ public class Home extends HttpServlet {
             case "invoice":
                 listInvoice(req, resp);
                 break;
-            default:
+            case "showList":
                 try {
-                    showList(req, resp);
+                    showList(req,resp);
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
                 break;
+            
         }
     }
 
@@ -291,14 +292,13 @@ public class Home extends HttpServlet {
         }
         req.setAttribute("buy", count);
         List<Product> products = productService.findAll();
-        for (int i = 0; i < products.size(); i++) {
-            if (products.get(i).getQuantity() == 0) {
-                String status = "Hết";
-                Product product = new Product(buyList.get(i).getId(), status);
-                productService.updateStatus(product);
+        List<Product> products1 = new ArrayList<>();
+        for (Product product : products) {
+            if (!product.getStatus().equals("Đã Xóa")) {
+                products1.add(product);
             }
         }
-        req.setAttribute("danhSach", products);
+        req.setAttribute("danhSach", products1);
         requestDispatcher.forward(req, resp);
     }
 

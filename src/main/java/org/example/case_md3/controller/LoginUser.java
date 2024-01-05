@@ -116,9 +116,15 @@ public class LoginUser extends HttpServlet {
                     check = true;
                     String name = list.get(i).getName();
                     int id = list.get(i).getId();
-                    RequestDispatcher requestDispatcher = req.getRequestDispatcher("user/home.jsp");
+//                    RequestDispatcher requestDispatcher = req.getRequestDispatcher("user/home.jsp");
                     List<Product> products = productService.findAll();
-                    req.setAttribute("danhSach", products);
+                    List<Product> products1 = new ArrayList<>();
+                    for (Product product : products) {
+                        if (!product.getStatus().equals("Đã Xóa")) {
+                            products1.add(product);
+                        }
+                    }
+                    req.setAttribute("danhSach", products1);
                     User user1 = list.get(i);
                     userList.add(user1);
                     req.setAttribute("id", userList);
@@ -126,7 +132,7 @@ public class LoginUser extends HttpServlet {
                     UserServiceImpl.id = id;
                     req.setAttribute("buy", Home.count = 0);
                     req.setAttribute("user", name);
-                    requestDispatcher.forward(req, resp);
+                    resp.sendRedirect("/home?action=showList");
                     break;
                 }
             }

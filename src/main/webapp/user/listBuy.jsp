@@ -88,12 +88,12 @@
                         aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="http://localhost:8080/home#"><img src="images/logo.png" class="logo"
+                <a class="navbar-brand" href="http://localhost:8080/home?action=showList"><img src="images/logo.png" class="logo"
                                                                                 alt=""></a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-menu">
                 <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
-                    <li class="nav-item active"><a class="nav-link" href="http://localhost:8080/home#">Trang Chủ</a>
+                    <li class="nav-item active"><a class="nav-link" href="http://localhost:8080/home?action=showList">Trang Chủ</a>
                     </li>
                     <li class="dropdown">
                         <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Thể Loại</a>
