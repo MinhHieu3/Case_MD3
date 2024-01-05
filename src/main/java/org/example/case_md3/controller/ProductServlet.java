@@ -55,9 +55,6 @@ public class ProductServlet extends HttpServlet {
         Product product = productService.findById(id);
         req.setAttribute("product", product);
         req.setAttribute("listType", typeProducts);
-        int id = Integer.parseInt(req.getParameter("id"));
-        Product product = productService.findById(id);
-        req.setAttribute("product",product);
         requestDispatcher.forward(req, resp);
     }
 

@@ -130,7 +130,7 @@
                                 <c:forEach items='${menuNav}' var="product">
                                     <tr>
                                         <td>${product.name}</td>
-                                        <td>${product.price}</td>
+                                        <td name="moneyFormat">${product.price}</td>
                                         <td>${product.quantity}</td>
                                         <td>${product.type.name}</td>
                                         <td>${product.status}</td>
@@ -173,6 +173,18 @@
     <script src="vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
     <script src="js/demo/datatables-demo.js"></script>
+    <script>
+        let elements = document.getElementsByName("moneyFormat");
+        for (let i = 0; i < elements.length; i++) {
+            let moneyValue = parseFloat(elements[i].innerHTML).toLocaleString('en-US', {
+                style: 'currency',
+                currency: 'USD' // Đổi 'USD' thành mã tiền tệ mong muốn (ví dụ: 'EUR' cho Euro)
+            });
+
+            elements[i].innerHTML = moneyValue;
+        }
+
+    </script>
 </div>
 </body>
 

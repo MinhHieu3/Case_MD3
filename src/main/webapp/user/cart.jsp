@@ -27,6 +27,16 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <script src="jsCart/confim.js"></script>
+    <script>
+        let elements = document.getElementsByName("moneyFormat");
+        for (let i = 0; i < elements.length; i++) {
+            let moneyValue = parseFloat(elements[i].innerHTML).toLocaleString('en-US', {
+                style: 'currency',
+                currency: 'USD'
+            });
+            elements[i].innerHTML = moneyValue;
+        }
+    </script>
 </head>
 <body>
 <div class="main-top">
@@ -152,7 +162,7 @@
                     <table class="table">
                         <thead>
                         <tr>
-                            <th>Tên Sản Phẩm</th>
+                            <th>Tên Sản Phẩm </th>
                             <th>Giá</th>
                             <th>Số Lượng</th>
                             <th>Thành Tiền</th>
@@ -161,35 +171,34 @@
                         </thead>
                         <tbody>
                         <c:forEach items='${buyList}' var="product">
-                            <tr>
-                                <td class="name-pr">
-                                    <a href="#">
-                                            ${product.name}
-                                    </a>
-                                </td>
-                                <td class="price-pr">
-                                    <p>$ ${product.price}</p>
-                                </td>
-                                <td class="price-pr">
-                                    <p>${product.quantity}</p>
-                                </td>
-                                <td class="total-pr">
-                                    <p>$ ${product.price * product.quantity}</p>
-                                </td>
-                                <td class="remove-pr">
-                                    <a href="/home?action=delete&id=${product.id}">
-                                        <i class="fas fa-times"></i>
-                                    </a>
-                                </td>
-                            </tr>
+                        <tr>
+                            <td class="name-pr">
+                                <a href="#">
+                                        ${product.name}
+                                </a>
+                            </td>
+                            <td class="price-pr">
+                                <p name="moneyFormat">$ ${product.price}</p>
+                            </td>
+                            <td class="price-pr">
+                                <p>${product.quantity}</p>
+                            </td>
+                            <td class="total-pr">
+                                <p name="moneyFormat">$ ${product.price * product.quantity}</p>
+                            </td>
+                            <td class="remove-pr">
+                                <a href="/home?action=delete&id=${product.id}">
+                                    <i class="fas fa-times"></i>
+                                </a>
+                            </td>
+                        </tr>
                         </c:forEach>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
-        <div class="col-12 d-flex shopping-box"><a href="http://localhost:8080/home" class="ml-auto btn hvr-hover">Chọn
-            Sản Phẩm Khác</a></div>
+        <div class="col-12 d-flex shopping-box"><a href="http://localhost:8080/home" class="ml-auto btn hvr-hover">Chọn Sản Phẩm Khác</a> </div>
         <div class="row my-5">
             <div class="col-lg-8 col-sm-12"></div>
             <div class="col-lg-4 col-sm-12">
@@ -201,17 +210,15 @@
                     </div>
                     <div class="d-flex">
                         <h4>Discount</h4>
-                        <div class="ml-auto font-weight-bold"> $ 0</div>
+                        <div class="ml-auto font-weight-bold"> $ 0 </div>
                     </div>
                     <div class="d-flex gr-total">
                         <h5>Tổng</h5>
-                        <div class="ml-auto h5"> $ ${total} </div>
+                        <div class="ml-auto h5" name="moneyFormat"> $ ${total} </div>
                     </div>
-                    <hr>
-                </div>
+                    <hr> </div>
             </div>
-            <div class="col-12 d-flex shopping-box"><a onclick="confirmAction()" class="ml-auto btn hvr-hover">Thanh
-                toán</a></div>
+            <div class="col-12 d-flex shopping-box"><a onclick="confirmAction()" class="ml-auto btn hvr-hover">Thanh toán</a> </div>
         </div>
 
     </div>
@@ -234,8 +241,6 @@
 <script src="js/form-validator.min.js"></script>
 <script src="js/contact-form-script.js"></script>
 <script src="js/custom.js"></script>
-
-
 </body>
 
 </html>
