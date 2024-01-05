@@ -57,6 +57,8 @@ public class HomeAdmin extends HttpServlet {
         for (int i = 0; i < products.size(); i++) {
             quantityProduct+=products.get(i).getQuantity();
         }
+//        List<OrderDetails> orderDetails1 = orderDetailService.findByIdOrder();
+//        req.setAttribute("total",orderDetails1);
         req.setAttribute("sale",order);
         req.setAttribute("orderBuy",count);
         req.setAttribute("quantityBuy",quantity);

@@ -49,6 +49,7 @@ public class LoginUser extends HttpServlet {
         }
     }
 
+
     private void sortMoneyMax(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Product> products;
         products = productService.SortPriceMax();
@@ -139,7 +140,7 @@ public class LoginUser extends HttpServlet {
             String username = req.getParameter("username");
             String password = req.getParameter("password");
             userService.add(new User(name, phone, username, password));
-            resp.sendRedirect("/homeUsers");
+            resp.sendRedirect("/loginUsers");
         }
     }
 }

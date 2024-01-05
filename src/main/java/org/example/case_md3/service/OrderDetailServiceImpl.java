@@ -79,12 +79,13 @@ public class OrderDetailServiceImpl implements GeneralService<OrderDetails> {
 
     }
 
-//    public List<OrderDetails> findByIdOrder(double price) {
+    // hàm tính tổng số tiền của hóa đơn chính là doanh thu
+//    public List<OrderDetails> findByIdOrder() {
 //        List<OrderDetails> orderDetails = new ArrayList<>();
 //        Connection connection = getConnection();
 //        try {
-//            PreparedStatement preparedStatement = connection.prepareStatement("select sum(orderdetail.price) as 'price' from orderdetail where price =?");
-//            preparedStatement.setDouble(1, price);
+//            PreparedStatement preparedStatement = connection.prepareStatement("select sum(orderdetail.price) as 'price'"
+//                    +" from orderdetail \n");
 //            ResultSet rs = preparedStatement.executeQuery();
 //            while (rs.next()) {
 //                double prices = rs.getDouble("price");
@@ -95,7 +96,7 @@ public class OrderDetailServiceImpl implements GeneralService<OrderDetails> {
 //            throw new RuntimeException(e);
 //        }
 //        return orderDetails;
-//    }
+//   }
 
 
     @Override

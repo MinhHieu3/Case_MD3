@@ -209,59 +209,111 @@ public class Home extends HttpServlet {
         resp.sendRedirect("/home");
     }
 
-    private void buy(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        if (UserServiceImpl.name == null) {
-            resp.sendRedirect("/loginUsers");
-        } else {
-            List<Product> productList = productService.findAll();
-            boolean check=false;
-            int id = Integer.parseInt(req.getParameter("id"));
-            for (int i = 0; i < productList.size(); i++) {
-                if (productList.get(i).getStatus().equals("hết")&&id==productList.get(i).getId()) {
-                   check=true;
-                }
-            }
-            if (!check){
-                RequestDispatcher requestDispatcher = req.getRequestDispatcher("user/cart.jsp");
-                for (int i = 0; i < productList.size(); i++) {
-                    if (productList.get(i).getId() == id&&productList.get(i).getQuantity()>0) {
-                            boolean check2 = false;
-                            for (int j = 0; j < buyList.size(); j++) {
-                                if (buyList.get(j).getId() == productList.get(i).getId()) {
-                                    check2 = true;
-
-                                    break;
-                                }
-                            }
-                            if (!check2) {
-                                Product product = productList.get(i);
-                                product.setQuantity(1);
-                                buyList.add(product);
-
-                            } else {
-                                for (int j = 0; j < buyList.size(); j++) {
-                                    if (buyList.get(j).getQuantity() != 0 && buyList.get(j).getId() == id) {
-                                        buyList.get(i).setQuantity(buyList.get(j).getQuantity() + 1);
-                                        break;
-                                    }
-                                }
-
-                            }
-                    }
-                    req.setAttribute("buyList", buyList);
-                }
-                double total=0;
-                for (int j = 0; j < buyList.size(); j++) {
-                    total+=(buyList.get(j).getQuantity()*buyList.get(j).getPrice());
-                }
-                req.setAttribute("total", total);
-                requestDispatcher.forward(req, resp);
-            }
-            else{
-                resp.sendRedirect("/home");
+//    private void buy(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+//        if (UserServiceImpl.name == null) {
+//            resp.sendRedirect("/loginUsers");
+//        } else {
+//            List<Product> productList = productService.findAll();
+//            boolean check=false;
+//            int id = Integer.parseInt(req.getParameter("id"));
+//            for (int i = 0; i < productList.size(); i++) {
+//                if (productList.get(i).getStatus().equals("hết")&&id==productList.get(i).getId()) {
+//                   check=true;
+//                }
+//            }
+//            if (!check){
+//                RequestDispatcher requestDispatcher = req.getRequestDispatcher("user/cart.jsp");
+//                for (int i = 0; i < productList.size(); i++) {
+//                    if (productList.get(i).getId() == id) {
+//                            boolean check2 = false;
+//                            for (int j = 0; j < buyList.size(); j++) {
+//                                if (buyList.get(j).getId() == productList.get(i).getId()) {
+//                                    check2 = true;
+//
+//                                    break;
+//                                }
+//                            }
+//                            if (!check2) {
+//                                Product product = productList.get(i);
+//                                product.setQuantity(1);
+//                                buyList.add(product);
+//
+//                            } else {
+//                                for (int j = 0; j < buyList.size(); j++) {
+//                                    if (buyList.get(j).getQuantity() != 0 && buyList.get(j).getId() == id) {
+//                                        buyList.get(i).setQuantity(buyList.get(j).getQuantity() + 1);
+//                                        break;
+//                                    }
+//                                }
+//
+//                            }
+//                    }
+//                    req.setAttribute("buyList", buyList);
+//                }
+//                double total=0;
+//                for (int j = 0; j < buyList.size(); j++) {
+//                    total+=(buyList.get(j).getQuantity()*buyList.get(j).getPrice());
+//                }
+//                req.setAttribute("total", total);
+//                requestDispatcher.forward(req, resp);
+//            }
+//            else{
+//                resp.sendRedirect("/home");
+//            }
+//        }
+//    }
+private void buy(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+    if (UserServiceImpl.name == null) {
+        resp.sendRedirect("/loginUsers");
+    } else {
+        List<Product> productList = productService.findAll();
+        boolean check = false;
+        int id = Integer.parseInt(req.getParameter("id"));
+        for (int i = 0; i < productList.size(); i++) {
+            if (productList.get(i).getStatus().equals("hết") && id == productList.get(i).getId()) {
+                check = true;
             }
         }
+        if (!check) {
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("user/cart.jsp");
+            if (buyList == null) {
+                buyList = new ArrayList<>();
+            }
+            for (int i = 0; i < productList.size(); i++) {
+                if (productList.get(i).getId() == id) {
+                    boolean check2 = false;
+                    for (int j = 0; j < buyList.size(); j++) {
+                        if (buyList.get(j).getId() == productList.get(i).getId()) {
+                            check2 = true;
+                            break;
+                        }
+                    }
+                    if (!check2) {
+                        Product product = productList.get(i);
+                        product.setQuantity(1);
+                        buyList.add(product);
+                    } else {
+                        for (int j = 0; j < buyList.size(); j++) {
+                            if (buyList.get(j).getQuantity() != 0 && buyList.get(j).getId() == id) {
+                                buyList.get(j).setQuantity(buyList.get(j).getQuantity() + 1);
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            req.setAttribute("buyList", buyList);
+            double total = 0;
+            for (int j = 0; j < buyList.size(); j++) {
+                total += (buyList.get(j).getQuantity() * buyList.get(j).getPrice());
+            }
+            req.setAttribute("total", total);
+            requestDispatcher.forward(req, resp);
+        } else {
+            resp.sendRedirect("/home");
+        }
     }
+}
 
 
         private void showList (HttpServletRequest req, HttpServletResponse resp) throws

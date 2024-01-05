@@ -63,7 +63,7 @@ public class LoginAdmin extends HttpServlet {
         if (check) {
             resp.sendRedirect("/homeAdmin");
         } else {
-            resp.sendRedirect("user/loginAdmin.jsp");
+            resp.sendRedirect("admin/loginAdmin.jsp");
         }
     }
 

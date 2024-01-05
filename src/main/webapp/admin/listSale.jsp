@@ -127,6 +127,11 @@
                                         <td>${sale.total}</td>
                                     </tr>
                                 </c:forEach>
+<%--                                <c:forEach items='${total}' var="sale">--%>
+<%--                                <tr>--%>
+<%--                                    <td>${sale.price}</td>--%>
+<%--                                    </tr>--%>
+<%--                                </c:forEach>--%>
                             </table>
                         </div>
                     </div>
