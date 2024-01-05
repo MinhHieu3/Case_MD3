@@ -128,7 +128,7 @@ public class ProductServiceImpl implements GeneralService<Product> {
     public boolean delete(int id) throws SQLException {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("update product set status=? where id =?");) {
-            preparedStatement.setString(1, "Hết");
+            preparedStatement.setString(1, "Đã Xóa");
             preparedStatement.setInt(2, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {

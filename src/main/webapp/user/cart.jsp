@@ -198,7 +198,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-12 d-flex shopping-box"><a href="http://localhost:8080/home" class="ml-auto btn hvr-hover">Chọn Sản Phẩm Khác</a> </div>
+        <div class="col-12 d-flex shopping-box"><a href="http://localhost:8080/home?action=showList" class="ml-auto btn hvr-hover">Chọn Sản Phẩm Khác</a> </div>
         <div class="row my-5">
             <div class="col-lg-8 col-sm-12"></div>
             <div class="col-lg-4 col-sm-12">
