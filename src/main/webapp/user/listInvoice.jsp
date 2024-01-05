@@ -88,12 +88,12 @@
                 aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
           <i class="fa fa-bars"></i>
         </button>
-        <a class="navbar-brand" href="http://localhost:8080/home#"><img src="images/logo.png" class="logo"
+        <a class="navbar-brand" href="http://localhost:8080/home?action=showList"><img src="images/logo.png" class="logo"
                                                                         alt=""></a>
       </div>
       <div class="collapse navbar-collapse" id="navbar-menu">
         <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
-          <li class="nav-item active"><a class="nav-link" href="http://localhost:8080/home#">Trang Chủ</a>
+          <li class="nav-item active"><a class="nav-link" href="http://localhost:8080/home?action=showList">Trang Chủ</a>
           </li>
           <li class="dropdown">
             <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Thể Loại</a>
@@ -192,43 +192,6 @@
       </div>
     </div>
   </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="table-main table-responsive">
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th>ID Sản Phẩm</th>
-                            <th>Tên Sản Phẩm</th>
-                            <th>Số Lượng</th>
-                            <th>Giá Tiền</th>
-                            <th></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <c:forEach items='${listOrderDetail}' var="order">
-                            <tr>
-                                <td class="name-pr">
-                                    <p>${order.idProduct.id}</p>
-                                </td>
-                                <td class="price-pr">
-                                    <p>${order.idProduct.name}</p>
-                                </td>
-                                <td class="price-pr">
-                                    <p>${order.quantity}</p>
-                                </td>
-                                <td class=total-pr">
-                                    <p>$${order.price}</p>
-                                </td>
-                            </tr>
-                        </c:forEach>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 
 <div class="footer-copyright" style="background-color: snow">
