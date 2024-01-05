@@ -33,7 +33,7 @@ public class LoginAdmin extends HttpServlet {
         }
     }
     private void showLoginAdmin(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("admin/login.jsp");
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("admin/loginAdmin.jsp");
         requestDispatcher.forward(req,resp);
     }
 
@@ -63,7 +63,7 @@ public class LoginAdmin extends HttpServlet {
         if (check) {
             resp.sendRedirect("/homeAdmin");
         } else {
-            resp.sendRedirect("user/login.jsp");
+            resp.sendRedirect("user/loginAdmin.jsp");
         }
     }
 
