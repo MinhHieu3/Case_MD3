@@ -20,7 +20,7 @@
         <input type="password" name="passAdmin" placeholder="passAdmin" required="">
         <button>Login Admin</button>
     </form>
-   <div class="exit"> <a class="exit1" href="/homeUser">Exit</a></div>
+   <div class="exit"> <a class="exit1" href="/home">Exit</a></div>
 </div>
 
 
