@@ -70,7 +70,7 @@ public class OrderService implements GeneralService<Order>{
         }
         return order;
     }
-    public List<Order> findByTime() {
+    public List<Order> findSumTotal() {
         List<Order> orders = new ArrayList<>();
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("select sum(`order`.total) as 'total'\n" +

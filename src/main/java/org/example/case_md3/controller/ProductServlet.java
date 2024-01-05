@@ -52,6 +52,9 @@ public class ProductServlet extends HttpServlet {
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("admin/update.jsp");
         List<TypeProduct> typeProducts = typeProductService.findAll();
         req.setAttribute("listType", typeProducts);
+        int id = Integer.parseInt(req.getParameter("id"));
+        Product product = productService.findById(id);
+        req.setAttribute("product",product);
         requestDispatcher.forward(req, resp);
     }
 

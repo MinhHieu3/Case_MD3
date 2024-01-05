@@ -44,7 +44,7 @@ public class HomeAdmin extends HttpServlet {
 
     private void showSale(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("admin/listSale.jsp");
-        List<Order> order= orderService.findByTime();
+        List<Order> order= orderService.findSumTotal();
         List<Order>orderList=orderService.findAll();
         List<Product>products=productService.findAll();
         int count=orderList.size();
