@@ -200,7 +200,7 @@ public class Home extends HttpServlet {
                             Product product = new Product(buyList.get(i).getId(), quantity);
                             productService.updateProduct(product);
                             if (quantity == 0) {
-                                String status = "hết";
+                                String status = "Hết";
                                 Product produc = new Product(buyList.get(i).getId(), status);
                                 productService.updateStatus(produc);
                             }
@@ -211,7 +211,7 @@ public class Home extends HttpServlet {
         }
         buyList = new ArrayList<>();
         count = 0;
-        resp.sendRedirect("/home");
+        resp.sendRedirect("http://localhost:8080/home?action=showList");
         req.setAttribute("danhSach", products);
     }
 
@@ -266,7 +266,7 @@ public class Home extends HttpServlet {
                 }
                 requestDispatcher.forward(req, resp);
             } else {
-                resp.sendRedirect("/home");
+                resp.sendRedirect("http://localhost:8080/home?action=showList");
             }
 
         }
