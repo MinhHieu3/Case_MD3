@@ -27,6 +27,16 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <script src="jsCart/confim.js"></script>
+    <script>
+        let elements = document.getElementsByName("moneyFormat");
+        for (let i = 0; i < elements.length; i++) {
+            let moneyValue = parseFloat(elements[i].innerHTML).toLocaleString('en-US', {
+                style: 'currency',
+                currency: 'USD'
+            });
+            elements[i].innerHTML = moneyValue;
+        }
+    </script>
 </head>
 <body>
 <div class="main-top">
@@ -166,13 +176,13 @@
                                 </a>
                             </td>
                             <td class="price-pr">
-                                <p>$ ${product.price}</p>
+                                <p name="moneyFormat">$ ${product.price}</p>
                             </td>
                             <td class="price-pr">
                                 <p>${product.quantity}</p>
                             </td>
                             <td class="total-pr">
-                                <p>$ ${product.price * product.quantity}</p>
+                                <p name="moneyFormat">$ ${product.price * product.quantity}</p>
                             </td>
                             <td class="remove-pr">
                                 <a href="/home?action=delete&id=${product.id}">
@@ -202,7 +212,7 @@
                     </div>
                     <div class="d-flex gr-total">
                         <h5>Tổng</h5>
-                        <div class="ml-auto h5"> $ ${total} </div>
+                        <div class="ml-auto h5" name="moneyFormat"> $ ${total} </div>
                     </div>
                     <hr> </div>
             </div>
@@ -229,8 +239,6 @@
 <script src="js/form-validator.min.js"></script>
 <script src="js/contact-form-script.js"></script>
 <script src="js/custom.js"></script>
-
-
 </body>
 
 </html>

@@ -124,7 +124,7 @@
                                     <tr>
                                         <td>${orderBuy}</td>
                                         <td>${quantityBuy} / ${quantity}</td>
-                                        <td>${sale.total}</td>
+                                        <td name="moneyFormat">${sale.total}</td>
                                     </tr>
                                 </c:forEach>
 <%--                                <c:forEach items='${total}' var="sale">--%>
@@ -167,6 +167,16 @@
     <script src="vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
     <script src="js/demo/datatables-demo.js"></script>
+    <script>
+        let elements = document.getElementsByName("moneyFormat");
+        for (let i = 0; i < elements.length; i++) {
+            let moneyValue = parseFloat(elements[i].innerHTML).toLocaleString('en-US', {
+                style: 'currency',
+                currency: 'USD'
+            });
+            elements[i].innerHTML = moneyValue;
+        }
+    </script>
 </div>
 </body>
 

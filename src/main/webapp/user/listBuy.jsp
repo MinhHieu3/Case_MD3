@@ -27,6 +27,16 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <script src="jsCart/confim.js"></script>
+    <script>
+        let elements = document.getElementsByName("moneyFormat");
+        for (let i = 0; i < elements.length; i++) {
+            let moneyValue = parseFloat(elements[i].innerHTML).toLocaleString('en-US', {
+                style: 'currency',
+                currency: 'USD'
+            });
+            elements[i].innerHTML = moneyValue;
+        }
+    </script>
 </head>
 <body>
 <div class="main-top">
@@ -91,7 +101,7 @@
                             <li></li>
                         </ul>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="/loginAdmin?action">Sản Phẩm Đã
+                    <li class="nav-item"><a class="nav-link" href="http://localhost:8080/home?action=cart">Sản Phẩm Đã
                         Mua</a></li>
                 </ul>
             </div>
@@ -169,13 +179,13 @@
                                 </td>
                                 <td class="price-pr"></td>
                                 <td class="price-pr">
-                                    <p>$ ${order.total}</p>
+                                    <p name="moneyFormat">$ ${order.total}</p>
                                 </td>
                                 <td class="total-pr"></td>
                                 <td class=total-pr">
                                     <p>${order.time}</p>
                                 </td>
-                                <td><a href="/home?action=invoice&idOrder=${order.id}"><< chi tiết >></a></td>
+                                <td><a href="/home?action=invoice&idOrder=${order.id}" style="font-weight: bold">Chi tiết </a></td>
                             </tr>
                         </c:forEach>
                         </tbody>
@@ -203,7 +213,6 @@
 <script src="js/form-validator.min.js"></script>
 <script src="js/contact-form-script.js"></script>
 <script src="js/custom.js"></script>
-
 
 </body>
 

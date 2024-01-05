@@ -25,6 +25,18 @@
     <link rel="stylesheet" href="css/custom.css">
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script>
+        let elements = document.getElementsByName("moneyFormat");
+        for (let i = 0; i < elements.length; i++) {
+            let moneyValue = parseFloat(elements[i].innerHTML).toLocaleString('en-US', {
+                style: 'currency',
+                currency: 'USD'
+            });
+
+            elements[i].innerHTML = moneyValue;
+        }
+
+    </script>
 
 </head>
 <body>
@@ -247,7 +259,7 @@
                             <h4>Tên Sản Phẩm : ${product.name}</h4>
                             <h4>Mô Tả : ${product.type.describe}</h4>
                             <h4>Số Lượng : ${product.quantity}</h4>
-                            <h5> $${product.price}</h5>
+                            <h5 name="moneyFormat"> $ ${product.price}</h5>
                         </div>
                     </div>
                 </div>

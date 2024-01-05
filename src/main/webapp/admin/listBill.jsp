@@ -130,7 +130,7 @@
                                         <td>${orderdetail.idOrder.idUser.name}</td>
                                         <td>${orderdetail.idProduct.name}</td>
                                         <td>${orderdetail.quantity}</td>
-                                        <td>${orderdetail.idOrder.total}</td>
+                                        <td name="moneyFormat">${orderdetail.idOrder.total}</td>
                                         <td>${orderdetail.idOrder.time}</td>
 
                                     </tr>
@@ -170,6 +170,18 @@
     <script src="vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
     <script src="js/demo/datatables-demo.js"></script>
+    <script>
+        let elements = document.getElementsByName("moneyFormat");
+        for (let i = 0; i < elements.length; i++) {
+            let moneyValue = parseFloat(elements[i].innerHTML).toLocaleString('en-US', {
+                style: 'currency',
+                currency: 'USD' // Đổi 'USD' thành mã tiền tệ mong muốn (ví dụ: 'EUR' cho Euro)
+            });
+
+            elements[i].innerHTML = moneyValue;
+        }
+
+    </script>
 </div>
 </body>
 
