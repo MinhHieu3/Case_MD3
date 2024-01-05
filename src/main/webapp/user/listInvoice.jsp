@@ -192,43 +192,6 @@
       </div>
     </div>
   </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="table-main table-responsive">
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th>ID Sản Phẩm</th>
-                            <th>Tên Sản Phẩm</th>
-                            <th>Số Lượng</th>
-                            <th>Giá Tiền</th>
-                            <th></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <c:forEach items='${listOrderDetail}' var="order">
-                            <tr>
-                                <td class="name-pr">
-                                    <p>${order.idProduct.id}</p>
-                                </td>
-                                <td class="price-pr">
-                                    <p>${order.idProduct.name}</p>
-                                </td>
-                                <td class="price-pr">
-                                    <p>${order.quantity}</p>
-                                </td>
-                                <td class=total-pr">
-                                    <p>$${order.price}</p>
-                                </td>
-                            </tr>
-                        </c:forEach>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 
 <div class="footer-copyright" style="background-color: snow">
