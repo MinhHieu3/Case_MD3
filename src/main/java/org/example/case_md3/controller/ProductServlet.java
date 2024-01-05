@@ -51,6 +51,9 @@ public class ProductServlet extends HttpServlet {
     private void showUpdate(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("admin/update.jsp");
         List<TypeProduct> typeProducts = typeProductService.findAll();
+        int id = Integer.parseInt(req.getParameter("id"));
+        Product product = productService.findById(id);
+        req.setAttribute("product", product);
         req.setAttribute("listType", typeProducts);
         requestDispatcher.forward(req, resp);
     }
