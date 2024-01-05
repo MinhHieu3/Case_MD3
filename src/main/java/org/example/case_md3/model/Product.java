@@ -8,6 +8,7 @@ public class Product {
     private TypeProduct type;
     private String status;
 
+
     public Product() {
     }
 
@@ -29,7 +30,6 @@ public class Product {
         this.price = price;
         this.type = type;
         this.status = status;
-
     }
 
     public Product(String name, int quantity, double price, TypeProduct type, String status) {
@@ -87,4 +87,5 @@ public class Product {
     public void setStatus(String status) {
         this.status = status;
     }
+
 }

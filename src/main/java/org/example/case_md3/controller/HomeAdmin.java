@@ -39,6 +39,7 @@ public class HomeAdmin extends HttpServlet {
                 break;
             default:
                 showList(req, resp);
+                break;
         }
 
     }
@@ -75,7 +76,13 @@ public class HomeAdmin extends HttpServlet {
     private void showList(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("admin/list.jsp");
         List<Product> products = productService.findAll();
-        req.setAttribute("menuNav", products);
+        List<Product> products1 = new ArrayList<>();
+        for (Product product: products) {
+            if (!product.getStatus().equals("het")) {
+                products1.add(product);
+            }
+        }
+        req.setAttribute("menuNav", products1);
         requestDispatcher.forward(req, resp);
     }
 }
