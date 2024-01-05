@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
-  User: chiuchiuleuleu
-  Date: 02/01/2024
-  Time: 15:48
+  User: admin
+  Date: 1/2/2024
+  Time: 7:26 PM
   To change this template use File | Settings | File Templates.
 --%>
 <!DOCTYPE html>
@@ -23,6 +23,8 @@
             rel="stylesheet">
     <link href="../css/sb-admin-2.min.css" rel="stylesheet">
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body id="page-top">
 

@@ -8,7 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdminServiceImpl implements GeneralService<Admin>{
+public class AdminServiceImpl implements GeneralService<Admin> {
     protected Connection getConnection() {
         Connection connection = null;
         try {
@@ -27,11 +27,11 @@ public class AdminServiceImpl implements GeneralService<Admin>{
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("select * from admin ");
             ResultSet rs = preparedStatement.executeQuery();
-            while (rs.next()){
+            while (rs.next()) {
                 int id = rs.getInt("id");
                 String name = rs.getString("name");
                 String pass = rs.getString("pass");
-                adminList.add(new Admin(id,name,pass));
+                adminList.add(new Admin(id, name, pass));
 
             }
         } catch (SQLException e) {
@@ -49,7 +49,7 @@ public class AdminServiceImpl implements GeneralService<Admin>{
     @Override
     public Admin findById(int id) {
 
-        return null ;
+        return null;
     }
 
     @Override

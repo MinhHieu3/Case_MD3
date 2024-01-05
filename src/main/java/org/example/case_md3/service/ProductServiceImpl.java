@@ -98,6 +98,7 @@ public class ProductServiceImpl implements GeneralService<Product> {
         }
         return false;
     }
+
     public boolean updateProduct(Product product) throws SQLException {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("update product set quantity=? where id =?");) {
@@ -109,6 +110,7 @@ public class ProductServiceImpl implements GeneralService<Product> {
         }
         return false;
     }
+
     public boolean updateStatus(Product product) throws SQLException {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("update product set status=? where id =?");) {
@@ -122,35 +124,23 @@ public class ProductServiceImpl implements GeneralService<Product> {
     }
 
 
-//    @Override
-//    public boolean delete(int id) throws SQLException {
+    @Override
+    public boolean delete(int id) throws SQLException {
 //        Connection connection = getConnection();
 //        PreparedStatement preparedStatement = connection.prepareStatement("delete from product where id=?");
 //        preparedStatement.setInt(1, id);
 //        preparedStatement.executeUpdate();
 //        return false;
-//    }
-public boolean delete(int id) throws SQLException {
-//    Connection connection = getConnection();
-//    try {
-//        // Xóa các dòng từ bảng orderdetail trước
-//        PreparedStatement deleteOrderDetails = connection.prepareStatement("DELETE FROM orderdetail WHERE idProduct = ?");
-//        deleteOrderDetails.setInt(1, id);
-//        deleteOrderDetails.executeUpdate();
-//
-//        // Sau đó, xóa sản phẩm từ bảng product
-//        PreparedStatement deleteProduct = connection.prepareStatement("DELETE FROM product WHERE id = ?");
-//        deleteProduct.setInt(1, id);
-//        int rowsAffected = deleteProduct.executeUpdate();
-//
-//        return rowsAffected > 0; // Trả về true nếu có ít nhất một dòng đã bị xóa
-//    } finally {
-//        // Đảm bảo đóng kết nối
-//        if (connection != null) {
-//            connection.close();
-//        }
-//    }
-}
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("update product set status=? where id =?");) {
+            preparedStatement.setString(1, "het");
+            preparedStatement.setInt(2, id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return false;
+    }
 
     public ArrayList<Product> findByName(String name) {
         ArrayList<Product> products = new ArrayList<>();
@@ -167,7 +157,7 @@ public boolean delete(int id) throws SQLException {
                 int idTypeN = resultSet.getInt("idType");
                 String statusN = resultSet.getString("status");
                 TypeProduct typeProduct = typeProductService.findById(idTypeN);
-                products.add(new Product(idN, nameN, quantityN, priceN, typeProduct ,statusN));
+                products.add(new Product(idN, nameN, quantityN, priceN, typeProduct, statusN));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

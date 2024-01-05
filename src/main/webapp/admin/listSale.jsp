@@ -32,7 +32,7 @@
             Interface
         </div>
         <li class="nav-item">
-            <a class="nav-link collapsed" href="/product?action=create" >
+            <a class="nav-link collapsed" href="/product?action=create">
                 <i class="fas fa-fw fa-cog"></i>
                 <span>Thêm Sản Phẩm </span>
             </a>
@@ -117,10 +117,10 @@
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <tr>
                                     <th>Số Đơn Hàng</th>
-                                    <th>Số Lượng Sản Phẩm Đã Bán Được </th>
+                                    <th>Số Lượng Sản Phẩm Đã Bán Được</th>
                                     <th>Doanh Số</th>
                                 </tr>
-                                    <c:forEach items='${sale}' var="sale">
+                                <c:forEach items='${sale}' var="sale">
                                     <tr>
                                         <td>${orderBuy}</td>
                                         <td>${quantityBuy} / ${quantity}</td>

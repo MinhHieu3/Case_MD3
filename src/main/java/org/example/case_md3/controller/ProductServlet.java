@@ -30,11 +30,11 @@ public class ProductServlet extends HttpServlet {
                 showCreate(req, resp);
                 break;
             case "update":
-                showUpdate(req,resp);
+                showUpdate(req, resp);
                 break;
             case "delete":
                 try {
-                    showDelete(req,resp);
+                    showDelete(req, resp);
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
@@ -52,10 +52,10 @@ public class ProductServlet extends HttpServlet {
     private void showUpdate(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("admin/update.jsp");
         List<TypeProduct> typeProducts = typeProductService.findAll();
-        req.setAttribute("listType", typeProducts);
         int id = Integer.parseInt(req.getParameter("id"));
         Product product = productService.findById(id);
-        req.setAttribute("product",product);
+        req.setAttribute("product", product);
+        req.setAttribute("listType", typeProducts);
         requestDispatcher.forward(req, resp);
     }
 
@@ -81,7 +81,7 @@ public class ProductServlet extends HttpServlet {
                 break;
             case "update":
                 try {
-                    updateProduct(req,resp);
+                    updateProduct(req, resp);
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
@@ -98,7 +98,7 @@ public class ProductServlet extends HttpServlet {
         int idType = Integer.parseInt(req.getParameter("idType"));
         TypeProduct typeProduct = typeProductService.findById(idType);
         String status = req.getParameter("status");
-        Product product = new Product(id,name,quantity,price,typeProduct,status);
+        Product product = new Product(id, name, quantity, price, typeProduct, status);
         productService.update(product);
         resp.sendRedirect("/homeAdmin");
     }

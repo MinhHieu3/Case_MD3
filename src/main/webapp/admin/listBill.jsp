@@ -33,7 +33,7 @@
             Interface
         </div>
         <li class="nav-item">
-            <a class="nav-link collapsed" href="/product?action=create" >
+            <a class="nav-link collapsed" href="/product?action=create">
                 <i class="fas fa-fw fa-cog"></i>
                 <span>Thêm Sản Phẩm </span>
             </a>

@@ -40,45 +40,45 @@
 </head>
 <body>
 <div class="main-top">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-12">
-        <div class="login-box">
-          <h2 style="color: white ;font-size: 16px">${user}</h2>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="login-box">
+                    <h2 style="color: white ;font-size: 16px">${user}</h2>
+                </div>
+                <div class="text-slid-box">
+                    <div id="offer-box" class="carouselTicker">
+                        <ul class="offer-box">
+                            <li>
+                                <i class="fab fa-opencart"></i> 20% off Entire Purchase Promo code: offT80
+                            </li>
+                            <li>
+                                <i class="fab fa-opencart"></i> 50% - 80% off on Vegetables
+                            </li>
+                            <li>
+                                <i class="fab fa-opencart"></i> Off 10%! Shop Vegetables
+                            </li>
+                            <li>
+                                <i class="fab fa-opencart"></i> Off 50%! Shop Now
+                            </li>
+                            <li>
+                                <i class="fab fa-opencart"></i> Off 10%! Shop Vegetables
+                            </li>
+                            <li>
+                                <i class="fab fa-opencart"></i> 50% - 80% off on Vegetables
+                            </li>
+                            <li>
+                                <i class="fab fa-opencart"></i> 20% off Entire Purchase Promo code: offT30
+                            </li>
+                            <li>
+                                <i class="fab fa-opencart"></i> Off 50%! Shop Now
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="text-slid-box">
-          <div id="offer-box" class="carouselTicker">
-            <ul class="offer-box">
-              <li>
-                <i class="fab fa-opencart"></i> 20% off Entire Purchase Promo code: offT80
-              </li>
-              <li>
-                <i class="fab fa-opencart"></i> 50% - 80% off on Vegetables
-              </li>
-              <li>
-                <i class="fab fa-opencart"></i> Off 10%! Shop Vegetables
-              </li>
-              <li>
-                <i class="fab fa-opencart"></i> Off 50%! Shop Now
-              </li>
-              <li>
-                <i class="fab fa-opencart"></i> Off 10%! Shop Vegetables
-              </li>
-              <li>
-                <i class="fab fa-opencart"></i> 50% - 80% off on Vegetables
-              </li>
-              <li>
-                <i class="fab fa-opencart"></i> 20% off Entire Purchase Promo code: offT30
-              </li>
-              <li>
-                <i class="fab fa-opencart"></i> Off 50%! Shop Now
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
 </div>
 <header class="main-header">
   <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-default bootsnav">
@@ -145,13 +145,13 @@
   </nav>
 </header>
 <div class="top-search">
-  <div class="container">
-    <div class="input-group">
-      <span class="input-group-addon"><i class="fa fa-search"></i></span>
-      <input type="text" class="form-control" placeholder="Search">
-      <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
+    <div class="container">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-search"></i></span>
+            <input type="text" class="form-control" placeholder="Search">
+            <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
+        </div>
     </div>
-  </div>
 </div>
 <div class="cart-box-main">
   <div class="container">
@@ -192,10 +192,47 @@
       </div>
     </div>
   </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="table-main table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>ID Sản Phẩm</th>
+                            <th>Tên Sản Phẩm</th>
+                            <th>Số Lượng</th>
+                            <th>Giá Tiền</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach items='${listOrderDetail}' var="order">
+                            <tr>
+                                <td class="name-pr">
+                                    <p>${order.idProduct.id}</p>
+                                </td>
+                                <td class="price-pr">
+                                    <p>${order.idProduct.name}</p>
+                                </td>
+                                <td class="price-pr">
+                                    <p>${order.quantity}</p>
+                                </td>
+                                <td class=total-pr">
+                                    <p>$${order.price}</p>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="footer-copyright" style="background-color: snow">
-  <p class="footer-company" style="color: black">Hội Người Đẹp Trai C09. &copy; 2024</p>
+    <p class="footer-company" style="color: black">Hội Người Đẹp Trai C09. &copy; 2024</p>
 </div>
 <script src="js/jquery-3.2.1.min.js"></script>
 <script src="js/popper.min.js"></script>
