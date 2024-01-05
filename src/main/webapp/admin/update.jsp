@@ -123,7 +123,7 @@
                 <div class="row">
                     <div class="offset-2"></div>
                     <div class="col-8">
-                        <h1 class="h3 mb-2 text-gray-800">Thêm Sản Phẩm Mới</h1>
+                        <h1 class="h3 mb-2 text-gray-800">Sửa Sản Phẩm</h1>
                         <form method="post">
                             <div class="form-group">
                                 <p>Tên Sản Phẩm </p>  <input type="text" name="name"
@@ -151,7 +151,7 @@
                                     </c:forEach>
                                 </select>
                             </div>
-                            <button class="btn btn-primary mb-2">Thêm</button>
+                            <button class="btn btn-primary mb-2">Sửa</button>
                         </form>
                     </div>
                 </div>

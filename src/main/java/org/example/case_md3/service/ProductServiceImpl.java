@@ -122,14 +122,36 @@ public class ProductServiceImpl implements GeneralService<Product> {
     }
 
 
-    @Override
-    public boolean delete(int id) throws SQLException {
-        Connection connection = getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement("delete from product where id=?");
-        preparedStatement.setInt(1, id);
-        preparedStatement.executeUpdate();
-        return false;
-    }
+//    @Override
+//    public boolean delete(int id) throws SQLException {
+//        Connection connection = getConnection();
+//        PreparedStatement preparedStatement = connection.prepareStatement("delete from product where id=?");
+//        preparedStatement.setInt(1, id);
+//        preparedStatement.executeUpdate();
+//        return false;
+//    }
+public boolean delete(int id) throws SQLException {
+//    Connection connection = getConnection();
+//    try {
+//        // Xóa các dòng từ bảng orderdetail trước
+//        PreparedStatement deleteOrderDetails = connection.prepareStatement("DELETE FROM orderdetail WHERE idProduct = ?");
+//        deleteOrderDetails.setInt(1, id);
+//        deleteOrderDetails.executeUpdate();
+//
+//        // Sau đó, xóa sản phẩm từ bảng product
+//        PreparedStatement deleteProduct = connection.prepareStatement("DELETE FROM product WHERE id = ?");
+//        deleteProduct.setInt(1, id);
+//        int rowsAffected = deleteProduct.executeUpdate();
+//
+//        return rowsAffected > 0; // Trả về true nếu có ít nhất một dòng đã bị xóa
+//    } finally {
+//        // Đảm bảo đóng kết nối
+//        if (connection != null) {
+//            connection.close();
+//        }
+//    }
+}
+
     public ArrayList<Product> findByName(String name) {
         ArrayList<Product> products = new ArrayList<>();
         Connection connection = getConnection();
