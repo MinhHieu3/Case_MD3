@@ -6,3 +6,4 @@ function confirmAction() {
        window.location.href="http://localhost:8080/home?action=cart"
     }
 }
+
