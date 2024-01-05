@@ -5,7 +5,6 @@ import org.example.case_md3.model.OrderDetails;
 import org.example.case_md3.service.AdminServiceImpl;
 import org.example.case_md3.service.OrderDetailServiceImpl;
 import org.example.case_md3.service.OrderService;
-import sun.util.resources.cldr.rof.CalendarData_rof_TZ;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -34,7 +33,7 @@ public class LoginAdmin extends HttpServlet {
         }
     }
     private void showLoginAdmin(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("admin/login.jsp");
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("admin/loginAdmin.jsp");
         requestDispatcher.forward(req,resp);
     }
 
@@ -64,8 +63,7 @@ public class LoginAdmin extends HttpServlet {
         if (check) {
             resp.sendRedirect("/homeAdmin");
         } else {
-            resp.sendRedirect("admin/login.jsp");
-
+            resp.sendRedirect("user/loginAdmin.jsp");
         }
     }
 
