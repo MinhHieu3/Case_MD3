@@ -222,7 +222,7 @@ public class Home extends HttpServlet {
             boolean check = false;
             int id = Integer.parseInt(req.getParameter("id"));
             for (int i = 0; i < productList.size(); i++) {
-                if (productList.get(i).getStatus().equals("hết") && id == productList.get(i).getId()) {
+                if (productList.get(i).getStatus().equals("Hết") && id == productList.get(i).getId()) {
                     check = true;
                 }
             }
@@ -293,7 +293,7 @@ public class Home extends HttpServlet {
         List<Product> products = productService.findAll();
         for (int i = 0; i < products.size(); i++) {
             if (products.get(i).getQuantity() == 0) {
-                String status = "hết";
+                String status = "Hết";
                 Product product = new Product(buyList.get(i).getId(), status);
                 productService.updateStatus(product);
             }

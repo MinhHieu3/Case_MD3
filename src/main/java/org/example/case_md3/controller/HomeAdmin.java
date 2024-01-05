@@ -78,7 +78,7 @@ public class HomeAdmin extends HttpServlet {
         List<Product> products = productService.findAll();
         List<Product> products1 = new ArrayList<>();
         for (Product product: products) {
-            if (!product.getStatus().equals("het")) {
+            if (!product.getStatus().equals("Đã Xóa")) {
                 products1.add(product);
             }
         }

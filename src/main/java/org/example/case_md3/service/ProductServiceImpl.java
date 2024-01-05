@@ -126,14 +126,9 @@ public class ProductServiceImpl implements GeneralService<Product> {
 
     @Override
     public boolean delete(int id) throws SQLException {
-//        Connection connection = getConnection();
-//        PreparedStatement preparedStatement = connection.prepareStatement("delete from product where id=?");
-//        preparedStatement.setInt(1, id);
-//        preparedStatement.executeUpdate();
-//        return false;
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("update product set status=? where id =?");) {
-            preparedStatement.setString(1, "het");
+            preparedStatement.setString(1, "Đã Xóa");
             preparedStatement.setInt(2, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
