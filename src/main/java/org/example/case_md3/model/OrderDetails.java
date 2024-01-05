@@ -14,10 +14,6 @@ public class OrderDetails {
         this.idProduct = idProduct;
     }
 
-    public OrderDetails(int quantity, double price) {
-        this.quantity = quantity;
-        this.price = price;
-    }
 
     public OrderDetails(Order idOrder, Product idProduct, int quantity, double price) {
         this.idOrder = idOrder;

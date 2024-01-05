@@ -45,12 +45,12 @@ public class HomeAdmin extends HttpServlet {
 
     private void showSale(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("admin/listSale.jsp");
-        List<Order> order = orderService.findSumTotal();
-        List<Order> orderList = orderService.findAll();
-        List<Product> products = productService.findAll();
-        int count = orderList.size();
-        List<OrderDetails> orderDetails = orderDetailService.findAll();
-        int quantity = 0;
+        List<Order> order= orderService.findSumTotal();
+        List<Order>orderList=orderService.findAll();
+        List<Product>products=productService.findAll();
+        int count=orderList.size();
+        List<OrderDetails>orderDetails=orderDetailService.findAll();
+        int quantity=0;
         for (int i = 0; i < orderDetails.size(); i++) {
             quantity += orderDetails.get(i).getQuantity();
         }

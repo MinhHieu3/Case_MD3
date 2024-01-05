@@ -49,6 +49,7 @@ public class LoginUser extends HttpServlet {
         }
     }
 
+
     private void sortMoneyMax(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Product> products;
         products = productService.SortPriceMax();

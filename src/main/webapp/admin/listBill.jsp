@@ -49,7 +49,7 @@
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Custom Utilities:</h6>
                     <a class="collapse-item" href="/homeAdmin?action=showBill">Danh Sách Hóa Đơn </a>
-                    <a class="collapse-item" href="">Doanh Thu</a>
+                    <a class="collapse-item" href="/homeAdmin?action=showSale">Doanh Thu</a>
 
                 </div>
             </div>

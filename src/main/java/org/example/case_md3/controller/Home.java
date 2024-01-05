@@ -15,7 +15,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.nio.file.Files.delete;
 
 @WebServlet(name = "homeUser", value = "/home")
 public class Home extends HttpServlet {
