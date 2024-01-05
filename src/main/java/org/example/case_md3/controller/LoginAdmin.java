@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 
 @WebServlet(name = "loginAdmin", value = "/loginAdmin")
@@ -27,12 +26,12 @@ public class LoginAdmin extends HttpServlet {
             action = "";
         }
         switch (action) {
+
             case "showLoginAdmin":
                 showLoginAdmin(req,resp);
                 break;
         }
     }
-
     private void showLoginAdmin(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("admin/login.jsp");
         requestDispatcher.forward(req,resp);

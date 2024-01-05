@@ -34,8 +34,8 @@ public class ProductServiceImpl implements GeneralService<Product> {
                 int quantity = rs.getInt("quantity");
                 double price = rs.getDouble("price");
                 int type = rs.getInt("idType");
-                TypeProduct typeProduct = typeProductService.findById(type);
                 String status = rs.getString("status");
+                TypeProduct typeProduct = typeProductService.findById(type);
                 products.add(new Product(id, name, quantity, price, typeProduct, status));
             }
         } catch (SQLException e) {
@@ -109,6 +109,17 @@ public class ProductServiceImpl implements GeneralService<Product> {
         }
         return false;
     }
+    public boolean updateStatus(Product product) throws SQLException {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("update product set status=? where id =?");) {
+            preparedStatement.setString(1, product.getStatus());
+            preparedStatement.setInt(2, product.getId());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return false;
+    }
 
 
     @Override
@@ -118,5 +129,69 @@ public class ProductServiceImpl implements GeneralService<Product> {
         preparedStatement.setInt(1, id);
         preparedStatement.executeUpdate();
         return false;
+    }
+    public ArrayList<Product> findByName(String name) {
+        ArrayList<Product> products = new ArrayList<>();
+        Connection connection = getConnection();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("select * from product where name like ?;");
+            preparedStatement.setString(1, "%" + name + "%");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int idN = resultSet.getInt("id");
+                String nameN = resultSet.getString("name");
+                int quantityN = resultSet.getInt("quantity");
+                double priceN = resultSet.getDouble("price");
+                int idTypeN = resultSet.getInt("idType");
+                String statusN = resultSet.getString("status");
+                TypeProduct typeProduct = typeProductService.findById(idTypeN);
+                products.add(new Product(idN, nameN, quantityN, priceN, typeProduct ,statusN));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return products;
+    }
+
+    public List<Product> SortPriceMin() {
+        List<Product> products = new ArrayList<>();
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("select * from product order by price asc ")) {
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                int quantity = rs.getInt("quantity");
+                double price = rs.getDouble("price");
+                int type = rs.getInt("idType");
+                TypeProduct typeProduct = typeProductService.findById(type);
+                String status = rs.getString("status");
+                products.add(new Product(id, name, quantity, price, typeProduct, status));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return products;
+    }
+
+    public List<Product> SortPriceMax() {
+        List<Product> products = new ArrayList<>();
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("select * from product order by price desc")) {
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                int quantity = rs.getInt("quantity");
+                double price = rs.getDouble("price");
+                int type = rs.getInt("idType");
+                TypeProduct typeProduct = typeProductService.findById(type);
+                String status = rs.getString("status");
+                products.add(new Product(id, name, quantity, price, typeProduct, status));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return products;
     }
 }

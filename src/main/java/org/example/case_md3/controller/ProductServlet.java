@@ -2,7 +2,6 @@ package org.example.case_md3.controller;
 
 import org.example.case_md3.model.Product;
 import org.example.case_md3.model.TypeProduct;
-import org.example.case_md3.service.OrderService;
 import org.example.case_md3.service.ProductServiceImpl;
 import org.example.case_md3.service.TypeProductServiceImpl;
 
@@ -40,13 +39,13 @@ public class ProductServlet extends HttpServlet {
                     throw new RuntimeException(e);
                 }
                 break;
-
         }
     }
+
     private void showDelete(HttpServletRequest req, HttpServletResponse resp) throws IOException, SQLException {
         int id = Integer.parseInt(req.getParameter("id"));
         productService.delete(id);
-        resp.sendRedirect("/homeAdmin");
+        resp.sendRedirect("/home");
     }
 
     private void showUpdate(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

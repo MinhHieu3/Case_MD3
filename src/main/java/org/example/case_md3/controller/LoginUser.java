@@ -1,8 +1,10 @@
 package org.example.case_md3.controller;
 
 import org.example.case_md3.model.Product;
+import org.example.case_md3.model.TypeProduct;
 import org.example.case_md3.model.User;
 import org.example.case_md3.service.ProductServiceImpl;
+import org.example.case_md3.service.TypeProductServiceImpl;
 import org.example.case_md3.service.UserServiceImpl;
 
 import javax.servlet.RequestDispatcher;
@@ -22,6 +24,7 @@ public class LoginUser extends HttpServlet {
 
     UserServiceImpl userService = new UserServiceImpl();
     ProductServiceImpl productService = new ProductServiceImpl();
+    TypeProductServiceImpl typeProductService = new TypeProductServiceImpl();
     public static List<User>userList=new ArrayList<>();
 
     @Override
@@ -31,12 +34,56 @@ public class LoginUser extends HttpServlet {
             action = "";
         }
         switch (action) {
+            case "search" :
+                searchProduct(req, resp);
+                break;
+            case "sortPriceM" :
+                sortMoneyMax(req, resp);
+                break;
+            case "sortPricem" :
+                sortMoneyMin(req, resp);
+                break;
             default:
-                showList(req, resp);
+                showFormLogin(req, resp);
+                break;
         }
     }
 
-    private void showList(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    private void sortMoneyMax(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        List<Product> products;
+        products = productService.SortPriceMax();
+        List<TypeProduct> typeProducts = typeProductService.findAll();
+        req.setAttribute("tpr", typeProducts);
+        req.setAttribute("danhSach", products);
+        req.getRequestDispatcher("user/home.jsp").forward(req, resp);
+    }
+
+    private void sortMoneyMin(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        List<Product> products;
+        products = productService.SortPriceMin();
+        List<TypeProduct> typeProducts = typeProductService.findAll();
+        req.setAttribute("tpr", typeProducts);
+        req.setAttribute("danhSach", products);
+        req.getRequestDispatcher("user/home.jsp").forward(req, resp);
+    }
+
+    private void searchProduct(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String search = req.getParameter("search");
+        List<Product> products;
+        if (search != null) {
+            products = productService.findByName(search);
+        } else {
+            products = productService.findAll();
+        }
+        List<TypeProduct> typeProducts = typeProductService.findAll();
+        req.setAttribute("tpr", typeProducts);
+        req.setAttribute("danhSach", products);
+        req.getRequestDispatcher("user/home.jsp").forward(req, resp);
+    }
+
+
+
+    private void showFormLogin(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("user/login.jsp");
         requestDispatcher.forward(req, resp);
     }
@@ -68,14 +115,17 @@ public class LoginUser extends HttpServlet {
                 if (list.get(i).getUsername().equals(user) && list.get(i).getPassword().equals(pass)) {
                     check = true;
                     String name = list.get(i).getName();
+                    int id=list.get(i).getId();
                     RequestDispatcher requestDispatcher = req.getRequestDispatcher("user/home.jsp");
                     List<Product> products = productService.findAll();
                     req.setAttribute("danhSach", products);
-                    req.setAttribute("user", name);
                     User user1=list.get(i);
                     userList.add(user1);
                     req.setAttribute("id", userList);
                     UserServiceImpl.name = name;
+                    UserServiceImpl.id=id;
+                    req.setAttribute("buy", Home.count=0);
+                    req.setAttribute("user", name);
                     requestDispatcher.forward(req, resp);
                     break;
                 }
@@ -89,7 +139,7 @@ public class LoginUser extends HttpServlet {
             String username = req.getParameter("username");
             String password = req.getParameter("password");
             userService.add(new User(name, phone, username, password));
-            resp.sendRedirect("/loginUsers");
+            resp.sendRedirect("/homeUsers");
         }
     }
 }
