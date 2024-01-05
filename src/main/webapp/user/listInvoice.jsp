@@ -27,6 +27,16 @@
   <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
   <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
   <script src="jsCart/confim.js"></script>
+  <script>
+    let elements = document.getElementsByName("moneyFormat");
+    for (let i = 0; i < elements.length; i++) {
+      let moneyValue = parseFloat(elements[i].innerHTML).toLocaleString('en-US', {
+        style: 'currency',
+        currency: 'USD'
+      });
+      elements[i].innerHTML = moneyValue;
+    }
+  </script>
 </head>
 <body>
 <div class="main-top">
@@ -91,8 +101,6 @@
               <li></li>
             </ul>
           </li>
-          <li class="nav-item"><a class="nav-link" href="/loginAdmin?action">Sản Phẩm Đã
-            Mua</a></li>
         </ul>
       </div>
       <div class="attr-nav">
@@ -173,12 +181,13 @@
                   <p>${order.quantity}</p>
                 </td>
                 <td class=total-pr">
-                  <p>$${order.price}</p>
+                  <p name="moneyFormat">$${order.price}</p>
                 </td>
               </tr>
             </c:forEach>
             </tbody>
           </table>
+          <div class="col-12 d-flex shopping-box"><a href="http://localhost:8080/home?action=listBuy" class="ml-auto btn hvr-hover">Trở Lại</a> </div>
         </div>
       </div>
     </div>
