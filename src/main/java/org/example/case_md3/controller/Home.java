@@ -26,7 +26,7 @@ public class Home extends HttpServlet {
     public static Integer count = 0;
 
     public static List<Product> buyList = new ArrayList<>();
-    public static List<Product> productList=new ArrayList<>();
+    public static List<Product> productList=HomePage.productList;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -71,8 +71,19 @@ public class Home extends HttpServlet {
                     throw new RuntimeException(e);
                 }
                 break;
+            case "logout":
+                listLogout(req,resp);
+                break;
             
         }
+    }
+
+    private void listLogout(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        UserServiceImpl.name=null;
+        buyList=new ArrayList<>();
+        count=0;
+        resp.sendRedirect("http://localhost:8080/homePage");
+
     }
 
     private void listInvoice(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

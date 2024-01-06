@@ -36,24 +36,23 @@
     <link rel="stylesheet" href="css/responsive.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/custom.css">
-    <script src="jsConfim/logout.js"></script>
 
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-<script>
-    let elements = document.getElementsByName("moneyFormat");
-    for (let i = 0; i < elements.length; i++) {
-        let moneyValue = parseFloat(elements[i].innerHTML).toLocaleString('en-US', {
-            style: 'currency',
-            currency: 'USD' // Đổi 'USD' thành mã tiền tệ mong muốn (ví dụ: 'EUR' cho Euro)
-        });
+    <script>
+        let elements = document.getElementsByName("moneyFormat");
+        for (let i = 0; i < elements.length; i++) {
+            let moneyValue = parseFloat(elements[i].innerHTML).toLocaleString('en-US', {
+                style: 'currency',
+                currency: 'USD' // Đổi 'USD' thành mã tiền tệ mong muốn (ví dụ: 'EUR' cho Euro)
+            });
 
-        elements[i].innerHTML = moneyValue;
-    }
+            elements[i].innerHTML = moneyValue;
+        }
 
-</script>
+    </script>
     <![endif]-->
 
 </head>
@@ -96,26 +95,27 @@
                 </div>
             </div>
             <div class="col-2">
-                <li class="nav-item dropdown no-arrow">
-                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="mr-2 d-none d-lg-inline text-gray-600 small" style="color:white;font-size: 18px">${user}</span>
-                        <img class="img-profile rounded-circle" style="width: 25px ;height: 25px"
-                             src="img/undraw_profile.svg">
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                         aria-labelledby="userDropdown">
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="http://localhost:8080/home?action=logout" onclick="confirmAction() ">
-                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                            Đăng Xuất
-                        </a>
-                    </div>
-                </li>
-                </div>
+
+    <li class="nav-item dropdown no-arrow">
+        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="mr-2 d-none d-lg-inline text-gray-600 small" style="color:white;font-size: 18px">Đăng Nhập</span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+             aria-labelledby="userDropdown">
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="http://localhost:8080/loginUsers">
+                Người Dùng
+            </a>
+            <a class="dropdown-item" href="/loginAdmin?action=showLoginAdmin">
+                Quản Lý
+            </a>
+        </div>
+    </li>
             </div>
         </div>
     </div>
+</div>
 
 <header class="main-header">
     <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-default bootsnav">
@@ -134,44 +134,44 @@
                     <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
                     <li class="nav-item"><a class="nav-link" href="contact-us.html">Contact Us</a></li>
                 </ul>
-            <div style="margin: 10px" class="attr-nav">
-                <ul>
-                    <li class="side-menu">
-                        <a href="/home?action=cart">
-                            <i class="fa fa-shopping-bag"></i>
-                            <span class="badge">${buy}</span>
-                            <p>Giỏ Hàng</p>
-                        </a>
-                    </li>
-                </ul>
+                <div style="margin: 10px" class="attr-nav">
+                    <ul>
+                        <li class="side-menu">
+                            <a href="/homePage?action=cart">
+                                <i class="fa fa-shopping-bag"></i>
+                                <span class="badge">0</span>
+                                <p>Giỏ Hàng</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
-        <div class="side">
-            <a href="#" class="close-side"><i class="fa fa-times"></i></a>
-            <li class="cart-box">
-                <ul class="cart-list">
-                    <li>
-                        <a href="#" class="photo"><img src="images/img-pro-01.jpg" class="cart-thumb" alt=""/></a>
-                        <h6><a href="#">Delica omtantur </a></h6>
-                        <p>1x - <span class="price">$80.00</span></p>
-                    </li>
-                    <li>
-                        <a href="#" class="photo"><img src="images/img-pro-02.jpg" class="cart-thumb" alt=""/></a>
-                        <h6><a href="#">Omnes ocurreret</a></h6>
-                        <p>1x - <span class="price">$60.00</span></p>
-                    </li>
-                    <li>
-                        <a href="#" class="photo"><img src="images/img-pro-03.jpg" class="cart-thumb" alt=""/></a>
-                        <h6><a href="#">Agam facilisis</a></h6>
-                        <p>1x - <span class="price">$40.00</span></p>
-                    </li>
-                    <li class="total">
-                        <a href="#" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
-                        <span class="float-right"><strong>Total</strong>: $180.00</span>
-                    </li>
-                </ul>
-            </li>
-        </div>
+            <div class="side">
+                <a href="#" class="close-side"><i class="fa fa-times"></i></a>
+                <li class="cart-box">
+                    <ul class="cart-list">
+                        <li>
+                            <a href="#" class="photo"><img src="images/img-pro-01.jpg" class="cart-thumb" alt=""/></a>
+                            <h6><a href="#">Delica omtantur </a></h6>
+                            <p>1x - <span class="price">$80.00</span></p>
+                        </li>
+                        <li>
+                            <a href="#" class="photo"><img src="images/img-pro-02.jpg" class="cart-thumb" alt=""/></a>
+                            <h6><a href="#">Omnes ocurreret</a></h6>
+                            <p>1x - <span class="price">$60.00</span></p>
+                        </li>
+                        <li>
+                            <a href="#" class="photo"><img src="images/img-pro-03.jpg" class="cart-thumb" alt=""/></a>
+                            <h6><a href="#">Agam facilisis</a></h6>
+                            <p>1x - <span class="price">$40.00</span></p>
+                        </li>
+                        <li class="total">
+                            <a href="#" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
+                            <span class="float-right"><strong>Total</strong>: $180.00</span>
+                        </li>
+                    </ul>
+                </li>
+            </div>
         </div>
     </nav>
 </header>
@@ -253,7 +253,7 @@
             <div class="col-1"></div>
             <div class="col-9">
                 <div class="row">
-                    <c:forEach items='${danhSach}' var="product">
+                    <c:forEach items='${list}' var="product">
                         <div class="col-3">
                             <div class="products-single ">
                                 <div class="box-img-hover">
@@ -279,7 +279,7 @@
             <div class="col-2">
                 <div class="product-categori">
                     <div class="search-product">
-                        <form action="/home">
+                        <form action="/homePage">
                             <input class="form-control" placeholder="Search here..." type="text" name="search">
                             <button type="submit"><i class="fa fa-search"></i></button>
                         </form>
