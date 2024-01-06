@@ -19,11 +19,8 @@ import java.util.List;
 @WebServlet(name = "homePage", value = "/homePage")
 public class HomePage extends HttpServlet {
     ProductServiceImpl productService = new ProductServiceImpl();
-    UserServiceImpl userService = new UserServiceImpl();
-    OrderDetailServiceImpl orderDetailService = new OrderDetailServiceImpl();
     TypeProductServiceImpl typeProductService = new TypeProductServiceImpl();
 
-    public static List<Product> productList=new ArrayList<>();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
@@ -37,34 +34,48 @@ public class HomePage extends HttpServlet {
             case "buy":
                 listBuy(req, resp);
                 break;
+            case "searchType":
+                searchType(req, resp);
+                break;
             default:
-                showList(req,resp);
-
+                showList(req, resp);
+                break;
         }
+    }
+
+    private void searchType(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+            int id = Integer.parseInt(req.getParameter("id"));
+        List<Product> products = productService.findAll();
+        List<Product>product=new ArrayList<>();
+        for (int i = 0; i < products.size(); i++) {
+            if (products.get(i).getType().getId() == id) {
+                product.add(products.get(i));
+            }
+        }
+        List<TypeProduct> typeProducts = typeProductService.findAll();
+        req.setAttribute("list", product);
+        req.setAttribute("listType", typeProducts);
+        req.getRequestDispatcher("user/menu.jsp").forward(req, resp);
     }
 
 
     private void listBuy(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        if (UserServiceImpl.name == null){
-            resp.sendRedirect("/loginUsers");
+        if (UserServiceImpl.name == null) {
+            resp.sendRedirect("http://localhost:8080/loginUsers");
         }
     }
-
     private void cart(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        if (UserServiceImpl.name == null){
-            resp.sendRedirect("/loginUsers");
+        if (UserServiceImpl.name == null) {
+            resp.sendRedirect("http://localhost:8080/loginUsers");
         }
     }
 
     private void showList(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher requestDispatcher=req.getRequestDispatcher("user/menu.jsp");
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("user/menu.jsp");
         List<Product> products = productService.findAll();
-        for (Product product : products) {
-            if (!product.getStatus().equals("Đã Xóa")) {
-                productList.add(product);
-            }
-        }
-        req.setAttribute("list", productList);
+        List<TypeProduct> list = typeProductService.findAll();
+        req.setAttribute("listType", list);
+        req.setAttribute("list", products);
         requestDispatcher.forward(req, resp);
     }
 }

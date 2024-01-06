@@ -26,7 +26,6 @@ public class Home extends HttpServlet {
     public static Integer count = 0;
 
     public static List<Product> buyList = new ArrayList<>();
-    public static List<Product> productList=HomePage.productList;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -66,22 +65,40 @@ public class Home extends HttpServlet {
                 break;
             case "showList":
                 try {
-                    showList(req,resp);
+                    showList(req, resp);
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
                 break;
             case "logout":
-                listLogout(req,resp);
+                listLogout(req, resp);
                 break;
-            
+            case "searchType":
+                searchType(req, resp);
+                break;
+
         }
     }
 
+    private void searchType(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int id = Integer.parseInt(req.getParameter("id"));
+        List<Product> product = new ArrayList<>();
+        List<Product> products = productService.findAll();
+        for (int i = 0; i < products.size(); i++) {
+            if (products.get(i).getType().getId() == id) {
+                product.add(products.get(i));
+            }
+        }
+        List<TypeProduct> typeProducts = typeProductService.findAll();
+        req.setAttribute("danhSach", product);
+        req.setAttribute("listType", typeProducts);
+        req.getRequestDispatcher("user/home.jsp").forward(req, resp);
+    }
+
     private void listLogout(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        UserServiceImpl.name=null;
-        buyList=new ArrayList<>();
-        count=0;
+        UserServiceImpl.name = null;
+        buyList = new ArrayList<>();
+        count = 0;
         resp.sendRedirect("http://localhost:8080/homePage");
 
     }
@@ -118,11 +135,11 @@ public class Home extends HttpServlet {
 
     private void searchProduct(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String search = req.getParameter("search");
-        List<Product> products;
+        List<Product> product;
         if (search != null) {
-            products = productService.findByName(search);
+            product = productService.findByName(search);
         } else {
-            products = productService.findAll();
+            product = productService.findAll();
         }
         List<TypeProduct> typeProducts = typeProductService.findAll();
         List<User> userList = userService.findAll();
@@ -135,8 +152,8 @@ public class Home extends HttpServlet {
             }
             req.setAttribute("user", name);
         }
-        req.setAttribute("tpr", typeProducts);
-        req.setAttribute("danhSach", products);
+        req.setAttribute("listType", typeProducts);
+        req.setAttribute("danhSach", product);
         req.setAttribute("buy", buyList.size());
         req.getRequestDispatcher("user/home.jsp").forward(req, resp);
     }
@@ -245,14 +262,7 @@ public class Home extends HttpServlet {
                     if (productList.get(i).getId() == id && productList.get(i).getQuantity() > 0) {
                         boolean check2 = false;
                         for (int j = 0; j < buyList.size(); j++) {
-                            if (buyList.get(j).getId() == productList.get(i).getId()) {
-                                if (productList.get(i).getQuantity() < buyList.get(j).getQuantity() + 1) {
-
-                                } else {
-                                    check2 = true;
-                                    break;
-                                }
-                            }
+                            check2 = true;
                         }
                         if (!check2) {
                             Product product = productList.get(i);
@@ -289,6 +299,7 @@ public class Home extends HttpServlet {
             ServletException, IOException, SQLException {
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("user/home.jsp");
         List<User> userList = userService.findAll();
+        List<TypeProduct> list = typeProductService.findAll();
         if (UserServiceImpl.name != null) {
             String name = "";
             for (int i = 0; i < userList.size(); i++) {
@@ -300,12 +311,8 @@ public class Home extends HttpServlet {
         }
         req.setAttribute("buy", buyList.size());
         List<Product> products = productService.findAll();
-        for (Product product : products) {
-            if (!product.getStatus().equals("Đã Xóa")) {
-                productList.add(product);
-            }
-        }
-        req.setAttribute("danhSach", productList);
+        req.setAttribute("listType", list);
+        req.setAttribute("danhSach", products);
         requestDispatcher.forward(req, resp);
     }
 

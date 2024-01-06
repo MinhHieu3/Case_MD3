@@ -12,6 +12,10 @@ public class Product {
     public Product() {
     }
 
+    public Product(TypeProduct type) {
+        this.type = type;
+    }
+
     public Product(int id, int quantity) {
         this.id = id;
         this.quantity = quantity;
