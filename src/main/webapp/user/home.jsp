@@ -290,8 +290,8 @@
                         </div>
                         <div class="list-group list-group-collapse list-group-sm list-group-tree" id="list-group-men"
                              data-children=".sub-men">
-                            <c:forEach items='${listType}' var="type">
-                                <a href="/home?action=searchType&id=${type.id}" class="list-group-item list-group-item-action"> ${type.name}<small
+                            <c:forEach items='${listType}' var="listType">
+                                <a href="/home?action=searchType&id=${listType.id}" class="list-group-item list-group-item-action"> ${listType.name}<small
                                         class="text-muted"> </small></a>
                             </c:forEach>
                         </div>

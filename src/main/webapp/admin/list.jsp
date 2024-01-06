@@ -33,10 +33,18 @@
             Interface
         </div>
         <li class="nav-item">
-            <a class="nav-link collapsed" href="/product?action=create">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+               aria-expanded="true" aria-controls="collapseTwo">
                 <i class="fas fa-fw fa-cog"></i>
-                <span>Thêm Sản Phẩm </span>
+                <span>Thêm Mới</span>
             </a>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Custom Components:</h6>
+                    <a class="collapse-item" href="/product?action=create">Thêm Sản Phẩm</a>
+                    <a class="collapse-item" href="/product?action=createType">Thêm Danh Mục Sản Phẩm</a>
+                </div>
+            </div>
         </li>
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
@@ -51,6 +59,20 @@
                     <a class="collapse-item" href="/homeAdmin?action=showBill">Danh Sách Hóa Đơn </a>
                     <a class="collapse-item" href="/homeAdmin?action=showSale">Doanh Thu</a>
 
+                </div>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+               aria-expanded="true" aria-controls="collapsePages">
+                <i class="fas fa-fw fa-folder"></i>
+                <span>Danh Sách</span>
+            </a>
+            <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Danh Sách:</h6>
+                    <a class="collapse-item" href="http://localhost:8080/homeAdmin">Danh Sách Sản Phẩm</a>
+                    <a class="collapse-item" href="/homeAdmin?action=showType">Danh Mục Sản Phẩm</a>
                 </div>
             </div>
         </li>
@@ -121,7 +143,7 @@
             <div class="container-fluid">
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Danh Mục Sản Phẩm</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Danh Sách Sản Phẩm</h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">

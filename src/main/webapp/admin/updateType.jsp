@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
-  User: chiuchiuleuleu
-  Date: 02/01/2024
-  Time: 15:48
+  User: admin
+  Date: 1/2/2024
+  Time: 7:26 PM
   To change this template use File | Settings | File Templates.
 --%>
 <!DOCTYPE html>
@@ -23,6 +23,8 @@
             rel="stylesheet">
     <link href="../css/sb-admin-2.min.css" rel="stylesheet">
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body id="page-top">
 
@@ -131,35 +133,25 @@
                 <div class="row">
                     <div class="offset-2"></div>
                     <div class="col-8">
-                        <h1 class="h3 mb-2 text-gray-800">Thêm Sản Phẩm Mới</h1>
-                        <form method="post"  ">
+                        <h1 class="h3 mb-2 text-gray-800">Sửa Danh Mục Sản Phẩm</h1>
+                        <form method="post">
                             <div class="form-group">
-                                <p>Tên Sản Phẩm </p>  <input type="text" name="name"
+<%--                                <c:forEach items='${list}' var="listType">--%>
+                                <p>Tên Danh Mục </p>  <input type="text" name="name"
                                                              class="form-control form-control-user"
-                                                             placeholder="Tên Sản Phẩm">
+                                                             placeholder="Tên Sản Phẩm" value="${listType.name}">
                             </div>
                             <div class="form-group">
-                                <p>Số Lượng </p><input type="number" name="quantity"
-                                                       class="form-control form-control-user" placeholder="Số Lượng">
+                                <p>Nhà Sản Xuất </p><input type="text" name="producer"
+                                                           class="form-control form-control-user" placeholder="Số Lượng"
+                                                           value="${listType.producer}">
                             </div>
                             <div class="form-group">
-                                <p>Giá Tiền </p><input type="number" name="price" class="form-control form-control-user"
-                                                       placeholder="Giá Tiền">
+                                <p>Mô Tả </p><input type="text" name="describe" class="form-control form-control-user"
+                                                    placeholder="Giá Tiền" value="${listType.describe}">
                             </div>
-                            <div class="form-group">
-                                <p>Trạng Thái </p><input type="text" name="status"
-                                                         class="form-control form-control-user"
-                                                         placeholder="Trạng Thái">
-                            </div>
-                            <div class="form-group">
-                                <p>Thể Loại</p>
-                                <select name="idType" class="custom-select" required>
-                                    <c:forEach items='${listType}' var="listType">
-                                        <option value="${listType.id}"> ${listType.name}</option>
-                                    </c:forEach>
-                                </select>
-                            </div>
-                            <button class="btn btn-primary mb-2">Thêm</button>
+<%--                            </c:forEach>--%>
+                            <button class="btn btn-primary mb-2">Sửa</button>
                         </form>
                     </div>
                 </div>

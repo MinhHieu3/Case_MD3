@@ -32,10 +32,18 @@
             Interface
         </div>
         <li class="nav-item">
-            <a class="nav-link collapsed" href="/product?action=create">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+               aria-expanded="true" aria-controls="collapseTwo">
                 <i class="fas fa-fw fa-cog"></i>
-                <span>Thêm Sản Phẩm </span>
+                <span>Thêm Mới</span>
             </a>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Custom Components:</h6>
+                    <a class="collapse-item" href="/product?action=create">Thêm Sản Phẩm</a>
+                    <a class="collapse-item" href="/product?action=createType">Thêm Danh Mục Sản Phẩm</a>
+                </div>
+            </div>
         </li>
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
@@ -48,7 +56,7 @@
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Custom Utilities:</h6>
                     <a class="collapse-item" href="/homeAdmin?action=showBill">Danh Sách Hóa Đơn </a>
-                    <a class="collapse-item" href="">Doanh Thu</a>
+                    <a class="collapse-item" href="/homeAdmin?action=showSale">Doanh Thu</a>
 
                 </div>
             </div>
@@ -107,7 +115,8 @@
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                              aria-labelledby="userDropdown">
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="http://localhost:8080/home?action=showList" data-toggle="modal" data-target="#logoutModal">
+                            <a class="dropdown-item" href="http://localhost:8080/home?action=showList"
+                               data-toggle="modal" data-target="#logoutModal">
                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                 Logout
                             </a>

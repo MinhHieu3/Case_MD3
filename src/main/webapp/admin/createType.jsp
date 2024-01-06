@@ -131,33 +131,20 @@
                 <div class="row">
                     <div class="offset-2"></div>
                     <div class="col-8">
-                        <h1 class="h3 mb-2 text-gray-800">Thêm Sản Phẩm Mới</h1>
-                        <form method="post"  ">
+                        <h1 class="h3 mb-2 text-gray-800">Thêm Danh Mục Sản Phẩm Mới</h1>
+                        <form method="post" >
                             <div class="form-group">
-                                <p>Tên Sản Phẩm </p>  <input type="text" name="name"
+                                <p>Tên Danh Mục </p>  <input type="text" name="name"
                                                              class="form-control form-control-user"
-                                                             placeholder="Tên Sản Phẩm">
+                                                             placeholder="Tên Danh Mục">
                             </div>
                             <div class="form-group">
-                                <p>Số Lượng </p><input type="number" name="quantity"
-                                                       class="form-control form-control-user" placeholder="Số Lượng">
+                                <p>Nhà Sản Xuất</p><input type="text" name="producer"
+                                                       class="form-control form-control-user" placeholder="Nhà Sản Xuất">
                             </div>
                             <div class="form-group">
-                                <p>Giá Tiền </p><input type="number" name="price" class="form-control form-control-user"
-                                                       placeholder="Giá Tiền">
-                            </div>
-                            <div class="form-group">
-                                <p>Trạng Thái </p><input type="text" name="status"
-                                                         class="form-control form-control-user"
-                                                         placeholder="Trạng Thái">
-                            </div>
-                            <div class="form-group">
-                                <p>Thể Loại</p>
-                                <select name="idType" class="custom-select" required>
-                                    <c:forEach items='${listType}' var="listType">
-                                        <option value="${listType.id}"> ${listType.name}</option>
-                                    </c:forEach>
-                                </select>
+                                <p>Mô Tả</p><input type="text" name="describe" class="form-control form-control-user"
+                                                       placeholder="Mô Tả">
                             </div>
                             <button class="btn btn-primary mb-2">Thêm</button>
                         </form>

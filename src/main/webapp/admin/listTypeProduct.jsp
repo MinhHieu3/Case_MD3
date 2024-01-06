@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: chiuchiuleuleu
-  Date: 02/01/2024
-  Time: 15:48
-  To change this template use File | Settings | File Templates.
---%>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -69,6 +62,20 @@
                 </div>
             </div>
         </li>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+               aria-expanded="true" aria-controls="collapsePages">
+                <i class="fas fa-fw fa-folder"></i>
+                <span>Danh Sách</span>
+            </a>
+            <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Danh Sách:</h6>
+                    <a class="collapse-item" href="http://localhost:8080/homeAdmin">Danh Sách Sản Phẩm</a>
+                    <a class="collapse-item" href="/homeAdmin?action=showType">Danh Mục Sản Phẩm</a>
+                </div>
+            </div>
+        </li>
     </ul>
     <div id="content-wrapper" class="d-flex flex-column">
         <div id="content">
@@ -122,52 +129,46 @@
                             <img class="img-profile rounded-circle"
                                  src="img/undraw_profile.svg">
                         </a>
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                             aria-labelledby="userDropdown">
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="http://localhost:8080/home?action=showList" data-toggle="modal" data-target="#logoutModal">
+                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Logout
+                            </a>
+                        </div>
                     </li>
                 </ul>
             </nav>
             <div class="container-fluid">
-
-                <!-- Page Heading -->
-                <div class="row">
-                    <div class="offset-2"></div>
-                    <div class="col-8">
-                        <h1 class="h3 mb-2 text-gray-800">Thêm Sản Phẩm Mới</h1>
-                        <form method="post"  ">
-                            <div class="form-group">
-                                <p>Tên Sản Phẩm </p>  <input type="text" name="name"
-                                                             class="form-control form-control-user"
-                                                             placeholder="Tên Sản Phẩm">
-                            </div>
-                            <div class="form-group">
-                                <p>Số Lượng </p><input type="number" name="quantity"
-                                                       class="form-control form-control-user" placeholder="Số Lượng">
-                            </div>
-                            <div class="form-group">
-                                <p>Giá Tiền </p><input type="number" name="price" class="form-control form-control-user"
-                                                       placeholder="Giá Tiền">
-                            </div>
-                            <div class="form-group">
-                                <p>Trạng Thái </p><input type="text" name="status"
-                                                         class="form-control form-control-user"
-                                                         placeholder="Trạng Thái">
-                            </div>
-                            <div class="form-group">
-                                <p>Thể Loại</p>
-                                <select name="idType" class="custom-select" required>
-                                    <c:forEach items='${listType}' var="listType">
-                                        <option value="${listType.id}"> ${listType.name}</option>
-                                    </c:forEach>
-                                </select>
-                            </div>
-                            <button class="btn btn-primary mb-2">Thêm</button>
-                        </form>
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Danh Mục Sản Phẩm</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <tr>
+                                    <th>Tên Danh Mục</th>
+                                    <th>Nhà Sản Xuất</th>
+                                    <th>Mô Tả</th>
+                                    <th></th>
+                                </tr>
+                                <c:forEach items='${listType}' var="listType">
+                                    <tr>
+                                        <td>${listType.name}</td>
+                                        <td>${listType.producer}</td>
+                                        <td>${listType.describe}</td>
+                                        <td><a href="/product?action=updateType&id=${listType.id}">sửa</a></td>
+                                    </tr>
+                                </c:forEach>
+                            </table>
+                        </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
-
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
@@ -176,15 +177,15 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Bạn Muốn Đăng Xuất ?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Hủy</button>
+                    <a class="btn btn-primary" href="http://localhost:8080/home?action=showList">Đồng Ý</a>
                 </div>
             </div>
         </div>
@@ -196,6 +197,19 @@
     <script src="vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
     <script src="js/demo/datatables-demo.js"></script>
+    <script>
+        let elements = document.getElementsByName("moneyFormat");
+        for (let i = 0; i < elements.length; i++) {
+            let moneyValue = parseFloat(elements[i].innerHTML).toLocaleString('en-US', {
+                style: 'currency',
+                currency: 'USD' // Đổi 'USD' thành mã tiền tệ mong muốn (ví dụ: 'EUR' cho Euro)
+            });
+
+            elements[i].innerHTML = moneyValue;
+        }
+
+    </script>
 </div>
 </body>
+
 </html>

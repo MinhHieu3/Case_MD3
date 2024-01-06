@@ -24,6 +24,7 @@ public class HomeAdmin extends HttpServlet {
     ProductServiceImpl productService = new ProductServiceImpl();
     OrderDetailServiceImpl orderDetailService = new OrderDetailServiceImpl();
     OrderService orderService = new OrderService();
+    TypeProductServiceImpl typeProductService=new TypeProductServiceImpl();
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
@@ -37,11 +38,20 @@ public class HomeAdmin extends HttpServlet {
             case "showSale":
                 showSale(req, resp);
                 break;
+            case "showType":
+                showTypeProduct(req,resp);
             default:
                 showList(req, resp);
                 break;
         }
 
+    }
+
+    private void showTypeProduct(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher=req.getRequestDispatcher("admin/listTypeProduct.jsp");
+        List<TypeProduct>typeProducts =typeProductService.findAll();
+        req.setAttribute("listType", typeProducts);
+        requestDispatcher.forward(req,resp);
     }
 
     private void showSale(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
