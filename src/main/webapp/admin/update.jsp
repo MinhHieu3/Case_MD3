@@ -42,10 +42,18 @@
             Interface
         </div>
         <li class="nav-item">
-            <a class="nav-link collapsed" href="/product?action=create" >
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+               aria-expanded="true" aria-controls="collapseTwo">
                 <i class="fas fa-fw fa-cog"></i>
-                <span>Thêm Sản Phẩm </span>
+                <span>Thêm Mới</span>
             </a>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Custom Components:</h6>
+                    <a class="collapse-item" href="/product?action=create">Thêm Sản Phẩm</a>
+                    <a class="collapse-item" href="/product?action=createType">Thêm Danh Mục Sản Phẩm</a>
+                </div>
+            </div>
         </li>
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
@@ -60,6 +68,20 @@
                     <a class="collapse-item" href="/homeAdmin?action=showBill">Danh Sách Hóa Đơn </a>
                     <a class="collapse-item" href="/homeAdmin?action=showSale">Doanh Thu</a>
 
+                </div>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+               aria-expanded="true" aria-controls="collapsePages">
+                <i class="fas fa-fw fa-folder"></i>
+                <span>Danh Sách</span>
+            </a>
+            <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Danh Sách:</h6>
+                    <a class="collapse-item" href="http://localhost:8080/homeAdmin">Danh Sách Sản Phẩm</a>
+                    <a class="collapse-item" href="/homeAdmin?action=showType">Danh Mục Sản Phẩm</a>
                 </div>
             </div>
         </li>
@@ -134,7 +156,8 @@
                             </div>
                             <div class="form-group">
                                 <p>Số Lượng </p><input type="number" name="quantity"
-                                                       class="form-control form-control-user" placeholder="Số Lượng" value="${product.quantity}">
+                                                       class="form-control form-control-user" placeholder="Số Lượng"
+                                                       value="${product.quantity}">
                             </div>
                             <div class="form-group">
                                 <p>Giá Tiền </p><input type="number" name="price" class="form-control form-control-user"
@@ -148,8 +171,8 @@
                             <div class="form-group">
                                 <p>Thể Loại</p>
                                 <select name="idType" class="custom-select" required>
-                                    <c:forEach items='${listType}' var="type">
-                                        <option value="${type.id}"> ${type.name}</option>
+                                    <c:forEach items='${listType}' var="listType">
+                                        <option value="${listType.id}"> ${listType.name}</option>
                                     </c:forEach>
                                 </select>
                             </div>

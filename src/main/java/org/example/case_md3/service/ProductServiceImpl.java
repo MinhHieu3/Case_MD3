@@ -26,7 +26,7 @@ public class ProductServiceImpl implements GeneralService<Product> {
     public List<Product> findAll() {
         List<Product> products = new ArrayList<>();
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("select * from product")) {
+             PreparedStatement preparedStatement = connection.prepareStatement("select * from product where status not like \"Đã Xóa\"")) {
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("id");
@@ -153,6 +153,28 @@ public class ProductServiceImpl implements GeneralService<Product> {
                 String statusN = resultSet.getString("status");
                 TypeProduct typeProduct = typeProductService.findById(idTypeN);
                 products.add(new Product(idN, nameN, quantityN, priceN, typeProduct, statusN));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return products;
+    }
+    public Product findByType(int idType) {
+        Product products=new Product();
+        Connection connection = getConnection();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("select * from product where status not like \"Đã Xóa\"  and idType = ?");
+            preparedStatement.setInt(1,idType);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int idN = resultSet.getInt("id");
+                String nameN = resultSet.getString("name");
+                int quantityN = resultSet.getInt("quantity");
+                double priceN = resultSet.getDouble("price");
+                int idTypeN = resultSet.getInt("idType");
+                String statusN = resultSet.getString("status");
+                TypeProduct typeProduct = typeProductService.findById(idTypeN);
+                products=(new Product(idN, nameN, quantityN, priceN, typeProduct, statusN));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

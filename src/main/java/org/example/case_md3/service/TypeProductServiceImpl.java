@@ -42,7 +42,7 @@ public class TypeProductServiceImpl implements GeneralService<TypeProduct> {
     @Override
     public void add(TypeProduct typeProduct) throws SQLException {
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("insert into user (name,producer,describe) values (?,?,?)")) {
+             PreparedStatement preparedStatement = connection.prepareStatement("insert into type (name,producer,`describe`) values (?,?,?)")) {
             preparedStatement.setString(1, typeProduct.getName());
             preparedStatement.setString(2, typeProduct.getProducer());
             preparedStatement.setString(3, typeProduct.getDescribe());
@@ -73,6 +73,16 @@ public class TypeProductServiceImpl implements GeneralService<TypeProduct> {
 
     @Override
     public boolean update(TypeProduct typeProduct) throws SQLException {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("update type set name=?,producer=?,`describe`=? where id =?");) {
+            preparedStatement.setString(1, typeProduct.getName());
+            preparedStatement.setString(2, typeProduct.getProducer());
+            preparedStatement.setString(3, typeProduct.getDescribe());
+            preparedStatement.setInt(4, typeProduct.getId());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
         return false;
     }
 
@@ -84,7 +94,7 @@ public class TypeProductServiceImpl implements GeneralService<TypeProduct> {
     public TypeProduct findByName(String name) {
         TypeProduct typeProducts = new TypeProduct();
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("select * from product where name like ? ")) {
+             PreparedStatement preparedStatement = connection.prepareStatement("select * from type where name like ? ")) {
             preparedStatement.setString(1, name);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {

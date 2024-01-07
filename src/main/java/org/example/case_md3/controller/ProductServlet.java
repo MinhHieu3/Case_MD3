@@ -40,7 +40,26 @@ public class ProductServlet extends HttpServlet {
                 }
 
                 break;
+            case "createType":
+                showCreateType(req, resp);
+                break;
+            case "updateType":
+                showUpdateType(req,resp);
+                break;
         }
+    }
+
+    private void showUpdateType(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("admin/updateType.jsp");
+        int id = Integer.parseInt(req.getParameter("id"));
+        TypeProduct typeProduct=typeProductService.findById(id);
+        req.setAttribute("list", typeProduct);
+        requestDispatcher.forward(req, resp);
+    }
+
+    private void showCreateType(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("admin/createType.jsp");
+        requestDispatcher.forward(req, resp);
     }
 
     private void showDelete(HttpServletRequest req, HttpServletResponse resp) throws IOException, SQLException {
@@ -66,7 +85,7 @@ public class ProductServlet extends HttpServlet {
         requestDispatcher.forward(req, resp);
     }
 
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         String action = req.getParameter("action");
         if (action == null) {
             action = "";
@@ -86,8 +105,41 @@ public class ProductServlet extends HttpServlet {
                     throw new RuntimeException(e);
                 }
                 break;
+            case "createType":
+                try {
+                    createType(req, resp);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                break;
+            case "updateType":
+                try {
+                    updateType(req,resp);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                break;
         }
 
+    }
+
+    private void updateType(HttpServletRequest req, HttpServletResponse resp) throws SQLException, IOException {
+        int id = Integer.parseInt(req.getParameter("id"));
+        String name = req.getParameter("name");
+        String producer = req.getParameter("producer");
+        String describe = req.getParameter("describe");
+        TypeProduct typeProduct = new TypeProduct(id,name, producer, describe);
+        typeProductService.update(typeProduct);
+        resp.sendRedirect("/homeAdmin?action=showType");
+    }
+
+    private void createType(HttpServletRequest req, HttpServletResponse resp) throws IOException, SQLException {
+        String name = req.getParameter("name");
+        String producer = req.getParameter("producer");
+        String describe = req.getParameter("describe");
+        TypeProduct typeProduct = new TypeProduct(name, producer, describe);
+        typeProductService.add(typeProduct);
+        resp.sendRedirect("/homeAdmin?action=showType");
     }
 
     private void updateProduct(HttpServletRequest req, HttpServletResponse resp) throws SQLException, IOException {

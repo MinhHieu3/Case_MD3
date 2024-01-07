@@ -9,6 +9,10 @@ public class TypeProduct {
     public TypeProduct() {
     }
 
+    public TypeProduct(int id) {
+        this.id = id;
+    }
+
     public TypeProduct(int id, String name, String producer, String describe) {
         this.id = id;
         this.name = name;

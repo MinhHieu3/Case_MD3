@@ -65,13 +65,52 @@ public class Home extends HttpServlet {
                 break;
             case "showList":
                 try {
-                    showList(req,resp);
+                    showList(req, resp);
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
                 break;
-            
+            case "logout":
+                listLogout(req, resp);
+                break;
+            case "searchType":
+                searchType(req, resp);
+                break;
+
         }
+    }
+
+    private void searchType(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int id = Integer.parseInt(req.getParameter("id"));
+        List<Product> product = new ArrayList<>();
+        List<Product> products = productService.findAll();
+        for (int i = 0; i < products.size(); i++) {
+            if (products.get(i).getType().getId() == id) {
+                product.add(products.get(i));
+            }
+        }
+        List<User> userList = userService.findAll();
+        List<TypeProduct> typeProducts = typeProductService.findAll();
+        req.setAttribute("danhSach", product);
+        req.setAttribute("listType", typeProducts);
+        if (UserServiceImpl.name != null) {
+            String name = "";
+            for (int i = 0; i < userList.size(); i++) {
+                if (userList.get(i).getName().equals(UserServiceImpl.name)) {
+                    name = userList.get(i).getName();
+                }
+            }
+            req.setAttribute("user", name);
+        }
+        req.getRequestDispatcher("user/home.jsp").forward(req, resp);
+    }
+
+    private void listLogout(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        UserServiceImpl.name = null;
+        buyList = new ArrayList<>();
+        count = 0;
+        resp.sendRedirect("http://localhost:8080/homePage");
+
     }
 
     private void listInvoice(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -106,11 +145,11 @@ public class Home extends HttpServlet {
 
     private void searchProduct(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String search = req.getParameter("search");
-        List<Product> products;
+        List<Product> product;
         if (search != null) {
-            products = productService.findByName(search);
+            product = productService.findByName(search);
         } else {
-            products = productService.findAll();
+            product = productService.findAll();
         }
         List<TypeProduct> typeProducts = typeProductService.findAll();
         List<User> userList = userService.findAll();
@@ -123,8 +162,8 @@ public class Home extends HttpServlet {
             }
             req.setAttribute("user", name);
         }
-        req.setAttribute("tpr", typeProducts);
-        req.setAttribute("danhSach", products);
+        req.setAttribute("listType", typeProducts);
+        req.setAttribute("danhSach", product);
         req.setAttribute("buy", buyList.size());
         req.getRequestDispatcher("user/home.jsp").forward(req, resp);
     }
@@ -171,7 +210,6 @@ public class Home extends HttpServlet {
             requestDispatcher.forward(req, resp);
         }
     }
-
     private void order(HttpServletRequest req, HttpServletResponse resp) throws SQLException, IOException {
         double total = 0;
         for (int i = 0; i < buyList.size(); i++) {
@@ -189,14 +227,14 @@ public class Home extends HttpServlet {
         List<Order> orderList = orderService.findAll();
         int idOrder = orderList.get(orderList.size() - 1).getId();
         Order order = orderService.findById(idOrder);
-        List<Product> products = productService.findAll();
+        List<Product> productList = productService.findAll();
         for (int i = 0; i < buyList.size(); i++) {
             if (buyList.get(i).getQuantity() > 0) {
                 orderDetailService.add(new OrderDetails(order, buyList.get(i)));
-                for (int j = 0; j < products.size(); j++) {
-                    if (buyList.get(i).getId() == products.get(j).getId()) {
-                        if (products.get(j).getQuantity() >= 1) {
-                            int quantity = products.get(j).getQuantity() - buyList.get(i).getQuantity();
+                for (int j = 0; j < productList.size(); j++) {
+                    if (buyList.get(i).getId() == productList.get(j).getId()) {
+                        if (productList.get(j).getQuantity() >= 1) {
+                            int quantity = productList.get(j).getQuantity() - buyList.get(i).getQuantity();
                             Product product = new Product(buyList.get(i).getId(), quantity);
                             productService.updateProduct(product);
                             if (quantity == 0) {
@@ -211,8 +249,10 @@ public class Home extends HttpServlet {
         }
         buyList = new ArrayList<>();
         count = 0;
-        resp.sendRedirect("http://localhost:8080/home?action=showList");
-        req.setAttribute("danhSach", products);
+        resp.sendRedirect("http://localhost:8080/home?action=listBuy");
+        List<Order>orders=orderService.findAll();
+        req.setAttribute("danhSach", productList);
+        req.setAttribute("listOrder", orders);
     }
 
     private void buy(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException, SQLException {
@@ -230,8 +270,8 @@ public class Home extends HttpServlet {
             if (!check) {
                 RequestDispatcher requestDispatcher = req.getRequestDispatcher("user/cart.jsp");
                 for (int i = 0; i < productList.size(); i++) {
-                    if (productList.get(i).getId() == id && productList.get(i).getQuantity() > 0) {
-                        boolean check2 = false;
+                    boolean check2 = false;
+                    if (productList.get(i).getId() == id) {
                         for (int j = 0; j < buyList.size(); j++) {
                             if (buyList.get(j).getId() == productList.get(i).getId()) {
                                 if (productList.get(i).getQuantity() < buyList.get(j).getQuantity() + 1) {
@@ -253,7 +293,6 @@ public class Home extends HttpServlet {
                                     break;
                                 }
                             }
-
                         }
                     }
                     double total = 0;
@@ -266,9 +305,8 @@ public class Home extends HttpServlet {
                 }
                 requestDispatcher.forward(req, resp);
             } else {
-                resp.sendRedirect("http://localhost:8080/home?action=showList");
+                resp.sendRedirect("/home");
             }
-
         }
     }
 
@@ -276,11 +314,8 @@ public class Home extends HttpServlet {
     private void showList(HttpServletRequest req, HttpServletResponse resp) throws
             ServletException, IOException, SQLException {
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("user/home.jsp");
-        for (int i = 0; i < buyList.size(); i++) {
-            count++;
-        }
         List<User> userList = userService.findAll();
-
+        List<TypeProduct> list = typeProductService.findAll();
         if (UserServiceImpl.name != null) {
             String name = "";
             for (int i = 0; i < userList.size(); i++) {
@@ -290,15 +325,10 @@ public class Home extends HttpServlet {
             }
             req.setAttribute("user", name);
         }
-        req.setAttribute("buy", count);
+        req.setAttribute("buy", buyList.size());
         List<Product> products = productService.findAll();
-        List<Product> products1 = new ArrayList<>();
-        for (Product product : products) {
-            if (!product.getStatus().equals("Đã Xóa")) {
-                products1.add(product);
-            }
-        }
-        req.setAttribute("danhSach", products1);
+        req.setAttribute("listType", list);
+        req.setAttribute("danhSach", products);
         requestDispatcher.forward(req, resp);
     }
 

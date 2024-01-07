@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
-  User: chiuchiuleuleu
-  Date: 02/01/2024
-  Time: 15:48
+  User: admin
+  Date: 1/2/2024
+  Time: 7:26 PM
   To change this template use File | Settings | File Templates.
 --%>
 <!DOCTYPE html>
@@ -23,6 +23,8 @@
             rel="stylesheet">
     <link href="../css/sb-admin-2.min.css" rel="stylesheet">
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body id="page-top">
 
@@ -66,6 +68,20 @@
                     <a class="collapse-item" href="/homeAdmin?action=showBill">Danh Sách Hóa Đơn </a>
                     <a class="collapse-item" href="/homeAdmin?action=showSale">Doanh Thu</a>
 
+                </div>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+               aria-expanded="true" aria-controls="collapsePages">
+                <i class="fas fa-fw fa-folder"></i>
+                <span>Danh Sách</span>
+            </a>
+            <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Danh Sách:</h6>
+                    <a class="collapse-item" href="http://localhost:8080/homeAdmin">Danh Sách Sản Phẩm</a>
+                    <a class="collapse-item" href="/homeAdmin?action=showType">Danh Mục Sản Phẩm</a>
                 </div>
             </div>
         </li>
@@ -131,35 +147,25 @@
                 <div class="row">
                     <div class="offset-2"></div>
                     <div class="col-8">
-                        <h1 class="h3 mb-2 text-gray-800">Thêm Sản Phẩm Mới</h1>
-                        <form method="post"  ">
+                        <h1 class="h3 mb-2 text-gray-800">Sửa Danh Mục Sản Phẩm</h1>
+                        <form method="post">
                             <div class="form-group">
-                                <p>Tên Sản Phẩm </p>  <input type="text" name="name"
+<%--                                <c:forEach items='${list}' var="listType">--%>
+                                <p>Tên Danh Mục </p>  <input type="text" name="name"
                                                              class="form-control form-control-user"
-                                                             placeholder="Tên Sản Phẩm">
+                                                             placeholder="Tên Thể Loại" value="${listType.name}">
                             </div>
                             <div class="form-group">
-                                <p>Số Lượng </p><input type="number" name="quantity"
-                                                       class="form-control form-control-user" placeholder="Số Lượng">
+                                <p>Nhà Sản Xuất </p><input type="text" name="producer"
+                                                           class="form-control form-control-user" placeholder="Tên Nhà Sản Xuất"
+                                                           value="${listType.producer}">
                             </div>
                             <div class="form-group">
-                                <p>Giá Tiền </p><input type="number" name="price" class="form-control form-control-user"
-                                                       placeholder="Giá Tiền">
+                                <p>Mô Tả </p><input type="text" name="describe" class="form-control form-control-user"
+                                                    placeholder="Chi Tiết" value="${listType.describe}">
                             </div>
-                            <div class="form-group">
-                                <p>Trạng Thái </p><input type="text" name="status"
-                                                         class="form-control form-control-user"
-                                                         placeholder="Trạng Thái">
-                            </div>
-                            <div class="form-group">
-                                <p>Thể Loại</p>
-                                <select name="idType" class="custom-select" required>
-                                    <c:forEach items='${listType}' var="listType">
-                                        <option value="${listType.id}"> ${listType.name}</option>
-                                    </c:forEach>
-                                </select>
-                            </div>
-                            <button class="btn btn-primary mb-2">Thêm</button>
+<%--                            </c:forEach>--%>
+                            <button class="btn btn-primary mb-2">Sửa</button>
                         </form>
                     </div>
                 </div>
