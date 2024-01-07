@@ -199,8 +199,8 @@ public class Home extends HttpServlet {
                             int quantity = products.get(j).getQuantity() - buyList.get(i).getQuantity();
                             Product product = new Product(buyList.get(i).getId(), quantity);
                             productService.updateProduct(product);
-                            if (quantity==0){
-                                String status = "hết";
+                            if (quantity == 0) {
+                                String status = "Hết";
                                 Product produc = new Product(buyList.get(i).getId(), status);
                                 productService.updateStatus(produc);
                             }
@@ -211,7 +211,7 @@ public class Home extends HttpServlet {
         }
         buyList = new ArrayList<>();
         count = 0;
-        resp.sendRedirect("/home");
+        resp.sendRedirect("http://localhost:8080/home?action=showList");
         req.setAttribute("danhSach", products);
     }
 
@@ -230,14 +230,13 @@ public class Home extends HttpServlet {
             if (!check) {
                 RequestDispatcher requestDispatcher = req.getRequestDispatcher("user/cart.jsp");
                 for (int i = 0; i < productList.size(); i++) {
-                    if (productList.get(i).getId() == id&&productList.get(i).getQuantity()>0) {
+                    if (productList.get(i).getId() == id && productList.get(i).getQuantity() > 0) {
                         boolean check2 = false;
                         for (int j = 0; j < buyList.size(); j++) {
                             if (buyList.get(j).getId() == productList.get(i).getId()) {
-                                if (productList.get(i).getQuantity()<buyList.get(j).getQuantity()+1){
-                                    //chưa lm dc
-                                }
-                                else {
+                                if (productList.get(i).getQuantity() < buyList.get(j).getQuantity() + 1) {
+
+                                } else {
                                     check2 = true;
                                     break;
                                 }
@@ -267,7 +266,7 @@ public class Home extends HttpServlet {
                 }
                 requestDispatcher.forward(req, resp);
             } else {
-                resp.sendRedirect("/home");
+                resp.sendRedirect("http://localhost:8080/home?action=showList");
             }
 
         }
