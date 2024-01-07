@@ -89,9 +89,19 @@ public class Home extends HttpServlet {
                 product.add(products.get(i));
             }
         }
+        List<User> userList = userService.findAll();
         List<TypeProduct> typeProducts = typeProductService.findAll();
         req.setAttribute("danhSach", product);
         req.setAttribute("listType", typeProducts);
+        if (UserServiceImpl.name != null) {
+            String name = "";
+            for (int i = 0; i < userList.size(); i++) {
+                if (userList.get(i).getName().equals(UserServiceImpl.name)) {
+                    name = userList.get(i).getName();
+                }
+            }
+            req.setAttribute("user", name);
+        }
         req.getRequestDispatcher("user/home.jsp").forward(req, resp);
     }
 
@@ -200,7 +210,6 @@ public class Home extends HttpServlet {
             requestDispatcher.forward(req, resp);
         }
     }
-
     private void order(HttpServletRequest req, HttpServletResponse resp) throws SQLException, IOException {
         double total = 0;
         for (int i = 0; i < buyList.size(); i++) {
@@ -240,8 +249,10 @@ public class Home extends HttpServlet {
         }
         buyList = new ArrayList<>();
         count = 0;
-        resp.sendRedirect("http://localhost:8080/home?action=showList");
+        resp.sendRedirect("http://localhost:8080/home?action=listBuy");
+        List<Order>orders=orderService.findAll();
         req.setAttribute("danhSach", productList);
+        req.setAttribute("listOrder", orders);
     }
 
     private void buy(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException, SQLException {
@@ -259,10 +270,17 @@ public class Home extends HttpServlet {
             if (!check) {
                 RequestDispatcher requestDispatcher = req.getRequestDispatcher("user/cart.jsp");
                 for (int i = 0; i < productList.size(); i++) {
-                    if (productList.get(i).getId() == id && productList.get(i).getQuantity() > 0) {
-                        boolean check2 = false;
+                    boolean check2 = false;
+                    if (productList.get(i).getId() == id) {
                         for (int j = 0; j < buyList.size(); j++) {
-                            check2 = true;
+                            if (buyList.get(j).getId() == productList.get(i).getId()) {
+                                if (productList.get(i).getQuantity() < buyList.get(j).getQuantity() + 1) {
+
+                                } else {
+                                    check2 = true;
+                                    break;
+                                }
+                            }
                         }
                         if (!check2) {
                             Product product = productList.get(i);
@@ -275,7 +293,6 @@ public class Home extends HttpServlet {
                                     break;
                                 }
                             }
-
                         }
                     }
                     double total = 0;
@@ -288,9 +305,8 @@ public class Home extends HttpServlet {
                 }
                 requestDispatcher.forward(req, resp);
             } else {
-                resp.sendRedirect("http://localhost:8080/home?action=showList");
+                resp.sendRedirect("/home");
             }
-
         }
     }
 

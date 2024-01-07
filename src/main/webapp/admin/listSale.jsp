@@ -45,6 +45,7 @@
                 </div>
             </div>
         </li>
+
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                aria-expanded="true" aria-controls="collapseUtilities">
@@ -58,6 +59,20 @@
                     <a class="collapse-item" href="/homeAdmin?action=showBill">Danh Sách Hóa Đơn </a>
                     <a class="collapse-item" href="/homeAdmin?action=showSale">Doanh Thu</a>
 
+                </div>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+               aria-expanded="true" aria-controls="collapsePages">
+                <i class="fas fa-fw fa-folder"></i>
+                <span>Danh Sách</span>
+            </a>
+            <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Danh Sách:</h6>
+                    <a class="collapse-item" href="http://localhost:8080/homeAdmin">Danh Sách Sản Phẩm</a>
+                    <a class="collapse-item" href="/homeAdmin?action=showType">Danh Mục Sản Phẩm</a>
                 </div>
             </div>
         </li>
